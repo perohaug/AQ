@@ -52,7 +52,7 @@ function AQPage() {
         setAqi3Value(aqi3.data.aqi.toFixed(1));
         setAqi3NameValue(aqi3.data.city.name);
       } catch (error) {
-        console.error('Error fetching and sorting data:', error);
+        console.error('Error fetching and so data:', error);
       }
     };
 
