@@ -5,8 +5,9 @@ import { SignInButton } from '~/components/domain/auth/SignInButton';
 import { SignOutButton } from '~/components/domain/auth/SignOutButton';
 import { Head } from '~/components/shared/Head';
 import BouncingSVGElements from '~/components/lib/BouncingSVGElements';
-import couple from '~/Icons/couple.png';
 import { spacing } from 'react-select/dist/declarations/src/theme';
+import AqMessage from './AqMessage';
+import UserGroups from './UserGroups';
 
 function Index() {
   const { state } = useAuthState();
@@ -16,45 +17,17 @@ function Index() {
   return (
     <>
       <Head title="TOP PAGE" />
-      <div className="min-h-screen max-w-screen " style={{ backgroundColor: '#F2EBDF' }}>
+      <div className="min-h-screen max-w-screen bg-background">
         <div className="text-center items-center">
           <div className="p-8" style={{ display: 'flex', justifyContent: 'center' }}>
             <h1 className="text-9xl rock-3d-logo">JegPuster</h1>
-            <h1 style={{ marginTop: '60px', fontSize: '50px' }}>i Trondheim</h1>
           </div>
           <div style={{ display: 'flex', justifyContent: 'center', marginTop: '20px' }}>
             <button className="btn btn-outline">NÅ</button>
             <button className="btn btn-ghost">DEN SISTE UKEN</button>
           </div>
-          <div style={{ display: 'flex', justifyContent: 'center', marginTop: '20px', marginBottom: '20px' }}>
-            <div style={{ display: 'flex', alignItems: 'center' }}>
-              <div style={{ marginRight: '20px' }}>
-                <svg width={80} height={80}>
-                  <circle cx={40} cy={40} r={40} fill={'#CFF9FB'} />
-                </svg>
-              </div>
-              <div>
-                <p style={{ fontSize: '30px' }}>Luften er fantastisk, nyt dagen ute!</p>
-              </div>
-            </div>
-          </div>
-          <div className="badge badge-neutral">Den generelle befolkningen</div>
-          <div
-            style={{
-              display: 'flex',
-              justifyContent: 'center',
-              marginTop: '20px',
-              marginBottom: '20px',
-            }}
-          >
-            <img style={{ height: '60px', marginRight: '10px' }} src={couple} alt="My Image" />
-            <img style={{ height: '60px', marginRight: '10px' }} src={couple} alt="My Image" />
-            <img style={{ height: '60px', marginRight: '10px' }} src={couple} alt="My Image" />
-            <img style={{ height: '60px', marginRight: '10px' }} src={couple} alt="My Image" />
-            <img style={{ height: '60px', marginRight: '10px' }} src={couple} alt="My Image" />
-            <img style={{ height: '60px', marginRight: '10px' }} src={couple} alt="My Image" />
-            <img style={{ height: '60px', marginRight: '10px' }} src={couple} alt="My Image" />
-          </div>
+          <AqMessage />
+          <UserGroups />
           <svg width="100%" height="120" viewBox="0 0 971 61" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path
               d="M0 21.3395C14.7308 20.8121 27.1712 18.9061 40.5763 17.434C73.1525 13.8567 106.223 11.9599 141.86 11.3078C163.071 10.9196 186.729 10.7025 207.6 11.997C231.102 13.4548 250.357 17.8194 269.565 21.1864C310.739 28.4037 346.358 28.2253 394.754 24.3261C445.395 20.246 494.859 13.4466 547.937 11.4227C581.849 10.1295 613.314 11.2311 647.019 11.997C664.579 12.396 682.052 12.3973 699.391 11.4992C725.247 10.1599 745.374 6.42502 769.377 4.03285C812.32 -0.246947 847.043 2.97983 887.488 6.82796C915.174 9.46213 943.833 11.5079 971 14.4475"

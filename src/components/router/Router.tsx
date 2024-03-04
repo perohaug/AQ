@@ -13,11 +13,11 @@ function Layout() {
   return (
     <div>
       {/* Insert style tag on the nav-tag */}
-      <nav className="p-4 grid-rows-2 flex items-center bg-gray-200">
-        <Link className="text-2xl font-semibold whitespace-nowrap dark:text-white" to="/">
+      <nav className="p-4 grid-rows-2 flex items-center bg-primary">
+        <Link className="text-2xl font-light whitespace-nowrap dark:text-grey" to="/">
           Home
         </Link>
-        <Link className="pl-5 text-2xl font-semibold whitespace-nowrap dark:text-white" to="/AQ">
+        <Link className="pl-5 text-2xl font-light whitespace-nowrap dark:text-grey" to="/AQ">
           AQ
         </Link>
         {/* Add more navigation links as needed */}
