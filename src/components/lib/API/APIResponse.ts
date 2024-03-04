@@ -1,245 +1,427 @@
-// types.ts
-
-import { Key, ReactNode } from 'react';
-
-export interface ApiResponse<T = any> {
-  meta: {
-    reftime: string;
-    location: {
-      name: string;
-      path: string;
-      longitude: string;
-      latitude: string;
-      areacode: string;
-    };
-    superlocation: {
-      name: string;
-      path: string;
-      longitude: string;
-      latitude: string;
-      areacode: string;
-      areaclass: string;
-      superareacode: string;
-    };
-    sublocations: [];
-  };
-  data: {
-    time: {
-      from: string;
-      to: string;
-      variables: T;
-    }[];
-  };
+export interface AQIint {
+  units: string;
+  value: any;
+  pm10: any;
+  pm25: any;
+  no2: any;
+  o3: any;
 }
 
-export interface AqiDataEntry {
-  value: ReactNode;
-  time: Key | null | undefined;
-  datetime: string;
-  values: Record<string, number>;
+interface stdconcentration {
+  value: number;
+  units: string;
+  origin?:
+    | {
+        langtransport?: {
+          value: number;
+          units: string;
+        };
+        sjosalt?: {
+          value: number;
+          units: string;
+        };
+        eksos?: {
+          value: number;
+          units: string;
+        };
+        veistov?: {
+          value: number;
+          units: string;
+        };
+        skip?: {
+          value: number;
+          units: string;
+        };
+        vedfyring?: {
+          value: number;
+          units: string;
+        };
+        industri?: {
+          value: number;
+          units: string;
+        };
+      }
+    | undefined;
 }
 
-// Define your different API response interfaces
-export interface ApiResponseMET {
-  meta: {
-    reftime: string;
-    location: {
-      name: string;
-      path: string;
-      longitude: string;
-      latitude: string;
-      areacode: string;
-    };
-    superlocation: {
-      name: string;
-      path: string;
-      longitude: string;
-      latitude: string;
-      areacode: string;
-      areaclass: string;
-      superareacode: string;
-    };
-    sublocations: [];
-  };
-  data: {
-    time: {
-      from: string;
-      to: string;
-      variables: {
-        AQI: {
-          value: number;
-          units: string;
-        };
-        no2_concentration: {
-          value: number;
-          units: string;
-        };
-        AQI_no2: {
-          value: number;
-          units: string;
-        };
-        no2_nonlocal_fraction: {
-          value: number;
-          units: string;
-        };
-        no2_local_fraction_traffic_exhaust: {
-          value: number;
-          units: string;
-        };
-        no2_local_fraction_shipping: {
-          value: number;
-          units: string;
-        };
-        no2_local_fraction_heating: {
-          value: number;
-          units: string;
-        };
-        no2_local_fraction_industry: {
-          value: number;
-          units: string;
-        };
-        pm10_concentration: {
-          value: number;
-          units: string;
-        };
-        AQI_pm10: {
-          value: number;
-          units: string;
-        };
-        pm10_nonlocal_fraction: {
-          value: number;
-          units: string;
-        };
-        pm10_nonlocal_fraction_seasalt: {
-          value: number;
-          units: string;
-        };
-        pm10_local_fraction_traffic_exhaust: {
-          value: number;
-          units: string;
-        };
-        pm10_local_fraction_traffic_nonexhaust: {
-          value: number;
-          units: string;
-        };
-        pm10_local_fraction_shipping: {
-          value: number;
-          units: string;
-        };
-        pm10_local_fraction_heating: {
-          value: number;
-          units: string;
-        };
-        pm10_local_fraction_industry: {
-          value: number;
-          units: string;
-        };
-        pm25_concentration: {
-          value: number;
-          units: string;
-        };
-        AQI_pm25: {
-          value: number;
-          units: string;
-        };
-        pm25_nonlocal_fraction: {
-          value: number;
-          units: string;
-        };
-        pm25_nonlocal_fraction_seasalt: {
-          value: number;
-          units: string;
-        };
-        pm25_local_fraction_traffic_exhaust: {
-          value: number;
-          units: string;
-        };
-        pm25_local_fraction_traffic_nonexhaust: {
-          value: number;
-          units: string;
-        };
-        pm25_local_fraction_shipping: {
-          value: number;
-          units: string;
-        };
-        pm25_local_fraction_heating: {
-          value: number;
-          units: string;
-        };
-        pm25_local_fraction_industry: {
-          value: number;
-          units: string;
-        };
-        o3_concentration: {
-          value: number;
-          units: string;
-        };
-        AQI_o3: {
-          value: number;
-          units: string;
-        };
-        o3_nonlocal_fraction: {
-          value: number;
-          units: string;
-        };
-      };
-    }[];
-  };
+interface stdconcentrations {
+  [key: string]: stdconcentration;
 }
 
-export type METStations = ApiMETStations[];
+interface stdvariables {
+  AQI: AQIint;
+  concentrations: stdconcentrations;
+}
 
-export interface ApiMETStations {
+interface stdlocation {
   name: string;
-  eoi: string;
-  height: number;
+  path: string;
+  longitude: number;
+  latitude: number;
+  areacode: string;
+}
+
+interface stdtime {
+  from: Date;
+  to: Date;
+  variables: stdvariables;
+}
+
+export interface APIStandard {
+  data: {
+    time: stdtime;
+  };
+  dominantPollutant?: any;
+  location: stdlocation;
+  stationID?: string;
+  description?: string;
+}
+
+export interface METResponse {
+  meta: METMeta;
+  data: METData;
+}
+
+export interface METMeta {
+  reftime: string;
+  location: Location;
+  superlocation: Superlocation;
+  sublocations: any[];
+}
+
+export interface Location {
+  name: string;
+  path: string;
   longitude: string;
   latitude: string;
-  grunnkrets: Grunnkrets;
-  delomrade: Delomrade;
-  kommune: Kommune;
-}
-
-export interface Grunnkrets {
-  name: string;
   areacode: string;
 }
 
-export interface Delomrade {
+export interface Superlocation {
   name: string;
+  path: string;
+  longitude: string;
+  latitude: string;
   areacode: string;
+  areaclass: string;
+  superareacode: string;
 }
 
-export interface Kommune {
+export interface METData {
+  time: METTime[];
+}
+
+export interface METTime {
+  from: string;
+  to: string;
+  variables: METVariables;
+}
+
+export interface METVariables {
+  AQI: Aqi;
+  no2_concentration: No2Concentration;
+  AQI_no2: AqiNo2;
+  no2_nonlocal_fraction: No2NonlocalFraction;
+  no2_local_fraction_traffic_exhaust: No2LocalFractionTrafficExhaust;
+  no2_local_fraction_shipping: No2LocalFractionShipping;
+  no2_local_fraction_heating: No2LocalFractionHeating;
+  no2_local_fraction_industry: No2LocalFractionIndustry;
+  pm10_concentration: Pm10Concentration;
+  AQI_pm10: AqiPm10;
+  pm10_nonlocal_fraction: Pm10NonlocalFraction;
+  pm10_nonlocal_fraction_seasalt: Pm10NonlocalFractionSeasalt;
+  pm10_local_fraction_traffic_exhaust: Pm10LocalFractionTrafficExhaust;
+  pm10_local_fraction_traffic_nonexhaust: Pm10LocalFractionTrafficNonexhaust;
+  pm10_local_fraction_shipping: Pm10LocalFractionShipping;
+  pm10_local_fraction_heating: Pm10LocalFractionHeating;
+  pm10_local_fraction_industry: Pm10LocalFractionIndustry;
+  pm25_concentration: Pm25Concentration;
+  AQI_pm25: AqiPm25;
+  pm25_nonlocal_fraction: Pm25NonlocalFraction;
+  pm25_nonlocal_fraction_seasalt: Pm25NonlocalFractionSeasalt;
+  pm25_local_fraction_traffic_exhaust: Pm25LocalFractionTrafficExhaust;
+  pm25_local_fraction_traffic_nonexhaust: Pm25LocalFractionTrafficNonexhaust;
+  pm25_local_fraction_shipping: Pm25LocalFractionShipping;
+  pm25_local_fraction_heating: Pm25LocalFractionHeating;
+  pm25_local_fraction_industry: Pm25LocalFractionIndustry;
+  o3_concentration: O3Concentration;
+  AQI_o3: AqiO3;
+  o3_nonlocal_fraction: O3NonlocalFraction;
+}
+
+export interface Aqi {
+  value: number;
+  units: string;
+}
+
+export interface No2Concentration {
+  value: number;
+  units: string;
+}
+
+export interface AqiNo2 {
+  value: number;
+  units: string;
+}
+
+export interface No2NonlocalFraction {
+  value: number;
+  units: string;
+}
+
+export interface No2LocalFractionTrafficExhaust {
+  value: number;
+  units: string;
+}
+
+export interface No2LocalFractionShipping {
+  value: number;
+  units: string;
+}
+
+export interface No2LocalFractionHeating {
+  value: number;
+  units: string;
+}
+
+export interface No2LocalFractionIndustry {
+  value: number;
+  units: string;
+}
+
+export interface Pm10Concentration {
+  value: number;
+  units: string;
+}
+
+export interface AqiPm10 {
+  value: number;
+  units: string;
+}
+
+export interface Pm10NonlocalFraction {
+  value: number;
+  units: string;
+}
+
+export interface Pm10NonlocalFractionSeasalt {
+  value: number;
+  units: string;
+}
+
+export interface Pm10LocalFractionTrafficExhaust {
+  value: number;
+  units: string;
+}
+
+export interface Pm10LocalFractionTrafficNonexhaust {
+  value: number;
+  units: string;
+}
+
+export interface Pm10LocalFractionShipping {
+  value: number;
+  units: string;
+}
+
+export interface Pm10LocalFractionHeating {
+  value: number;
+  units: string;
+}
+
+export interface Pm10LocalFractionIndustry {
+  value: number;
+  units: string;
+}
+
+export interface Pm25Concentration {
+  value: number;
+  units: string;
+}
+
+export interface AqiPm25 {
+  value: number;
+  units: string;
+}
+
+export interface Pm25NonlocalFraction {
+  value: number;
+  units: string;
+}
+
+export interface Pm25NonlocalFractionSeasalt {
+  value: number;
+  units: string;
+}
+
+export interface Pm25LocalFractionTrafficExhaust {
+  value: number;
+  units: string;
+}
+
+export interface Pm25LocalFractionTrafficNonexhaust {
+  value: number;
+  units: string;
+}
+
+export interface Pm25LocalFractionShipping {
+  value: number;
+  units: string;
+}
+
+export interface Pm25LocalFractionHeating {
+  value: number;
+  units: string;
+}
+
+export interface Pm25LocalFractionIndustry {
+  value: number;
+  units: string;
+}
+
+export interface O3Concentration {
+  value: number;
+  units: string;
+}
+
+export interface AqiO3 {
+  value: number;
+  units: string;
+}
+
+export interface O3NonlocalFraction {
+  value: number;
+  units: string;
+}
+
+export interface WAQIResponse {
+  status: string;
+  data: WAQIData;
+}
+
+export interface WAQIData {
+  aqi: number;
+  idx: number;
+  attributions: Attribution[];
+  city: City;
+  dominentpol: string;
+  iaqi: Iaqi;
+  time: WAQITime;
+  forecast: Forecast;
+  debug: Debug;
+}
+
+export interface Attribution {
+  url: string;
   name: string;
-  areacode: string;
+  logo?: string;
 }
 
-export interface ApiResponseB {
-  // ... Interface for API B
+export interface City {
+  geo: number[];
+  name: string;
+  url: string;
+  location: string;
 }
 
-// export type ResponseNilu = ApiResponseNilu[];
+export interface Iaqi {
+  co: Co;
+  dew: Dew;
+  h: H;
+  no2: No2;
+  o3: O3;
+  p: P;
+  pm10: Pm10;
+  pm25: Pm25;
+  so2: So2;
+  t: T;
+  w: W;
+}
 
-export interface ApiResponseNilu {
-  [station: string]: {
-    id: number;
-    zone: string;
-    municipality: string;
-    area: string;
-    station: string;
-    type: string;
-    eoi?: string;
-    latitude: number;
-    longitude: number;
-    owner?: string;
-    status?: string;
-    description?: string;
-    firstMeasurment: string;
-    lastMeasurment: string;
-    components: string;
-    isVisible: boolean;
-  };
+export interface Co {
+  v: number;
+}
+
+export interface Dew {
+  v: number;
+}
+
+export interface H {
+  v: number;
+}
+
+export interface No2 {
+  v: number;
+}
+
+export interface O3 {
+  v: number;
+}
+
+export interface P {
+  v: number;
+}
+
+export interface Pm10 {
+  v: number;
+}
+
+export interface Pm25 {
+  v: number;
+}
+
+export interface So2 {
+  v: number;
+}
+
+export interface T {
+  v: number;
+}
+
+export interface W {
+  v: number;
+}
+
+export interface WAQITime {
+  s: string;
+  tz: string;
+  v: number;
+  iso: string;
+}
+
+export interface Forecast {
+  daily: Daily;
+}
+
+export interface Daily {
+  o3: O32[];
+  pm10: Pm102[];
+  pm25: Pm252[];
+}
+
+export interface O32 {
+  avg: number;
+  day: string;
+  max: number;
+  min: number;
+}
+
+export interface Pm102 {
+  avg: number;
+  day: string;
+  max: number;
+  min: number;
+}
+
+export interface Pm252 {
+  avg: number;
+  day: string;
+  max: number;
+  min: number;
+}
+
+export interface Debug {
+  sync: string;
 }
 
 const PM25AQI = (x: number) => {

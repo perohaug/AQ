@@ -21,6 +21,19 @@ module.exports = {
   variants: {},
   plugins: [require('daisyui')],
   daisyui: {
-    themes: ['emerald'],
+    themes: [
+      {
+        jegpuster: {
+          primary: '#a601f7',
+          secondary: '#f6d860',
+          accent: '#37cdbe',
+          neutral: '#3d4451',
+          'base-100': '#ffffff',
+          'base-200': '#f9fafb',
+        },
+      },
+      ,
+      'emerald',
+    ],
   },
 };
