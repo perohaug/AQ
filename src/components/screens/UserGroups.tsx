@@ -1,10 +1,9 @@
 import { useEffect, useState } from 'react';
-import userGroupInfo from './userGroupInfo';
+import { aqMessage } from './aqMessageInfo';
+import { userGroupInfoLow } from './userGroupInfo';
 
 function UserGroups() {
   const [activeSVG, setActiveSVG] = useState(1);
-
-  console.log(userGroupInfo[activeSVG]);
 
   const handleSVGClick = (svgId: any) => {
     setActiveSVG(svgId);
@@ -12,10 +11,10 @@ function UserGroups() {
 
   return (
     <>
-      {userGroupInfo[activeSVG].id > 1 ? (
-        <div className="badge badge-neutral">{userGroupInfo[activeSVG].name}</div>
+      {userGroupInfoLow[activeSVG].id > 1 ? (
+        <div className="badge badge-neutral">{aqMessage['moderate'].userGroupInfo[activeSVG].name}</div>
       ) : (
-        <div className="badge badge-neutral">{userGroupInfo[1].name}</div>
+        <div className="badge badge-neutral">{userGroupInfoLow[1].name}</div>
       )}
       <div
         style={{
@@ -190,7 +189,7 @@ function UserGroups() {
           </defs>
         </svg>
       </div>
-      <p>{userGroupInfo[activeSVG].healthMessage}</p>
+      <p>{aqMessage['moderate'].userGroupInfo[activeSVG].healthMessage}</p>
     </>
   );
 }
