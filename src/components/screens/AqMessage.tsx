@@ -2,15 +2,15 @@ import { aqMessage } from './aqMessageInfo';
 
 function AqMessage() {
   return (
-    <div style={{ display: 'flex', justifyContent: 'center', marginTop: '20px', marginBottom: '20px' }}>
-      <div style={{ display: 'flex', alignItems: 'center' }}>
-        <div style={{ marginRight: '20px' }}>
+    <div className="flex justify-center mt-20 mb-10">
+      <div className="flex justify-center">
+        <div className="mr-8">
           <svg width={80} height={80}>
-            <circle cx={40} cy={40} r={40} fill={aqMessage['moderate'].color} />
+            <circle cx={40} cy={40} r={40} fill={aqMessage['low'].color} />
           </svg>
         </div>
-        <div>
-          <p className="font-light text-2xl">{aqMessage['moderate'].message}</p>
+        <div className="mt-5">
+          <p className="font-light text-3xl">{aqMessage['low'].message}</p>
         </div>
       </div>
     </div>

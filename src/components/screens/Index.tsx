@@ -19,16 +19,13 @@ function Index() {
       <Head title="TOP PAGE" />
       <div className="min-h-screen max-w-screen bg-background">
         <div className="text-center items-center">
-          <div className="p-8" style={{ display: 'flex', justifyContent: 'center' }}>
+          <div style={{ display: 'flex', justifyContent: 'center' }}>
             <h1 className="text-9xl rock-3d-logo">JegPuster</h1>
-          </div>
-          <div style={{ display: 'flex', justifyContent: 'center', marginTop: '20px' }}>
-            <button className="btn btn-outline">NÅ</button>
-            <button className="btn btn-ghost">DEN SISTE UKEN</button>
           </div>
           <AqMessage />
           <UserGroups />
-          <div className="justify-center items-center p-8">
+
+          {/**  <div className="justify-center items-center p-8">
             <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="914" viewBox="0 400 2743 756" fill="none">
               <path
                 d="M2 212.389C43.5526 211.833 78.6447 209.824 116.458 208.272C208.349 204.5 301.634 202.5 402.158 201.813C461.992 201.404 528.726 201.175 587.598 202.54C653.895 204.076 708.208 208.678 762.39 212.228C878.533 219.837 979.007 219.649 1115.52 215.538C1258.37 211.236 1397.9 204.068 1547.62 201.934C1643.28 200.571 1732.04 201.732 1827.11 202.54C1876.65 202.96 1925.94 202.962 1974.84 202.015C2047.78 200.603 2104.55 196.665 2172.26 194.143C2293.4 189.631 2391.34 193.033 2505.43 197.09C2583.53 199.867 2664.37 202.024 2741 205.123"
@@ -113,11 +110,13 @@ function Index() {
               />
             </svg>
           </div>
+   
           <div className="flex justify-center items-center p-8">
             <div className="">
               <BouncingSVGElements containerId={'Hue'} />
             </div>
           </div>
+              */}
         </div>
       </div>
     </>

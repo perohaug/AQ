@@ -1,10 +1,10 @@
-import { userGroupInfoModerate , userGroupInfoLow } from "./userGroupInfo";
+import { UserGroupInfo, userGroupInfoHigh, userGroupInfoLow, userGroupInfoModerate, userGroupInfoVeryHigh } from "./userGroupInfo";
 
 interface AQMessage {
     [key: string]: {
         color: string;
         message: string,
-        userGroupInfo: typeof userGroupInfoLow;
+        userGroupInfo: UserGroupInfo;
     };
 }
 
@@ -18,8 +18,18 @@ export const aqMessage: AQMessage =
         },
         moderate: {
             color: '#FEA837',
-            message: 'Dagen anbefales å nytes ute',
+            message: 'Nyt dagen ute, men det er moderat helserisiko for utsatte grupper',
             userGroupInfo: userGroupInfoModerate,
+        },
+        high: {
+            color: '#EB6758',
+            message: 'Nyt dagen ute, men det er betydelig helserisiko for utsatte grupper',
+            userGroupInfo: userGroupInfoHigh,
+        },
+        veryhigh: {
+            color: '#593E67',
+            message: 'Nyt dagen ute, men det er alvorlig heleserisiko for sårbare grupper ',
+            userGroupInfo: userGroupInfoVeryHigh,
         }
     }
 

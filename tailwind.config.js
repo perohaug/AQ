@@ -28,6 +28,7 @@ module.exports = {
           secondary: '#f6d860',
           accent: '#37cdbe',
           neutral: '#3d4451',
+          badgeColor: '#192E54',
           'base-100': '#ffffff',
         },
       },
