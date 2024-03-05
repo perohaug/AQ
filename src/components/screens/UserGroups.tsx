@@ -1,8 +1,10 @@
 import { useEffect, useState } from 'react';
-import couple from '~/Icons/couple.png';
+import userGroupInfo from './userGroupInfo';
 
 function UserGroups() {
-  const [activeSVG, setActiveSVG] = useState(null);
+  const [activeSVG, setActiveSVG] = useState(1);
+
+  console.log(userGroupInfo[activeSVG]);
 
   const handleSVGClick = (svgId: any) => {
     setActiveSVG(svgId);
@@ -10,7 +12,11 @@ function UserGroups() {
 
   return (
     <>
-      <div className="badge badge-neutral">Den generelle befolkningen</div>
+      {userGroupInfo[activeSVG].id > 1 ? (
+        <div className="badge badge-neutral">{userGroupInfo[activeSVG].name}</div>
+      ) : (
+        <div className="badge badge-neutral">{userGroupInfo[1].name}</div>
+      )}
       <div
         style={{
           display: 'flex',
@@ -65,10 +71,58 @@ function UserGroups() {
               opacity: activeSVG === 3 ? '0.8' : '0.5',
             }}
           />
-          <rect x="186" width="25" height="25" fill="url(#pattern3)" fill-opacity="0.4" />
-          <rect opacity="0.4" x="247" y="2" width="25.1838" height="25" fill="url(#pattern4)" />
-          <rect opacity="0.4" x="308" y="2" width="25.8824" height="25" fill="url(#pattern5)" fill-opacity="0.7" />
-          <rect opacity="0.4" x="374" width="25" height="25" fill="url(#pattern6)" />
+          <rect
+            x="186"
+            width="25"
+            height="25"
+            fill="url(#pattern3)"
+            onClick={() => handleSVGClick(4)}
+            style={{
+              cursor: 'pointer',
+              marginRight: '10px',
+              opacity: activeSVG === 4 ? '0.8' : '0.5',
+            }}
+          />
+          <rect
+            x="247"
+            y="2"
+            width="25.1838"
+            height="25"
+            fill="url(#pattern4)"
+            onClick={() => handleSVGClick(5)}
+            style={{
+              cursor: 'pointer',
+              marginRight: '10px',
+              opacity: activeSVG === 5 ? '0.8' : '0.5',
+            }}
+          />
+          <rect
+            opacity="0.4"
+            x="308"
+            y="2"
+            width="25.8824"
+            height="25"
+            fill="url(#pattern5)"
+            onClick={() => handleSVGClick(6)}
+            style={{
+              cursor: 'pointer',
+              marginRight: '10px',
+              opacity: activeSVG === 6 ? '0.8' : '0.5',
+            }}
+          />
+          <rect
+            opacity="0.4"
+            x="374"
+            width="25"
+            height="25"
+            fill="url(#pattern6)"
+            onClick={() => handleSVGClick(7)}
+            style={{
+              cursor: 'pointer',
+              marginRight: '10px',
+              opacity: activeSVG === 7 ? '0.8' : '0.5',
+            }}
+          />
           <defs>
             <pattern id="pattern0" patternContentUnits="objectBoundingBox" width="1" height="1">
               <use xlinkHref="#image0_141_4608" transform="scale(0.00195312)" />
@@ -136,6 +190,7 @@ function UserGroups() {
           </defs>
         </svg>
       </div>
+      <p>{userGroupInfo[activeSVG].healthMessage}</p>
     </>
   );
 }
