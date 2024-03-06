@@ -12,7 +12,7 @@ interface AQMessage {
 export const aqMessage: AQMessage = 
     {
         low: {
-            color: '#CFF9FB',
+            color: '#A4E7ED',
             message: 'Nyt dagen ute!',
             userGroupInfo: userGroupInfoLow,
         },

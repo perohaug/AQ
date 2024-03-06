@@ -8,6 +8,7 @@ const Loading = () => <p className="p-4 w-full h-full text-center">Loading...</p
 const IndexScreen = lazy(() => import('~/components/screens/Index'));
 const Page404Screen = lazy(() => import('~/components/screens/404'));
 const AQPage = lazy(() => import('~/components/screens/AQ'));
+const LearnMore = lazy(() => import('~/components/screens/LearnMore'));
 
 function Layout() {
   return (
@@ -20,7 +21,9 @@ function Layout() {
         <Link className="pl-5 text-2xl font-light whitespace-nowrap dark:text-grey" to="/AQ">
           AQ
         </Link>
-        {/* Add more navigation links as needed */}
+        <Link className="pl-5 text-2xl font-light whitespace-nowrap dark:text-grey" to="/learn">
+          Learn more
+        </Link>
       </nav>
       <Outlet />
     </div>
@@ -52,6 +55,10 @@ const InnerRouter = () => {
         {
           path: 'AQ',
           element: <AQPage />,
+        },
+        {
+          path: 'learn',
+          element: <LearnMore />,
         },
       ],
     },
