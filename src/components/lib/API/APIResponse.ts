@@ -61,16 +61,18 @@ interface stdlocation {
   areacode: string;
 }
 
-interface stdtime {
+export interface stdtime {
   from: Date;
   to: Date;
   variables: stdvariables;
 }
 
+export interface stdtimes {
+  time: stdtime[];
+}
+
 export interface APIStandard {
-  data: {
-    time: stdtime;
-  };
+  data: stdtimes;
   dominantPollutant?: any;
   location: stdlocation;
   stationID?: string;
@@ -424,7 +426,7 @@ export interface Debug {
   sync: string;
 }
 
-const PM25AQI = (x: number) => {
+function PM25AQI(x: number) {
   let aqi = 1;
   if (x < 0) {
     aqi = 1;
@@ -443,9 +445,9 @@ const PM25AQI = (x: number) => {
   }
 
   return aqi;
-};
+}
 
-const PM10AQI = (x: number) => {
+function PM10AQI(x: number) {
   let aqi = 1;
   if (x < 0) {
     aqi = 1;
@@ -464,9 +466,9 @@ const PM10AQI = (x: number) => {
   }
 
   return aqi;
-};
+}
 
-const NO2AQI = (x: number) => {
+function NO2AQI(x: number) {
   let aqi = 1;
   if (x < 0) {
     aqi = 1;
@@ -485,9 +487,9 @@ const NO2AQI = (x: number) => {
   }
 
   return aqi;
-};
+}
 
-const SO2AQI = (x: number) => {
+function SO2AQI(x: number) {
   let aqi = 1;
   if (x < 0) {
     aqi = 1;
@@ -506,9 +508,9 @@ const SO2AQI = (x: number) => {
   }
 
   return aqi;
-};
+}
 
-const O3AQI = (x: number) => {
+function O3AQI(x: number) {
   let aqi = 1;
   if (x < 0) {
     aqi = 1;
@@ -527,9 +529,9 @@ const O3AQI = (x: number) => {
   }
 
   return aqi;
-};
+}
 
-const AQI = (x: number) => {
+function AQI(x: number) {
   let aqi = 1;
   if (x < 0) {
     aqi = 1;
@@ -548,4 +550,4 @@ const AQI = (x: number) => {
   }
 
   return aqi;
-};
+}

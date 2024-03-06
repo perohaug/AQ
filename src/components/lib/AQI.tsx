@@ -20,314 +20,6 @@ interface Station {
   };
 }
 
-// interface AQIStandard {
-//   data: {
-//     time: {
-//       from: Date;
-//       to: Date;
-//       variables: {
-//         AQI: {
-//           units: string; // aqi standardisert
-//           value: number;
-//           pm10: number;
-//           pm25: number;
-//           no2: number;
-//           o3: number;
-//         };
-//         cocncentrations: {
-//           no2_concentration: {
-//             value: number;
-//             units: string;
-//             origin?: {
-//               no2_langtransport?: {
-//                 value?: number;
-//                 units?: string;
-//               };
-//               no2_sjosalt?: {
-//                 value: number;
-//                 units: string;
-//               };
-//               no2_eksos?: {
-//                 value: number;
-//                 units: string;
-//               };
-//               no2_veistov?: {
-//                 value: number;
-//                 units: string;
-//               };
-//               no2_skip?: {
-//                 value: number;
-//                 units: string;
-//               };
-//               no2_vedfyring?: {
-//                 value: number;
-//                 units: string;
-//               };
-//               no2_industri?: {
-//                 value: number;
-//                 units: string;
-//               };
-//             };
-//           };
-//           pm10_concentration: {
-//             value: number;
-//             units: string;
-//             origin?: {
-//               pm10_langtransport?: {
-//                 value: number;
-//                 units: string;
-//               };
-//               pm10_sjosalt?: {
-//                 value: number;
-//                 units: string;
-//               };
-//               pm10_eksos?: {
-//                 value: number;
-//                 units: string;
-//               };
-//               pm10_veistov?: {
-//                 value: number;
-//                 units: string;
-//               };
-//               pm10_skip?: {
-//                 value: number;
-//                 units: string;
-//               };
-//               pm10_vedfyring?: {
-//                 value: number;
-//                 units: string;
-//               };
-//               pm10_industri?: {
-//                 value: number;
-//                 units: string;
-//               };
-//             };
-//           };
-//           pm25_concentration: {
-//             value: number;
-//             units: string;
-//             origin?: {
-//               pm25_langtransport?: {
-//                 value: number;
-//                 units: string;
-//               };
-//               pm25_sjosalt?: {
-//                 value: number;
-//                 units: string;
-//               };
-//               pm25_eksos?: {
-//                 value: number;
-//                 units: string;
-//               };
-//               pm25_veistov?: {
-//                 value: number;
-//                 units: string;
-//               };
-//               pm25_skip?: {
-//                 value: number;
-//                 units: string;
-//               };
-//               pm25_vedfyring?: {
-//                 value: number;
-//                 units: string;
-//               };
-//               pm25_industri?: {
-//                 value: number;
-//                 units: string;
-//               };
-//             };
-//           };
-//           o3_concentration: {
-//             value: number;
-//             units: string;
-//             origin?: {
-//               o3_langtransport?: {
-//                 value: number;
-//                 units: string;
-//               };
-//               o3_eksos?: {
-//                 value: number;
-//                 units: string;
-//               };
-//               o3_skip?: {
-//                 value: number;
-//                 units: string;
-//               };
-//               o3_veistov?: {
-//                 value: number;
-//                 units: string;
-//               };
-//               o3_vedfyring?: {
-//                 value: number;
-//                 units: string;
-//               };
-//               o3_industri?: {
-//                 value: number;
-//                 units: string;
-//               };
-//             };
-//           };
-//         };
-//       }[];
-//     };
-//   };
-//   location: {
-//     name: string;
-//     path: string;
-//     longitude: number;
-//     latitude: number;
-//     areacode: string;
-//   };
-//   stationID?: string;
-// }
-
-// interface AQIResponse {
-//   meta: {
-//     reftime: string;
-//     location: {
-//       name: string;
-//       path: string;
-//       longitude: string;
-//       latitude: string;
-//       areacode: string;
-//     };
-//     superlocation: {
-//       name: string;
-//       path: string;
-//       longitude: string;
-//       latitude: string;
-//       areacode: string;
-//       areaclass: string;
-//       superareacode: string;
-//     };
-//     sublocations: [];
-//   };
-//   data: {
-//     time: {
-//       from: string;
-//       to: string;
-//       variables: {
-//         AQI: {
-//           value: number;
-//           units: string;
-//         };
-//         no2_concentration: {
-//           value: number;
-//           units: string;
-//         };
-//         AQI_no2: {
-//           value: number;
-//           units: string;
-//         };
-//         no2_nonlocal_fraction: {
-//           value: number;
-//           units: string;
-//         };
-//         no2_local_fraction_traffic_exhaust: {
-//           value: number;
-//           units: string;
-//         };
-//         no2_local_fraction_shipping: {
-//           value: number;
-//           units: string;
-//         };
-//         no2_local_fraction_heating: {
-//           value: number;
-//           units: string;
-//         };
-//         no2_local_fraction_industry: {
-//           value: number;
-//           units: string;
-//         };
-//         pm10_concentration: {
-//           value: number;
-//           units: string;
-//         };
-//         AQI_pm10: {
-//           value: number;
-//           units: string;
-//         };
-//         pm10_nonlocal_fraction: {
-//           value: number;
-//           units: string;
-//         };
-//         pm10_nonlocal_fraction_seasalt: {
-//           value: number;
-//           units: string;
-//         };
-//         pm10_local_fraction_traffic_exhaust: {
-//           value: number;
-//           units: string;
-//         };
-//         pm10_local_fraction_traffic_nonexhaust: {
-//           value: number;
-//           units: string;
-//         };
-//         pm10_local_fraction_shipping: {
-//           value: number;
-//           units: string;
-//         };
-//         pm10_local_fraction_heating: {
-//           value: number;
-//           units: string;
-//         };
-//         pm10_local_fraction_industry: {
-//           value: number;
-//           units: string;
-//         };
-//         pm25_concentration: {
-//           value: number;
-//           units: string;
-//         };
-//         AQI_pm25: {
-//           value: number;
-//           units: string;
-//         };
-//         pm25_nonlocal_fraction: {
-//           value: number;
-//           units: string;
-//         };
-//         pm25_nonlocal_fraction_seasalt: {
-//           value: number;
-//           units: string;
-//         };
-//         pm25_local_fraction_traffic_exhaust: {
-//           value: number;
-//           units: string;
-//         };
-//         pm25_local_fraction_traffic_nonexhaust: {
-//           value: number;
-//           units: string;
-//         };
-//         pm25_local_fraction_shipping: {
-//           value: number;
-//           units: string;
-//         };
-//         pm25_local_fraction_heating: {
-//           value: number;
-//           units: string;
-//         };
-//         pm25_local_fraction_industry: {
-//           value: number;
-//           units: string;
-//         };
-//         o3_concentration: {
-//           value: number;
-//           units: string;
-//         };
-//         AQI_o3: {
-//           value: number;
-//           units: string;
-//         };
-//         o3_nonlocal_fraction: {
-//           value: number;
-//           units: string;
-//         };
-//       };
-//     }[];
-//   };
-// }
-
 function AQI() {
   const [stations, setStations] = useState<Station[]>([]);
   const [selectedStation, setSelectedStation] = useState<string | null>(null);
@@ -342,8 +34,11 @@ function AQI() {
   >([]);
   const [aqiDescriptions, setAqiDescriptions] = useState<any>({});
   const { status, data, error }: ApiResponse = DataFetcher(
-    'https://api.met.no/weatherapi/airqualityforecast/0.1/?station=NO0060A',
+    'https://api.waqi.info/feed/bali/?token=22f37ad5c0fae31b55ee3304697b74c44a1a4cd0',
   );
+  // const { status, data, error }: ApiResponse = DataFetcher(
+  //   `https://api.met.no/weatherapi/airqualityforecast/0.1/?station=NO0060A`,
+  // );
 
   useEffect(() => {
     const fetchAqiDescriptions = async () => {
@@ -404,21 +99,15 @@ function AQI() {
 
   const getDominantPollutant = (data: any) => {
     const pollutants = [
-      { variable: 'AQI_pm10', name: 'PM', sub: 10, value: data.data.time[0].variables.AQI_pm10.value },
-      { variable: 'AQI_pm25', name: 'PM', sub: 2.5, value: data.data.time[0].variables.AQI_pm25.value },
-      { variable: 'AQI_o3', name: 'O', sub: 3, value: data.data.time[0].variables.AQI_o3.value },
-      { variable: 'AQI_no2', name: 'NO', sub: 2, value: data.data.time[0].variables.AQI_no2.value },
+      { variable: 'AQI_pm10', name: 'PM₁₀', sub: 10, value: data.data.time[0].variables.AQI_pm10.value },
+      { variable: 'AQI_pm25', name: 'PM₂.₅', sub: 2.5, value: data.data.time[0].variables.AQI_pm25.value },
+      { variable: 'AQI_o3', name: 'O₃', sub: 3, value: data.data.time[0].variables.AQI_o3.value },
+      { variable: 'AQI_no2', name: 'NO₂', sub: 2, value: data.data.time[0].variables.AQI_no2.value },
     ];
     console.log('Verdier for pollutants:', pollutants);
     const dominantPollutant = pollutants.reduce((prev, current) => (prev.value > current.value ? prev : current));
-    const dompollEl = (
-      <>
-        {dominantPollutant.name}
-        <sub>{dominantPollutant.sub}</sub>
-      </>
-    );
 
-    return dominantPollutant.name + dominantPollutant.sub;
+    return dominantPollutant.name;
   };
 
   useEffect(() => {
@@ -435,12 +124,6 @@ function AQI() {
 
     fetchStations();
   }, []);
-
-  const [fetchedData, setFetchedData] = useState<APIStandard | null>(null);
-
-  const handleDataFetched = (data: APIStandard) => {
-    setFetchedData(data);
-  };
 
   return (
     <>
@@ -467,9 +150,24 @@ function AQI() {
           </ul>
         </div>
       </div>
-      <div>
-        {data?.data.time.from.toTimeString()}
-        {data?.location.path}
+      <div className="block flex-row justify-end">
+        {data?.data.time[0].variables.AQI.pm25}
+        <br />
+        Transport: {data?.data.time[0].variables.concentrations.PM10.origin?.langtransport?.value}
+        {data?.data.time[0].variables.concentrations.PM10.origin?.langtransport?.units}, vedfyring:{' '}
+        {data?.data.time[0].variables.concentrations.PM10.origin?.veistov?.value}
+        {data?.data.time[0].variables.concentrations.PM10.origin?.veistov?.units}
+        <br />
+        Med standardisering: {data?.data.time[0].variables.AQI.pm10}| Uten standardisering:{' '}
+        {data?.data.time[0].variables.concentrations.PM10.value}
+        <br />
+        Med standardisering: {data?.data.time[0].variables.AQI.pm25}| Uten standardisering:{' '}
+        {data?.data.time[0].variables.concentrations.PM25.value}
+        <br />
+        {data?.dominantPollutant}
+        <div>{status}</div>
+        <div>{data?.location.latitude}</div>
+        <div>{data?.location.longitude}</div>
       </div>
     </>
   );
