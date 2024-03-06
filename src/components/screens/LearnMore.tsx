@@ -26,12 +26,19 @@ function LearnMore() {
         <div className="flex items-center justify-center h-screen ">
           <div className="relative">
             <svg width="70" height="70" onClick={handleSvgClick}>
-              <circle cx="35" cy="35" r="35" fill="#192E54"/>
+              <circle cx="35" cy="35" r="35" fill="#192E54" />
               <text x="50%" y="50%" textAnchor="middle" fill="#FFFFFF" fontSize="24" dy=".3em">
                 ?
               </text>
             </svg>
             {isClicked && <div className="absolute z-20 text-grey-900 ml-2">Trang?</div>}
+          </div>
+          <div className="flex items-center justify-center h-screen ">
+            <div className="relative">
+              <div className="badge badge-lg badge-badgeColor text-xl ml-20 text-white font-light px-[0.9em] pb-[0.8em] pt-[0.7em] mb-40">
+                Hva er i lufta nå?
+              </div>
+            </div>
           </div>
         </div>
       </div>
