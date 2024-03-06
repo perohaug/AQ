@@ -128,7 +128,7 @@ function UserGroups() {
             style={{
               cursor: 'pointer',
               marginRight: '10px',
-              opacity: activeSVG === 1 ? '0.8' : '0.5',
+              opacity: activeSVG === 1 ? '0.8' : '0.3',
             }}
           />
           <rect
@@ -141,7 +141,7 @@ function UserGroups() {
             style={{
               cursor: 'pointer',
               marginRight: '10px',
-              opacity: activeSVG === 2 ? '0.8' : '0.5',
+              opacity: activeSVG === 2 ? '0.8' : '0.3',
             }}
           />
           <rect
@@ -154,7 +154,7 @@ function UserGroups() {
             style={{
               cursor: 'pointer',
               marginRight: '10px',
-              opacity: activeSVG === 3 ? '0.8' : '0.5',
+              opacity: activeSVG === 3 ? '0.8' : '0.3',
             }}
           />
           <rect
@@ -166,7 +166,7 @@ function UserGroups() {
             style={{
               cursor: 'pointer',
               marginRight: '10px',
-              opacity: activeSVG === 4 ? '0.8' : '0.5',
+              opacity: activeSVG === 4 ? '0.8' : '0.3',
             }}
           />
           <rect
@@ -180,7 +180,7 @@ function UserGroups() {
             style={{
               cursor: 'pointer',
               marginRight: '10px',
-              opacity: activeSVG === 5 ? '0.8' : '0.5',
+              opacity: activeSVG === 5 ? '0.8' : '0.3',
             }}
           />
           <rect
@@ -194,7 +194,7 @@ function UserGroups() {
             style={{
               cursor: 'pointer',
               marginRight: '10px',
-              opacity: activeSVG === 6 ? '0.8' : '0.5',
+              opacity: activeSVG === 6 ? '0.8' : '0.3',
             }}
           />
           <defs>

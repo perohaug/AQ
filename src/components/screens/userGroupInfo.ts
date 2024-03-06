@@ -97,12 +97,12 @@ export const userGroupInfoHigh: UserGroupInfo = {
     5: {
         id: 5,
         name: "Astmatikere og luftveisplager",
-        healthMessage: "Low Health message for group 3"
+        healthMessage: "Alvorlig luftveissykdom eller som opplever du forverring av din astma? Da bør redusere høy fysisk aktivitet og begrense oppholdstiden i de mest forurensede uteområdene."
     },
     6: {
         id: 6,
         name: "Hjerte- og karsykdommer",
-        healthMessage: "Low Health message for group 3"
+        healthMessage: "Alvorlig hjerte- og karsykdom? Da bør du redusere høy fysisk aktivitet og begrense oppholdstiden i de mest forurensede uteområdene."
     },
 
 };
