@@ -22,7 +22,7 @@ function Layout() {
           AQ
         </Link>
         <Link className="pl-5 text-2xl font-light whitespace-nowrap dark:text-grey" to="/learn">
-          Learn more
+          Lær mer
         </Link>
       </nav>
       <Outlet />

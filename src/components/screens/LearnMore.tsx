@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Head } from '../shared/Head';
 import AirFlowSVG from './AirFlowSVG';
 import HumanBody from './HumanBodySVG';
+import ParticleExplanation from './ParticleExplanation';
 
 function LearnMore() {
   const [isClicked, setIsClicked] = useState(false);
@@ -64,44 +65,7 @@ function LearnMore() {
               {isClicked && <div className="absolute z-20 text-grey-900">Trang?</div>}
             </div>
           </div>
-          {/* Particle explanation */}
-
-          <div className="absolute left-1/2 transform translate-x-1/4 ml-40 mt-60">
-            <div className="flex items-center justify-start">
-              <svg className="w-12 h-12" viewBox="0 0 70 70">
-                <circle cx="35" cy="35" r="35" fill="#FCC16D" />
-              </svg>
-              <p className="ml-2 font-medium text-m">Store partikler, ikke alle trenger ned i lungene</p>
-            </div>
-            <div className="ml-2 flex items-center justify-start mt-2">
-              <svg className="w-8 h-8" viewBox="0 0 70 70">
-                <circle cx="35" cy="35" r="35" fill="#F88864" />
-              </svg>
-              <p className="ml-2 font-medium text-m">Små partikler, trenger oftere ned i lungene</p>
-            </div>
-            <div className="ml-2 flex items-center justify-start mt-2">
-              <svg className="w-8 h-8" viewBox="0 0 70 70">
-                <defs>
-                  <filter id="blurFilter" x="0" y="0" width="100%" height="100%">
-                    <feGaussianBlur in="SourceGraphic" stdDeviation="3" />
-                  </filter>
-                </defs>
-                <circle cx="35" cy="35" r="35" fill="#593E67" filter="url(#blurFilter)" />
-              </svg>
-              <p className="ml-2 font-medium  text-m">Gass1: Irriterer øverst i lungene</p>
-            </div>
-            <div className="ml-2 flex items-center justify-start mt-2">
-              <svg className="w-8 h-8" viewBox="0 0 70 70">
-                <defs>
-                  <filter id="blurFilter" x="0" y="0" width="100%" height="100%">
-                    <feGaussianBlur in="SourceGraphic" stdDeviation="3" />
-                  </filter>
-                </defs>
-                <circle cx="35" cy="35" r="35" fill="#C1AA9D" filter="url(#blurFilter)" />
-              </svg>
-              <p className="ml-2 font-medium  text-m">Gass2: Irriterer øverst i lungene</p>
-            </div>
-          </div>
+          <ParticleExplanation />
         </div>
       </div>
     </>
