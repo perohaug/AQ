@@ -28,30 +28,32 @@ function AqMessage() {
       {isModalOpen && (
         <div className="fixed inset-0 z-10 flex items-center justify-center">
           <div className="absolute inset-0 bg-black opacity-5" onClick={closeModal}></div>
-          <div className="bg-white p-10 rounded-lg z-20">
+          <div className="bg-white p-8 rounded-lg z-20">
+            <p className="font-bold mb-3">Helserisiko</p>
+
             <div className="flex items-center mb-3">
               <svg width={40} height={40} className=" mr-5">
-                <circle cx={20} cy={20} r={20} fill={'#A4E7ED'} />
+                <circle cx={20} cy={20} r={20} fill={aqMessage['low'].color} />
               </svg>
-              <p>Liten helserisiko</p>
+              <p>Liten</p>
             </div>
             <div className="flex items-center mb-3">
               <svg width={40} height={40} className="mr-5">
-                <circle cx={20} cy={20} r={20} fill={'#FEA837'} />
+                <circle cx={20} cy={20} r={20} fill={aqMessage['moderate'].color} />
               </svg>
-              <p>Moderat helserisiko</p>
+              <p>Moderat</p>
             </div>
             <div className="flex items-center mb-3">
               <svg width={40} height={40} className="mr-5">
-                <circle cx={20} cy={20} r={20} fill={'#EB6758'} />
+                <circle cx={20} cy={20} r={20} fill={aqMessage['high'].color} />
               </svg>
-              <p>Høy helserisiko</p>
+              <p>Høy</p>
             </div>
             <div className="flex items-center">
               <svg width={40} height={40} className="mr-5">
-                <circle cx={20} cy={20} r={20} fill={'#593E67'} />
+                <circle cx={20} cy={20} r={20} fill={aqMessage['veryhigh'].color} />
               </svg>
-              <p>Svært høy helserisiko</p>
+              <p>Svært høy</p>
             </div>
           </div>
         </div>
