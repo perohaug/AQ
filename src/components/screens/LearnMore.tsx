@@ -3,6 +3,7 @@ import { Head } from '../shared/Head';
 import AirFlowSVG from './AirFlowSVG';
 import HumanBody from './HumanBodySVG';
 import ParticleExplanation from './ParticleExplanation';
+import bonfire from '~/icons/bonfire 1.png';
 
 function LearnMore() {
   const [isClicked, setIsClicked] = useState(false);
@@ -24,6 +25,29 @@ function LearnMore() {
         <div className="absolute mt-20 left-0 w-full flex justify-center items-center">
           <HumanBody height={900} />
         </div>
+        <div className=" absolute flex flex-col top-1/4 left-20 mt-20">
+          <div
+            className="badge badge-lg text-xl  text-white font-light  px-[0.65em] pb-[0.8em] pt-[0.7em] mb-10"
+            style={{ backgroundColor: '#FDA26B', borderColor: '#FDA26B' }}
+          >
+            Kilder til forurensning
+          </div>{' '}
+          <div className="flex row items-center">
+            <div className="mr-10">
+              <img src={bonfire} alt="" />
+              <p>Vedfyring</p>
+            </div>
+            <div className="mr-10">
+              <img src={bonfire} alt="" />
+              <p>Vedfyring</p>
+            </div>
+            <div className="mr-10">
+              <img src={bonfire} alt="" />
+              <p>Vedfyring</p>
+            </div>
+          </div>
+        </div>
+
         <div className="flex justify-center">
           <div className="flex items-center justify-center relative">
             {/* Search city */}
@@ -31,7 +55,7 @@ function LearnMore() {
               <div className="flex items-center">
                 <div
                   className="badge badge-lg text-xl text-white font-light px-[0.9em] pb-[0.8em] pt-[0.7em] mt-80 mr-10"
-                  style={{ backgroundColor: '#192E54' }}
+                  style={{ backgroundColor: '#FDA26B', borderColor: '#FDA26B' }}
                 >
                   Trondheim
                 </div>

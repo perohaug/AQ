@@ -29,7 +29,7 @@ function ParticleExplanation() {
         <svg className="w-12 h-12" viewBox="0 0 70 70">
           <circle cx="35" cy="35" r="35" fill="#FCC16D" />
         </svg>
-        <p className="ml-2 font-medium text-m mr-1">Ikke alle partiklene trenger ned i lungene</p>
+        <p className="ml-2 font-medium text-m mr-1">Store partikler</p>
         {expanded.particle1 ? (
           <svg xmlns="http://www.w3.org/2000/svg" width="22" height="12" viewBox="0 0 22 12" fill="none">
             <path d="M20.829 1.00022L10.9629 10.704L1.00657 1.72343" stroke="black" />
@@ -42,7 +42,14 @@ function ParticleExplanation() {
       </div>
       {/* Description for the first SVG */}
       {expanded.particle1 && (
-        <p className="mt-2 text-sm ml-12">Hovedveier inkludert dekkpartikler og feiing av veier </p>
+        <div className="mt-2 ml-12">
+          <p className="text-sm">
+            <b> Stammer fra:</b> Hovedveier inkludert dekkpartikler og feiing av veier
+          </p>
+          <p className="text-sm">
+            <b>Effekt:</b> Ikke alle trenger ned i lungene
+          </p>
+        </div>
       )}
 
       {/* Second SVG */}

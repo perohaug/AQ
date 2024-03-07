@@ -15,7 +15,7 @@ function AqMessage() {
   return (
     <div className="flex justify-center mt-20 mb-10">
       <div className="flex justify-center">
-        <div className="mr-8">
+        <div className="mr-5">
           <svg width={80} height={80} onClick={openModal} className="cursor-pointer">
             <circle cx={40} cy={40} r={40} fill={aqMessage['low'].color} />
           </svg>
@@ -28,8 +28,8 @@ function AqMessage() {
       {isModalOpen && (
         <div className="fixed inset-0 z-10 flex items-center justify-center">
           <div className="absolute inset-0 bg-black opacity-5" onClick={closeModal}></div>
-          <div className="bg-white p-8 rounded-lg z-20">
-            <p className="font-bold mb-3">Helserisiko</p>
+          <div className="bg-white p-10 rounded-lg z-20">
+            <p className="font-bold mb-6">Helserisiko</p>
 
             <div className="flex items-center mb-3">
               <svg width={40} height={40} className=" mr-5">
