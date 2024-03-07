@@ -31,12 +31,33 @@ function LearnMore() {
                 ?
               </text>
             </svg>
-            {isClicked && <div className="absolute z-20 text-grey-900 ml-2">Trang?</div>}
+            {isClicked && <div className="absolute z-20 text-grey-900">Trang?</div>}
           </div>
-          <div className="flex items-center justify-center h-screen ">
-            <div className="relative">
-              <div className="badge badge-lg badge-badgeColor text-xl ml-20 text-white font-light px-[0.9em] pb-[0.8em] pt-[0.7em] mb-40">
-                Hva er i lufta nå?
+          <div className="flex items-center justify-center mt-20">
+            <div className="relative top-1/2 mr-20">
+              <div
+                className="badge badge-lg text-xl text-white font-light px-[0.9em] pb-[0.8em] pt-[0.7em] mt-80"
+                style={{ backgroundColor: '#192E54' }}
+              >
+                Trondheim
+              </div>
+            </div>
+            <div className="relative top-1/4 ">
+              <div className="relative inline-block text-left mt-80 mr-10">
+                <div>
+                  <input
+                    type="text"
+                    className="border border-white bg-white h-8 px-3 w-40 rounded-2xl text-lg focus:outline-none"
+                    placeholder="Skriv inn by.."
+                  />
+                  <svg
+                    className="absolute right-2 top-2.5 h-5 w-5 text-gray-400"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
+                    aria-hidden="true"
+                  ></svg>
+                </div>
               </div>
             </div>
           </div>

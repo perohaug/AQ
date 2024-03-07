@@ -18,11 +18,17 @@ function UserGroups() {
   return (
     <>
       {userGroupInfoLow[activeSVG].id > 1 ? (
-        <div className="badge badge-lg text-xl  text-white font-light pb-[0.8em] pt-[0.7em] ">
+        <div
+          className="badge badge-lg text-xl  text-white font-light pb-[0.8em] pt-[0.7em]"
+          style={{ backgroundColor: '#192E54' }}
+        >
           {aqMessage['moderate'].userGroupInfo[activeSVG].name}
         </div>
       ) : (
-        <div className="badge badge-lg text-xl   text-white font-light  px-[0.65em] pb-[0.8em] pt-[0.7em] ">
+        <div
+          className="badge badge-lg text-xl   text-white font-light  px-[0.65em] pb-[0.8em] pt-[0.7em]"
+          style={{ backgroundColor: '#192E54' }}
+        >
           Generell befolkning
         </div>
       )}
@@ -30,7 +36,10 @@ function UserGroups() {
       <div className="relative flex justify-center items-center">
         <AirFlowSVG />
         <div className="flex flex-col justify-center items-center absolute left-0">
-          <div className="badge badge-lg badge-badgeColor text-xl ml-20 text-white font-light px-[0.65em] pb-[0.8em] pt-[0.7em] mb-10">
+          <div
+            className="badge badge-lg badge-badgeColor text-xl ml-20 text-white font-light px-[0.65em] pb-[0.8em] pt-[0.7em] mb-10"
+            style={{ backgroundColor: '#192E54' }}
+          >
             Hva er i lufta nå?
           </div>
           <img src={bonfire} alt="Bonfire" className="w-16 h-16 mb-5" />
@@ -41,10 +50,15 @@ function UserGroups() {
           <HumanBody height={600} style={{ transform: 'translateY(150px)' }} />
         </div>
         <UserGroupsSVG handleSVGClick={handleSVGClick} activeSVG={activeSVG} />
-      </div>
-      <div className="chat chat-end">
-        <div className="chat-bubble bg-white text-xl font-light text-black mr-80">
-          {aqMessage['moderate'].userGroupInfo[activeSVG].healthMessage}
+        <div className="absolute right-20" style={{ top: '160px' }}>
+          <div className="chat chat-end">
+            <div
+              className="relative chat-bubble bg-white text-2xl font-light text-black px-4 py-3 mr-80"
+              style={{ maxWidth: '600px' }}
+            >
+              {aqMessage['moderate'].userGroupInfo[activeSVG].healthMessage}
+            </div>
+          </div>
         </div>
       </div>
     </>
