@@ -24,7 +24,12 @@ function ParticleExplanation() {
 
   return (
     <div>
-      {' '}
+      <div
+        className="badge badge-lg text-xl  text-white font-light  px-[0.65em] pb-[0.8em] pt-[0.7em] mb-10 ml-10"
+        style={{ backgroundColor: '#FDA26B', borderColor: '#FDA26B' }}
+      >
+        Hva er i lufta?
+      </div>{' '}
       {/* First SVG */}
       <div className="flex items-center justify-start " onClick={() => handleExpand('particle1')}>
         <svg className="w-12 h-12" viewBox="0 0 70 70">
