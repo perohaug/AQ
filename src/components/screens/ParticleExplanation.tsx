@@ -32,12 +32,12 @@ function ParticleExplanation() {
         </svg>
         <p className="ml-2 font-medium text-m mr-1">Store partikler</p>
         {expanded.particle1 ? (
-          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="12" viewBox="0 0 22 12" fill="none">
-            <path d="M20.829 1.00022L10.9629 10.704L1.00657 1.72343" stroke="black" />
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="8" viewBox="0 0 14 8" fill="none">
+            <path d="M12.9959 6.00035L6.74505 0.822213L0.553797 6.54292" stroke="black" />
           </svg>
         ) : (
-          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="12" viewBox="0 0 22 12" fill="none">
-            <path d="M20.829 11.0002L10.9629 1.29641L1.00657 10.277" stroke="black" />
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="8" viewBox="0 0 14 8" fill="none">
+            <path d="M13.4462 0.999647L7.25495 7.17779L1.00414 1.45708" stroke="black" />
           </svg>
         )}
       </div>
@@ -59,12 +59,12 @@ function ParticleExplanation() {
         </svg>
         <p className="ml-2 font-medium text-m mr-1">Små partikler</p>
         {expanded.particle2 ? (
-          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="12" viewBox="0 0 22 12" fill="none">
-            <path d="M20.829 1.00022L10.9629 10.704L1.00657 1.72343" stroke="black" />
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="8" viewBox="0 0 14 8" fill="none">
+            <path d="M12.9959 6.00035L6.74505 0.822213L0.553797 6.54292" stroke="black" />
           </svg>
         ) : (
-          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="12" viewBox="0 0 22 12" fill="none">
-            <path d="M20.829 11.0002L10.9629 1.29641L1.00657 10.277" stroke="black" />
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="8" viewBox="0 0 14 8" fill="none">
+            <path d="M13.4462 0.999647L7.25495 7.17779L1.00414 1.45708" stroke="black" />
           </svg>
         )}
       </div>
@@ -91,12 +91,12 @@ function ParticleExplanation() {
         </svg>
         <p className="ml-2 font-medium text-m mr-1">Irriterer øverst i lungene</p>
         {expanded.particle3 ? (
-          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="12" viewBox="0 0 22 12" fill="none">
-            <path d="M20.829 1.00022L10.9629 10.704L1.00657 1.72343" stroke="black" />
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="8" viewBox="0 0 14 8" fill="none">
+            <path d="M12.9959 6.00035L6.74505 0.822213L0.553797 6.54292" stroke="black" />
           </svg>
         ) : (
-          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="12" viewBox="0 0 22 12" fill="none">
-            <path d="M20.829 11.0002L10.9629 1.29641L1.00657 10.277" stroke="black" />
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="8" viewBox="0 0 14 8" fill="none">
+            <path d="M13.4462 0.999647L7.25495 7.17779L1.00414 1.45708" stroke="black" />
           </svg>
         )}
       </div>
@@ -123,12 +123,12 @@ function ParticleExplanation() {
         </svg>
         <p className="ml-2 font-medium text-m mr-1">Irriterer øverst i lungene</p>
         {expanded.particle4 ? (
-          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="12" viewBox="0 0 22 12" fill="none">
-            <path d="M20.829 1.00022L10.9629 10.704L1.00657 1.72343" stroke="black" />
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="8" viewBox="0 0 14 8" fill="none">
+            <path d="M12.9959 6.00035L6.74505 0.822213L0.553797 6.54292" stroke="black" />
           </svg>
         ) : (
-          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="12" viewBox="0 0 22 12" fill="none">
-            <path d="M20.829 11.0002L10.9629 1.29641L1.00657 10.277" stroke="black" />
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="8" viewBox="0 0 14 8" fill="none">
+            <path d="M13.4462 0.999647L7.25495 7.17779L1.00414 1.45708" stroke="black" />
           </svg>
         )}
       </div>
