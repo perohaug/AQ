@@ -21,14 +21,14 @@ function UserGroups() {
       {userGroupInfoLow[activeSVG].id > 1 ? (
         <div
           className="badge badge-lg text-xl  text-white font-light pb-[0.8em] pt-[0.7em]"
-          style={{ backgroundColor: '#FDA26B', borderColor: '#FDA26B' }}
+          style={{ backgroundColor: '#FC8861', borderColor: '#FC8861' }}
         >
           {aqMessage['moderate'].userGroupInfo[activeSVG].name}
         </div>
       ) : (
         <div
           className="badge badge-lg text-xl  text-white font-light  px-[0.65em] pb-[0.8em] pt-[0.7em]"
-          style={{ backgroundColor: '#FDA26B', borderColor: '#FDA26B' }}
+          style={{ backgroundColor: '#FC8861', borderColor: '#FC8861' }}
         >
           Generell befolkning
         </div>

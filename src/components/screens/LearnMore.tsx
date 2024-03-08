@@ -16,14 +16,14 @@ function LearnMore() {
   return (
     <>
       <Head title="TOP PAGE" />
-      <div className="min-h-screen max-w-screen bg-background relative">
-        <div className="absolute top-0 left-0 w-full h-full flex justify-center items-center">
+      <div className="bg-background relative">
+        <div className="absolute top-1/2 mt-20">
           <AirFlowSVG />
         </div>
         <div className="absolute mt-20 left-0 w-full flex justify-center items-center">
           <HumanBody height={900} />
         </div>
-        <div className="absolute flex flex-col top-1/4 left-40 mt-10">
+        <div className="absolute flex flex-col top-1/2 left-20 mt-40">
           <ParticleExplanation />
         </div>
 
@@ -34,7 +34,7 @@ function LearnMore() {
               <div className="flex items-center">
                 <div
                   className="badge badge-lg text-xl text-white font-light px-[0.9em] pb-[0.8em] pt-[0.7em] mt-80 mr-10"
-                  style={{ backgroundColor: '#FDA26B', borderColor: '#FDA26B' }}
+                  style={{ backgroundColor: '#FC8861', borderColor: '#FC8861' }}
                 >
                   Trondheim
                 </div>
@@ -68,7 +68,7 @@ function LearnMore() {
               {isClicked && <div className="absolute z-20 text-grey-900">Trang?</div>}
             </div>
           </div>
-          <div className="absolute left-1/2 transform translate-x-1/4 ml-60 mt-40">
+          <div className="absolute left-1/2 transform translate-x-1/4 ml-60 mt-10">
             <MainPollutants />
           </div>
         </div>

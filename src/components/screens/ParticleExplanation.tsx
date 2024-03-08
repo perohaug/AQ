@@ -25,10 +25,10 @@ function ParticleExplanation() {
   return (
     <div>
       <div
-        className="badge badge-lg text-xl  text-white font-light  px-[0.65em] pb-[0.8em] pt-[0.7em] mb-10 ml-10"
+        className="badge badge-lg text-xl  text-white font-light  px-[0.65em] pb-[0.8em] pt-[0.7em] mt-20 mb-10 ml-10"
         style={{ backgroundColor: '#FDA26B', borderColor: '#FDA26B' }}
       >
-        Hva er i lufta?
+        Hva betyr sirklene?
       </div>{' '}
       {/* First SVG */}
       <div className="flex items-center justify-start " onClick={() => handleExpand('particle1')}>
@@ -94,7 +94,7 @@ function ParticleExplanation() {
           </defs>
           <circle cx="35" cy="35" r="35" fill="#5A4858" filter="url(#blurFilter)" />
         </svg>
-        <p className="ml-2 font-medium text-m mr-1">Irriterer øverst i lungene</p>
+        <p className="ml-2 font-medium text-m mr-1">Gasser</p>
         {expanded.particle3 ? (
           <svg xmlns="http://www.w3.org/2000/svg" width="14" height="8" viewBox="0 0 14 8" fill="none">
             <path d="M12.9959 6.00035L6.74505 0.822213L0.553797 6.54292" stroke="black" />
@@ -112,7 +112,7 @@ function ParticleExplanation() {
             <b> Stammer fra:</b> Veitrafikk
           </p>
           <p className="text-sm">
-            <b>Effekt:</b> De fleste partiklene trenger ned i lungene
+            <b>Effekt:</b> Irriterer øverst i lungene
           </p>
         </div>
       )}
@@ -126,7 +126,7 @@ function ParticleExplanation() {
           </defs>
           <circle cx="35" cy="35" r="35" fill="#C1AA9D" filter="url(#blurFilter)" />
         </svg>
-        <p className="ml-2 font-medium text-m mr-1">Irriterer øverst i lungene</p>
+        <p className="ml-2 font-medium text-m mr-1">Gasser</p>
         {expanded.particle4 ? (
           <svg xmlns="http://www.w3.org/2000/svg" width="14" height="8" viewBox="0 0 14 8" fill="none">
             <path d="M12.9959 6.00035L6.74505 0.822213L0.553797 6.54292" stroke="black" />

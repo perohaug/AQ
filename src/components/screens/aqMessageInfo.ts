@@ -18,17 +18,17 @@ export const aqMessage: AQMessage =
         },
         moderate: {
             color: '#FEA837',
-            message: 'Nyt dagen ute, men det er moderat helserisiko for utsatte grupper',
+            message: 'Nyt dagen ute, men for noen finnes det en liten helserisiko',
             userGroupInfo: userGroupInfoModerate,
         },
         high: {
             color: '#EB6758',
-            message: 'Nyt dagen ute, men det er betydelig helserisiko for utsatte grupper',
+            message: 'Nyt dagen ute,  men for noen finnes det betydelig helserisiko',
             userGroupInfo: userGroupInfoHigh,
         },
         veryhigh: {
             color: '#593E67',
-            message: 'Nyt dagen ute, men det er alvorlig heleserisiko for sårbare grupper ',
+            message: 'Nyt dagen ute,  men for noen finnes det en alvorlig helserisiko',
             userGroupInfo: userGroupInfoVeryHigh,
         }
     }

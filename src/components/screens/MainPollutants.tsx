@@ -8,7 +8,7 @@ function MainPollutants() {
           className="badge badge-lg text-xl  text-white font-light  px-[0.65em] pb-[0.8em] pt-[0.7em] mb-10"
           style={{ backgroundColor: '#FDA26B', borderColor: '#FDA26B' }}
         >
-          Kilder til forurensning
+          Dette forurenser luften nå
         </div>
         <div className="flex flex-col items-center">
           <div className="mb-10">
