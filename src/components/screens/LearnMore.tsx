@@ -4,6 +4,7 @@ import AirFlowSVG from './AirFlowSVG';
 import HumanBody from './HumanBodySVG';
 import ParticleExplanation from './ParticleExplanation';
 import bonfire from '~/icons/bonfire 1.png';
+import MainPollutants from './MainPollutants';
 
 function LearnMore() {
   const [isClicked, setIsClicked] = useState(false);
@@ -16,36 +17,14 @@ function LearnMore() {
     <>
       <Head title="TOP PAGE" />
       <div className="min-h-screen max-w-screen bg-background relative">
-        <div style={{ display: 'flex', justifyContent: 'center' }}>
-          <h1 className="text-7xl rock-3d-logo">JegPuster</h1>
-        </div>
         <div className="absolute top-0 left-0 w-full h-full flex justify-center items-center">
           <AirFlowSVG />
         </div>
         <div className="absolute mt-20 left-0 w-full flex justify-center items-center">
           <HumanBody height={900} />
         </div>
-        <div className=" absolute flex flex-col top-1/4 left-20 mt-20">
-          <div
-            className="badge badge-lg text-xl  text-white font-light  px-[0.65em] pb-[0.8em] pt-[0.7em] mb-10"
-            style={{ backgroundColor: '#FDA26B', borderColor: '#FDA26B' }}
-          >
-            Kilder til forurensning
-          </div>{' '}
-          <div className="flex row items-center">
-            <div className="mr-10">
-              <img src={bonfire} alt="" />
-              <p>Vedfyring</p>
-            </div>
-            <div className="mr-10">
-              <img src={bonfire} alt="" />
-              <p>Vedfyring</p>
-            </div>
-            <div className="mr-10">
-              <img src={bonfire} alt="" />
-              <p>Vedfyring</p>
-            </div>
-          </div>
+        <div className="absolute flex flex-col top-1/4 left-40 mt-10">
+          <ParticleExplanation />
         </div>
 
         <div className="flex justify-center">
@@ -89,7 +68,9 @@ function LearnMore() {
               {isClicked && <div className="absolute z-20 text-grey-900">Trang?</div>}
             </div>
           </div>
-          <ParticleExplanation />
+          <div className="absolute left-1/2 transform translate-x-1/4 ml-60 mt-40">
+            <MainPollutants />
+          </div>
         </div>
       </div>
     </>

@@ -15,14 +15,15 @@ function Layout() {
     <div>
       {/* Insert style tag on the nav-tag */}
       <nav className="p-4 grid-rows-2 flex items-center bg-primary">
-        <Link className="text-2xl font-light whitespace-nowrap dark:text-grey" to="/">
-          Home
-        </Link>
+        {location.pathname === '/learn' && (
+          <Link className="text-2xl font-light whitespace-nowrap dark:text-grey" to="/">
+            <div>
+              <h1 className="text-5xl rock-3d-logo">JegPuster</h1>
+            </div>
+          </Link>
+        )}
         <Link className="pl-5 text-2xl font-light whitespace-nowrap dark:text-grey" to="/AQ">
           AQ
-        </Link>
-        <Link className="pl-5 text-2xl font-light whitespace-nowrap dark:text-grey" to="/learn">
-          Lær mer
         </Link>
       </nav>
       <Outlet />
