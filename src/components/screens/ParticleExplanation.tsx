@@ -24,9 +24,10 @@ function ParticleExplanation() {
 
   return (
     <div>
+      
       <div
         className="badge badge-lg text-xl  text-white font-light  px-[0.65em] pb-[0.8em] pt-[0.7em] mt-20 mb-10 ml-10"
-        style={{ backgroundColor: '#FDA26B', borderColor: '#FDA26B' }}
+        style={{ backgroundColor: '#192E54', borderColor: '#192E54' }}
       >
         Hva betyr sirklene?
       </div>{' '}
@@ -49,11 +50,11 @@ function ParticleExplanation() {
       {/* Description for the first SVG */}
       {expanded.particle1 && (
         <div className="mt-2 ml-12">
-          <p className="text-sm">
-            <b> Stammer fra:</b> Hovedveier inkludert dekkpartikler og feiing av veier
+          <p className="text-m">
+            <b> Hovedkilde:</b> Hovedveier (Partikler fra dekk og asfalt)
           </p>
-          <p className="text-sm">
-            <b>Effekt:</b> Ikke alt trenger ned i lungene
+          <p className="text-m">
+            <b>Effekt:</b> Disse partiklene blir ofte filtrert ut før de når de dypere delene av lungene.
           </p>
         </div>
       )}
@@ -76,11 +77,12 @@ function ParticleExplanation() {
       {/* Description for the second SVG */}
       {expanded.particle2 && (
         <div className="mt-2 ml-12">
-          <p className="text-sm">
-            <b> Stammer fra:</b> Vedfyring og eksos
+          <p className="text-m">
+            <b> Hovedkilde:</b> Røyk fra vedfyring og eksos
           </p>
-          <p className="text-sm">
-            <b>Effekt:</b> De fleste partiklene trenger ned i lungene
+          <p className="text-m">
+            <b>Effekt:</b> Disse partiklene blir i mindrer grad filtrert og har større evne til å trenge dypere inn i
+            lungene
           </p>
         </div>
       )}
@@ -108,11 +110,12 @@ function ParticleExplanation() {
       {/* Description for the third SVG */}
       {expanded.particle3 && (
         <div className="mt-2 ml-12">
-          <p className="text-sm">
-            <b> Stammer fra:</b> Veitrafikk
+          <p className="text-m">
+            <b> Hovedkilde:</b> Veitrafikk
           </p>
-          <p className="text-sm">
-            <b>Effekt:</b> Irriterer øverst i lungene
+          <p className="text-m">
+            <b>Effekt:</b> Kortvarig eksponering for høye nivåer av NO2 kan føre til irritasjon i de øvre luftveiene
+            (feks nese og svelg)
           </p>
         </div>
       )}
@@ -138,7 +141,13 @@ function ParticleExplanation() {
         )}
       </div>
       {/* Description for the fourth SVG */}
-      {expanded.particle4 && <p className="mt-2 text-sm ml-12">Langdistansetransport fra Europa</p>}
+      {expanded.particle4 && <p className="mt-2 text-m ml-12">Langdistansetransport fra Europa</p>}
+      {/* 
+      <p className="text-m">
+        <b>Alt i luften påvirker i ulik grad, men de mest sårbare gruppene er:</b> Barn, eldre, personer med eksisterende luftveissykdommer, personer med hjerte- og
+        karsykdommer
+      </p> */}
+     
     </div>
   );
 }

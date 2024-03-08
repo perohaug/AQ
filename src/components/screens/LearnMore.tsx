@@ -5,6 +5,7 @@ import HumanBody from './HumanBodySVG';
 import ParticleExplanation from './ParticleExplanation';
 import bonfire from '~/icons/bonfire 1.png';
 import MainPollutants from './MainPollutants';
+import VulnerableUserGroup from './VulnerableUserGroup';
 
 function LearnMore() {
   const [isClicked, setIsClicked] = useState(false);

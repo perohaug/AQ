@@ -21,14 +21,14 @@ function UserGroups() {
       {userGroupInfoLow[activeSVG].id > 1 ? (
         <div
           className="badge badge-lg text-xl  text-white font-light pb-[0.8em] pt-[0.7em]"
-          style={{ backgroundColor: '#FC8861', borderColor: '#FC8861' }}
+          style={{ backgroundColor: '#192E54', borderColor: '#192E54' }}
         >
           {aqMessage['moderate'].userGroupInfo[activeSVG].name}
         </div>
       ) : (
         <div
           className="badge badge-lg text-xl  text-white font-light  px-[0.65em] pb-[0.8em] pt-[0.7em]"
-          style={{ backgroundColor: '#FC8861', borderColor: '#FC8861' }}
+          style={{ backgroundColor: '#192E54', borderColor: '#192E54' }}
         >
           Generell befolkning
         </div>
@@ -40,7 +40,7 @@ function UserGroups() {
           <Link to="/learn">
             <button
               className="rounded-full bg-blue-800 text-white text-xl px-4 py-2"
-              style={{ width: '150px', height: '150px', backgroundColor: '#192E54' }}
+              style={{ width: '150px', height: '150px', backgroundColor: '#FC8861' }}
             >
               Hva er i luften nå?
             </button>
