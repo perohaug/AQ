@@ -1,6 +1,7 @@
 import { Dialog } from '@headlessui/react';
 import { lazy, Suspense, useState } from 'react';
 import { Outlet, RouteObject, useRoutes, BrowserRouter, Link } from 'react-router-dom';
+import AQMap from '../screens/AQMap';
 import { Header } from './Header';
 
 const Loading = () => <p className="p-4 w-full h-full text-center">Loading...</p>;
@@ -57,6 +58,10 @@ const InnerRouter = () => {
         {
           path: 'learn',
           element: <LearnMore />,
+        },
+        {
+          path: 'map',
+          element: <AQMap />,
         },
       ],
     },

@@ -1,9 +1,6 @@
 import { useEffect, useState } from 'react';
 import { aqMessage } from './aqMessageInfo';
 import { userGroupInfoLow } from './userGroupInfo';
-import bonfire from '~/icons/bonfire 1.png';
-import exhaust from '~/icons/exhaust-pipe 1.png';
-import traffic from '~/icons/car 1.png';
 import HumanBody from './HumanBodySVG';
 import UserGroupsSVG from './UserGroupSVG';
 import AirFlowSVG from './AirFlowSVG';
@@ -46,18 +43,19 @@ function UserGroups() {
             </button>
           </Link>
         </div>
-        <div className="absolute right-0">
-          <HumanBody height={600} style={{ transform: 'translateY(150px)' }} />
+        <div className="absolute right-0 mt-80">
+          <HumanBody height={600} />
         </div>
         <UserGroupsSVG handleSVGClick={handleSVGClick} activeSVG={activeSVG} />
         <div className="absolute right-20" style={{ top: '160px' }}>
-          <div className="chat chat-end">
+          <div className="relative chat chat-end mr-80">
             <div
-              className="relative chat-bubble bg-white text-2xl font-light text-black px-4 py-3 mr-80"
+              className=" chat-bubble bg-white text-2xl font-light text-black px-4 py-3 "
               style={{ maxWidth: '600px' }}
             >
               {aqMessage['moderate'].userGroupInfo[activeSVG].healthMessage}
             </div>
+            <div className="chat-footer opacity-50">Sendt 12:46</div>
           </div>
         </div>
       </div>
