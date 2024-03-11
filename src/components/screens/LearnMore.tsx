@@ -30,7 +30,7 @@ function LearnMore() {
           <AirFlowSVG />
         </div>
         <div className="absolute mt-20 left-0 w-full flex justify-center items-center">
-          <HumanBody height={900} />
+          <HumanBody showLungs={true} height={900} />
         </div>
         <div className="absolute flex flex-col top-1/2 left-20 mt-80">
           <ParticleExplanation />
@@ -41,7 +41,7 @@ function LearnMore() {
             {!isViewMore && (
               <div className="absolute top-1/2 mt-80 ml-80">
                 <button
-                  className="rounded-full bg-blue-800 text-white text-lg px-4 py-2 mt-20"
+                  className="rounded-full bg-blue-800 text-white text-lg px-4 hover:scale-110 transition-transform duration-300 py-2 mt-20"
                   style={{ width: '160px', height: '160px', backgroundColor: '#FC8861' }}
                   onClick={handleCompareClick}
                 >

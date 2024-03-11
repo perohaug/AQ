@@ -36,7 +36,7 @@ function UserGroups() {
         <div className="absolute left-40">
           <Link to="/learn">
             <button
-              className="rounded-full bg-blue-800 text-white text-xl px-4 py-2"
+              className="rounded-full bg-blue-800 text-white text-xl px-4 py-2 hover:scale-105 transition-transform duration-300"
               style={{ width: '150px', height: '150px', backgroundColor: '#FC8861' }}
             >
               Se mer om luften
@@ -44,7 +44,7 @@ function UserGroups() {
           </Link>
         </div>
         <div className="absolute right-0 mt-80">
-          <HumanBody height={600} />
+          <HumanBody showLungs={false} height={600} />
         </div>
         <UserGroupsSVG handleSVGClick={handleSVGClick} activeSVG={activeSVG} />
         <div className="absolute right-20" style={{ top: '160px' }}>
