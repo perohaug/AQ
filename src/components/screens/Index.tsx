@@ -1,15 +1,17 @@
-import { Dialog } from '@headlessui/react';
 import { useRef, useState } from 'react';
 import { useAuthState } from '~/components/contexts/UserContext';
-import { SignInButton } from '~/components/domain/auth/SignInButton';
-import { SignOutButton } from '~/components/domain/auth/SignOutButton';
 import { Head } from '~/components/shared/Head';
 import BouncingSVGElements from '~/components/lib/BouncingSVGElements';
+import useDataFetcher, { ApiResponse } from '../lib/API/DataFetcher';
 
 function Index() {
-  const { state } = useAuthState();
-  const [isOpen, setIsOpen] = useState(true);
-  const completeButtonRef = useRef(null);
+  const { fetchData, status, data, error }: ApiResponse = useDataFetcher();
+
+  const inputRef: any = useRef();
+
+  const handleSubmit = async () => {
+    await fetchData(inputRef.current.value);
+  };
 
   return (
     <>
@@ -20,9 +22,20 @@ function Index() {
             <h1 className="text-9xl rock-3d-logo">
               JegPuster<b>Ikke</b>
             </h1>
-            <div className="flex justify-center items-center p-8">
+            <div className="grid justify-center items-center p-8">
+              <div className="text-center p-8">
+                <input ref={inputRef} type="text" className=" w-1/2 border-2" placeholder="Enter user input" />
+                <button onClick={handleSubmit}>Search for Data</button>
+              </div>
+              <p> AQI: {data?.data.time[0].variables.AQI.value}</p>
+              <p> Lokasjon: {data?.location.name}</p>
+              <p>pm25={data?.data.time[0].variables.AQI.pm25}</p>
+              <p>pm10={data?.data.time[0].variables.AQI.pm10}</p>
               <div className="">
-                <BouncingSVGElements containerId={'Hue'} />
+                <BouncingSVGElements
+                  pm25={data?.data.time[0].variables.AQI.pm25}
+                  pm10={data?.data.time[0].variables.AQI.pm10}
+                />
               </div>
             </div>
           </div>

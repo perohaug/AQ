@@ -20,7 +20,7 @@ interface Station {
   };
 }
 
-function AQI() {
+const AQI: React.FC = () => {
   const [stations, setStations] = useState<Station[]>([]);
   const [selectedStation, setSelectedStation] = useState<string | null>(null);
   const [aqiData, setAqiData] = useState<
@@ -33,9 +33,13 @@ function AQI() {
     }[]
   >([]);
   const [aqiDescriptions, setAqiDescriptions] = useState<any>({});
-  const { status, data, error }: ApiResponse = DataFetcher(
-    'https://api.waqi.info/feed/bali/?token=22f37ad5c0fae31b55ee3304697b74c44a1a4cd0',
-  );
+  const { fetchData, status, data, error }: ApiResponse = DataFetcher();
+  // const { status, data, error }: ApiResponse = DataFetcher(
+  //   'https://api.waqi.info/feed/bali/?token=22f37ad5c0fae31b55ee3304697b74c44a1a4cd0',
+  // );
+  // const { status, data, error }: ApiResponse = DataFetcher(
+  //   `https://api.met.no/weatherapi/airqualityforecast/0.1/?station=NO0060A`,
+  // );
   // const { status, data, error }: ApiResponse = DataFetcher(
   //   `https://api.met.no/weatherapi/airqualityforecast/0.1/?station=NO0060A`,
   // );
@@ -121,7 +125,7 @@ function AQI() {
         console.error('Error fetching stations:', error);
       }
     };
-
+    fetchData('mexico city');
     fetchStations();
   }, []);
 
@@ -153,16 +157,26 @@ function AQI() {
       <div className="block flex-row justify-end">
         {data?.data.time[0].variables.AQI.pm25}
         <br />
+        {data?.location.name}
+        <br />
         Transport: {data?.data.time[0].variables.concentrations.PM10.origin?.langtransport?.value}
         {data?.data.time[0].variables.concentrations.PM10.origin?.langtransport?.units}, vedfyring:{' '}
         {data?.data.time[0].variables.concentrations.PM10.origin?.veistov?.value}
         {data?.data.time[0].variables.concentrations.PM10.origin?.veistov?.units}
+        {data?.data.time[0].variables.concentrations.PM10.origin?.vedfyring?.value}
+        {data?.data.time[0].variables.concentrations.PM10.origin?.industri?.units}
         <br />
-        Med standardisering: {data?.data.time[0].variables.AQI.pm10}| Uten standardisering:{' '}
-        {data?.data.time[0].variables.concentrations.PM10.value}
+        {data?.data.time[0].variables.concentrations.O3.origin?.vedfyring?.value}
+        {data?.data.time[0].variables.concentrations.PM10.origin?.industri?.units}
+        Dato: {data?.data.time[0].from.toDateString()}
+        <br />
+        Med standardisering: {data?.data.time[0].variables.AQI.no2}| Uten standardisering:{' '}
+        {data?.data.time[0].variables.concentrations.NO2.value}
         <br />
         Med standardisering: {data?.data.time[0].variables.AQI.pm25}| Uten standardisering:{' '}
         {data?.data.time[0].variables.concentrations.PM25.value}
+        {data?.location.latitude}
+        {data?.location.longitude}
         <br />
         {data?.dominantPollutant}
         <div>{status}</div>
@@ -171,6 +185,6 @@ function AQI() {
       </div>
     </>
   );
-}
+};
 
 export default AQI;

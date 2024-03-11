@@ -76,7 +76,6 @@ export interface APIStandard {
   dominantPollutant?: any;
   location: stdlocation;
   stationID?: string;
-  description?: string;
 }
 
 export interface METResponse {
