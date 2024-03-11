@@ -10,28 +10,17 @@ function MainPollutants() {
         >
           Dette forurenser luften nå
         </div>
-        <div className="flex flex-col items-center">
-          <div className="mb-10">
+        <div className="flex items-center">
+          <div>
             <div className="flex row justify-center items-center">
-              <h1 className="text-6xl rock-3d-logo ">1.</h1>
               <div className="flex flex-col justify-center items-center">
                 <img src={bonfire} alt="" />
                 <p>Vedfyring</p>
               </div>
             </div>
           </div>
-          <div className="mb-10 ml-20">
+          <div className=" ml-20">
             <div className="flex row justify-center items-center">
-              <h1 className="text-6xl rock-3d-logo ">2.</h1>
-              <div className="flex flex-col justify-center items-center">
-                <img src={bonfire} alt="" />
-                <p>Vedfyring</p>
-              </div>
-            </div>
-          </div>
-          <div className="mb-10">
-            <div className="flex row justify-center items-center">
-              <h1 className="text-6xl rock-3d-logo ">3.</h1>
               <div className="flex flex-col justify-center items-center">
                 <img src={bonfire} alt="" />
                 <p>Vedfyring</p>

@@ -42,7 +42,7 @@ function UserGroups() {
               className="rounded-full bg-blue-800 text-white text-xl px-4 py-2"
               style={{ width: '150px', height: '150px', backgroundColor: '#FC8861' }}
             >
-              Hva er i luften nå?
+              Se mer om luften
             </button>
           </Link>
         </div>

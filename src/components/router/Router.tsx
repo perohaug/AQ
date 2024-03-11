@@ -14,7 +14,7 @@ function Layout() {
   return (
     <div>
       {/* Insert style tag on the nav-tag */}
-      <nav className="p-4 grid-rows-2 flex items-center bg-primary">
+      <nav className="p-4 grid-rows-2 flex items-center justify-center bg-primary">
         {location.pathname === '/learn' && (
           <Link className="text-2xl font-light whitespace-nowrap dark:text-grey" to="/">
             <div>
@@ -22,9 +22,6 @@ function Layout() {
             </div>
           </Link>
         )}
-        <Link className="pl-5 text-2xl font-light whitespace-nowrap dark:text-grey" to="/AQ">
-          AQ
-        </Link>
       </nav>
       <Outlet />
     </div>
