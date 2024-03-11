@@ -5,7 +5,7 @@ function MainPollutants() {
     <>
       <>
         <div
-          className="badge badge-lg text-xl  text-white font-light  px-[0.65em] pb-[0.8em] pt-[0.7em] mb-10"
+          className="badge badge-lg text-xl  text-white font-light  px-[0.65em] pb-[0.8em] pt-[0.7em] mb-10 mt-10"
           style={{ backgroundColor: '#192E54', borderColor: '#192E54' }}
         >
           Dette forurenser luften nå

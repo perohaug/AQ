@@ -24,49 +24,15 @@ function LearnMore() {
   return (
     <>
       <Head title="TOP PAGE" />
-      <div className="bg-background relative">
-        <div className="absolute flex items-center  absolut ml-20 mt-20">
-          <div className="mr-3">
-            <svg width={80} height={80}>
-              <circle
-                cx={40}
-                cy={40}
-                r={20}
-                fill={aqMessage['moderate'].color} // Adjust opacity as needed (0.3 for example)
-                opacity={0.5}
-                style={{ animation: 'expandShrink 1s infinite alternate' }}
-              />
-              {/* Tinier circle */}
-              <circle cx={40} cy={40} r={25} fill={aqMessage['moderate'].color} /> {/* Adjust the radius as needed */}
-            </svg>
-            <style>
-              {`
-        @keyframes expandShrink {
-          0% {
-            r: 30; // Initial radius
-          }
-          50% {
-            r: 35; // Maximum radius
-          }
-          100% {
-            r: 40; // Back to the initial radius
-          }
-        }
-      `}
-            </style>
-          </div>
-          <div className="mt-5">
-            <p className="font-light text-2xl mb-4">{aqMessage['moderate'].risk}</p>
-          </div>
-        </div>
 
-        <div className="absolute top-1/2 mt-40">
+      <div className="bg-background relative">
+        <div className="absolute top-1/2 mt-60">
           <AirFlowSVG />
         </div>
         <div className="absolute mt-20 left-0 w-full flex justify-center items-center">
           <HumanBody height={900} />
         </div>
-        <div className="absolute flex flex-col top-1/2 left-20 mt-60">
+        <div className="absolute flex flex-col top-1/2 left-20 mt-80">
           <ParticleExplanation />
         </div>
 
@@ -93,17 +59,17 @@ function LearnMore() {
                     style={{ width: '60px', height: '60px', backgroundColor: '#FC8861' }}
                     onClick={handleCompareClick}
                   >
-                    X
+                    <p className="text-3xl mb-1">x</p>
                   </button>
                   <div className="flex items-center mt-20">
                     <div
-                      className="badge badge-lg text-xl text-white font-light px-[0.9em] pb-[0.8em] pt-[0.7em] top-1/2 mr-10"
+                      className="badge badge-lg text-xl text-white font-light px-[0.9em] pb-[0.8em] pt-[0.7em] top-1/2 mr-6"
                       style={{ backgroundColor: '#192E54', borderColor: '#192E54' }}
                     >
                       Trondheim
                     </div>
 
-                    <div className="relative inline-block text-left ">
+                    <div className="relative inline-block text-left ml-20 ">
                       <div>
                         <input
                           type="text"

@@ -22,12 +22,12 @@ function AqMessage() {
               cx={40}
               cy={40}
               r={20}
-              fill={aqMessage['moderate'].color} // Adjust opacity as needed (0.3 for example)
+              fill={aqMessage['low'].color} // Adjust opacity as needed (0.3 for example)
               opacity={0.5}
               style={{ animation: 'expandShrink 1s infinite alternate' }}
             />
             {/* Tinier circle */}
-            <circle cx={40} cy={40} r={25} fill={aqMessage['moderate'].color} /> {/* Adjust the radius as needed */}
+            <circle cx={40} cy={40} r={25} fill={aqMessage['low'].color} /> {/* Adjust the radius as needed */}
           </svg>
           <style>
             {`
@@ -46,7 +46,7 @@ function AqMessage() {
           </style>
         </div>
         <div className="mt-5">
-          <p className="font-light text-3xl">{aqMessage['moderate'].message}</p>
+          <p className="font-light text-3xl">{aqMessage['low'].message}</p>
         </div>
         <Link to="/map">
           <svg
@@ -58,9 +58,9 @@ function AqMessage() {
             fill="none"
             className="mt-3 ml-3"
           >
-            <rect width="40" height="40" fill="url(#pattern0)" />
+            <rect width="40" height="40" fill="url(#pattern7)" />
             <defs>
-              <pattern id="pattern0" patternContentUnits="objectBoundingBox" width="1" height="1">
+              <pattern id="pattern7" patternContentUnits="objectBoundingBox" width="1" height="1">
                 <use xlinkHref="#image0_209_2250" transform="scale(0.00195312)" />
               </pattern>
               <image
@@ -100,7 +100,7 @@ function AqMessage() {
             </div>
             <div className="flex items-center">
               <svg width={40} height={40} className="mr-5">
-                <circle cx={20} cy={20} r={20} fill={aqMessage['veryhigh'].color} />
+                <circle cx={20} cy={20} r={20} fill={aqMessage['low'].color} />
               </svg>
               <p>Svært høy</p>
             </div>

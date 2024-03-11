@@ -20,7 +20,7 @@ function UserGroups() {
           className="badge badge-lg text-xl  text-white font-light pb-[0.8em] pt-[0.7em]"
           style={{ backgroundColor: '#192E54', borderColor: '#192E54' }}
         >
-          {aqMessage['moderate'].userGroupInfo[activeSVG].name}
+          {aqMessage['low'].userGroupInfo[activeSVG].name}
         </div>
       ) : (
         <div
@@ -50,12 +50,12 @@ function UserGroups() {
         <div className="absolute right-20" style={{ top: '160px' }}>
           <div className="relative chat chat-end mr-80">
             <div
-              className=" chat-bubble bg-white text-2xl font-light text-black px-4 py-3 "
+              className=" chat-bubble bg-white text-2xl font-light text-black px-4 py-3 mr-10"
               style={{ maxWidth: '600px' }}
             >
-              {aqMessage['moderate'].userGroupInfo[activeSVG].healthMessage}
+              {aqMessage['low'].userGroupInfo[activeSVG].healthMessage}
             </div>
-            <div className="chat-footer opacity-50">Sendt 12:46</div>
+            <div className="chat-footer opacity-50 mr-10">Sendt 12:46</div>
           </div>
         </div>
       </div>

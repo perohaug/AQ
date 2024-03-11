@@ -1,7 +1,7 @@
 import { aqMessage } from './aqMessageInfo';
 
 function AirFlowSVG() {
-  const color = aqMessage['moderate'].color;
+  const color = aqMessage['low'].color;
   return (
     <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="156" viewBox="0 0 2743 256" fill="none">
       <path

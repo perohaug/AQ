@@ -7,13 +7,16 @@ interface AQMessage {
         message: string,
         userGroupInfo: UserGroupInfo;
     };
+
 }
+// 89c4f4, CFF9FB
 
 // Define the array of AQ message colors
 export const aqMessage: AQMessage = 
     {
+
         low: {
-            color: '#CFF9FB',
+            color: '#9BE4E6',
             risk: 'Lav helserisiko',
             message: 'Nyt dagen ute!',
             userGroupInfo: userGroupInfoLow,
