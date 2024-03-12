@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react';
-import { aqMessage } from './aqMessageInfo';
-import { userGroupInfoLow } from './userGroupInfo';
-import HumanBody from './HumanBodySVG';
-import UserGroupsSVG from './UserGroupSVG';
-import AirFlowSVG from './AirFlowSVG';
+import { aqMessage } from '../TextContent/aqMessageInfo';
+import { userGroupInfoLow } from '../TextContent/userGroupInfo';
+import HumanBody from '../../svgs/HumanBodySVG';
+import UserGroupsSVG from '../../svgs/UserGroupSVG';
+import AirFlowSVG from '../../svgs/AirFlowSVG';
 import { Link } from 'react-router-dom';
+import ChatBubble from './ChatBubble';
 
 function UserGroups() {
   const [activeSVG, setActiveSVG] = useState(1);
@@ -31,7 +32,7 @@ function UserGroups() {
         </div>
       )}
 
-      <div className="relative flex  items-center">
+      <div className="relative flex items-center">
         <AirFlowSVG />
         <div className="absolute left-40">
           <Link to="/learn">
@@ -47,16 +48,8 @@ function UserGroups() {
           <HumanBody showLungs={false} height={600} />
         </div>
         <UserGroupsSVG handleSVGClick={handleSVGClick} activeSVG={activeSVG} />
-        <div className="absolute right-20" style={{ top: '160px' }}>
-          <div className="relative chat chat-end mr-80">
-            <div
-              className=" chat-bubble bg-white text-2xl font-light text-black px-4 py-3 mr-10"
-              style={{ maxWidth: '600px' }}
-            >
-              {aqMessage['low'].userGroupInfo[activeSVG].healthMessage}
-            </div>
-            <div className="chat-footer opacity-50 mr-10">Sendt 12:46</div>
-          </div>
+        <div className="absolute right-20" style={{ top: '180px' }}>
+          <ChatBubble svg={activeSVG} />
         </div>
       </div>
     </>

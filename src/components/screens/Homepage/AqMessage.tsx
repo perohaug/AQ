@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { aqMessage } from './aqMessageInfo';
+import { aqMessage } from '../TextContent/aqMessageInfo';
 
 function AqMessage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -100,7 +100,7 @@ function AqMessage() {
             </div>
             <div className="flex items-center">
               <svg width={40} height={40} className="mr-5">
-                <circle cx={20} cy={20} r={20} fill={aqMessage['low'].color} />
+                <circle cx={20} cy={20} r={20} fill={aqMessage['veryhigh'].color} />
               </svg>
               <p>Svært høy</p>
             </div>

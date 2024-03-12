@@ -39,13 +39,13 @@ function ParticleExplanation() {
       >
         Hva er i luften?
       </div>{' '}
-      <div className="flex flex-row items-center ml-20">
+      <div className="flex flex-row items-center ml-12">
         {/* First SVG */}
         <div
           className="flex items-center justify-start hover:scale-110 transition-transform duration-300"
           onClick={() => handleExpand('particle1')}
         >
-          <svg className="w-12 h-12" viewBox="0 0 70 70">
+          <svg className="w-20 h-20" viewBox="0 0 70 70">
             <circle cx="35" cy="35" r="35" fill="#FF6C6C" />
           </svg>
         </div>
@@ -54,7 +54,7 @@ function ParticleExplanation() {
           className="ml-16 flex items-center justify-start mt-5 hover:scale-110 transition-transform duration-300"
           onClick={() => handleExpand('particle2')}
         >
-          <svg className="w-8 h-8" viewBox="0 0 70 70">
+          <svg className="w-10 h-10" viewBox="0 0 70 70">
             <circle cx="35" cy="35" r="35" fill="#FF155C" />
           </svg>
         </div>
@@ -63,7 +63,7 @@ function ParticleExplanation() {
           className="ml-16 flex items-center justify-start hover:scale-110 transition-transform duration-300"
           onClick={() => handleExpand('particle3')}
         >
-          <svg className="w-8 h-8" viewBox="0 0 70 70">
+          <svg className="w-12 h-12" viewBox="0 0 70 70">
             <defs>
               <filter id="blurFilter" x="0" y="0" width="100%" height="100%">
                 <feGaussianBlur in="SourceGraphic" stdDeviation="3" />
@@ -75,12 +75,12 @@ function ParticleExplanation() {
       </div>
       {/* Description for the first SVG */}
       {expanded.particle1 && (
-        <div className="mt-2 ml-12" style={{ maxWidth: '350px' }}>
+        <div className="mt-2 ml-8" style={{ maxWidth: '350px' }}>
           <p className="font-md text-m font-bold mt-2 mb-5">Store partikler</p>
-          <p className="text-m">
+          <p className="text-m ml-2">
             <b> Hovedkilde:</b> Hovedveier (Partikler fra dekk og asfalt)
           </p>
-          <p className="text-m">
+          <p className="text-m ml-2">
             <b>Effekt:</b> Disse partiklene blir ofte filtrert ut før de når de dypere delene av lungene.
           </p>
         </div>
@@ -101,7 +101,7 @@ function ParticleExplanation() {
       {/* Description for the third SVG */}
       {expanded.particle3 && (
         <div className="mt-2 ml-12" style={{ maxWidth: '350px' }}>
-          <p className="text-m font-bold mb-5 ml-56">Gasser</p>
+          <p className="text-m font-bold mb-5 ml-60">Gasser</p>
           <p className="text-m">
             <b> Hovedkilde:</b> Veitrafikk
           </p>

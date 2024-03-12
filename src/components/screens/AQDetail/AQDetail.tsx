@@ -1,11 +1,11 @@
 import { useState } from 'react';
-import { Head } from '../shared/Head';
-import AirFlowSVG from './AirFlowSVG';
-import HumanBody from './HumanBodySVG';
+import { Head } from '../../shared/Head';
+import AirFlowSVG from '../../svgs/AirFlowSVG';
+import HumanBody from '../../svgs/HumanBodySVG';
 import ParticleExplanation from './ParticleExplanation';
 import bonfire from '~/icons/bonfire 1.png';
 import MainPollutants from './MainPollutants';
-import { aqMessage } from './aqMessageInfo';
+import { aqMessage } from '../TextContent/aqMessageInfo';
 
 function LearnMore() {
   const [isClicked, setIsClicked] = useState(false);

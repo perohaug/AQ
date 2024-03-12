@@ -2,15 +2,15 @@ import { Dialog } from '@headlessui/react';
 import { lazy, Suspense, useState } from 'react';
 import { Outlet, RouteObject, useRoutes, BrowserRouter, Link } from 'react-router-dom';
 import AQMap from '../screens/AQMap';
-import { aqMessage } from '../screens/aqMessageInfo';
+import { aqMessage } from '../screens/TextContent/aqMessageInfo';
 import { Header } from './Header';
 
 const Loading = () => <p className="p-4 w-full h-full text-center">Loading...</p>;
 
-const IndexScreen = lazy(() => import('~/components/screens/Index'));
+const IndexScreen = lazy(() => import('~/components/screens/Homepage/Index'));
 const Page404Screen = lazy(() => import('~/components/screens/404'));
 const AQPage = lazy(() => import('~/components/screens/AQ'));
-const LearnMore = lazy(() => import('~/components/screens/LearnMore'));
+const LearnMore = lazy(() => import('~/components/screens/AQDetail/AQDetail'));
 
 function Layout() {
   return (
