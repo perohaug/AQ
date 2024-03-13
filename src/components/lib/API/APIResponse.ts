@@ -1,5 +1,4 @@
 export interface AQIint {
-  units: string;
   value: any;
   pm10: any;
   pm25: any;
@@ -7,7 +6,7 @@ export interface AQIint {
   o3: any;
 }
 
-interface stdconcentration {
+export interface stdconcentration {
   value: number;
   units: string;
   origin?:
@@ -44,7 +43,7 @@ interface stdconcentration {
     | undefined;
 }
 
-interface stdconcentrations {
+export interface stdconcentrations {
   [key: string]: stdconcentration;
 }
 
@@ -54,8 +53,8 @@ interface stdvariables {
 }
 
 interface stdlocation {
-  name: string;
   path: string;
+  name: string;
   longitude: number;
   latitude: number;
   areacode: string;
@@ -76,6 +75,21 @@ export interface APIStandard {
   dominantPollutant?: any;
   location: stdlocation;
   stationID?: string;
+  topContributors?: contributer;
+}
+
+export interface contributer {
+  [key: string]: poll;
+}
+
+export interface poll {
+  veistov?: number;
+  eksos?: number;
+  langtransport?: number;
+  skip?: number;
+  vedfyring?: number;
+  industri?: number;
+  seasalt?: number;
 }
 
 export interface METResponse {
