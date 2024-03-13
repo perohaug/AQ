@@ -1,11 +1,41 @@
 import { useState, useEffect, useCallback } from 'react';
-import { APIStandard, METResponse, METTime, WAQIResponse, stdtime, stdtimes } from './APIResponse';
+import {
+  APIStandard,
+  METResponse,
+  METTime,
+  METVariables,
+  WAQIResponse,
+  poll,
+  stdconcentration,
+  stdconcentrations,
+  stdtime,
+  stdtimes,
+} from './APIResponse';
 
 export interface ApiResponse {
   fetchData: (userInput: string) => Promise<void>;
   status: 'loading' | 'success' | 'error';
   data: APIStandard | null;
   error: string | null;
+}
+
+function domPoll(O3: number, NO2: number, PM10: number, PM25: number) {
+  const max = Math.max(O3, NO2, PM10, PM25);
+  if (max === O3) {
+    return 'O₃'; // Ozon
+  } else if (max === NO2) {
+    return 'NO₂'; // Nitrogendioksid
+  } else if (max === PM10) {
+    return 'PM₁₀'; // Store svevestøv
+  } else {
+    return 'PM₂.₅'; // Små svevestøv
+  }
+}
+
+function topContribs(topContributors: METVariables, pos: number) {
+  const values = [Object.values(topContributors)];
+  values.sort();
+  return values[pos];
 }
 
 function PM25AQI(x: number) {
@@ -151,20 +181,21 @@ function AQI(x: number) {
   return aqi;
 }
 
-const useDataFetcher = (userInput?: string): ApiResponse => {
+const useDataFetcher = (): ApiResponse => {
   const [apiData, setApiData] = useState<APIStandard>(null as unknown as APIStandard);
-  const [status, setStatus] = useState<'loading' | 'success' | 'error'>('loading');
+  const [status, setStatus] = useState<'success' | 'loading' | 'error'>('loading');
   const [error, setError] = useState<string | null>(null);
 
   const fetchData = useCallback(async (userInput: string) => {
-    const url = `https://api.waqi.info/feed/${userInput}/?token=22f37ad5c0fae31b55ee3304697b74c44a1a4cd0`;
+    // const url = `https://api.waqi.info/feed/${userInput}/?token=22f37ad5c0fae31b55ee3304697b74c44a1a4cd0`;
     try {
       if (!userInput) {
         throw new Error('URL is undefined');
       }
-      if (url.includes('met')) {
-        const apiResponse = await fetch(url);
+      if (userInput.includes('met')) {
+        const apiResponse = await fetch(userInput);
         console.log(apiResponse.status);
+        console.log(apiResponse);
         const apiDataResponse: METResponse = await apiResponse.json();
         const timeData: stdtimes = {
           time: apiDataResponse.data.time.map((timeEntry: METTime) => ({
@@ -172,16 +203,15 @@ const useDataFetcher = (userInput?: string): ApiResponse => {
             to: new Date(timeEntry.to),
             variables: {
               AQI: {
-                units: 'µg/m³',
-                value: timeEntry.variables.AQI.value,
-                pm10: timeEntry.variables.AQI_pm10.value,
-                pm25: timeEntry.variables.AQI_pm25.value,
-                no2: timeEntry.variables.AQI_no2.value,
-                o3: timeEntry.variables.AQI_o3.value,
+                value: timeEntry.variables.AQI.value.toFixed(2),
+                pm10: timeEntry.variables.AQI_pm10.value.toFixed(2),
+                pm25: timeEntry.variables.AQI_pm25.value.toFixed(2),
+                no2: timeEntry.variables.AQI_no2.value.toFixed(2),
+                o3: timeEntry.variables.AQI_o3.value.toFixed(2),
               },
               concentrations: {
                 PM10: {
-                  value: PM10AQI(timeEntry.variables.pm10_concentration.value),
+                  value: timeEntry.variables.pm10_concentration.value,
                   units: 'µg/m³',
                   origin: {
                     langtransport: {
@@ -280,7 +310,7 @@ const useDataFetcher = (userInput?: string): ApiResponse => {
                   origin: {
                     langtransport: {
                       value: timeEntry.variables.o3_nonlocal_fraction.value,
-                      units: 'µg/m³',
+                      units: '%',
                     },
                   },
                 },
@@ -299,13 +329,89 @@ const useDataFetcher = (userInput?: string): ApiResponse => {
             areacode: apiDataResponse.meta.location.areacode,
           },
           stationID: apiDataResponse.meta.superlocation.superareacode,
-          dominantPollutant: apiDataResponse.meta.sublocations,
+          dominantPollutant: domPoll(
+            apiDataResponse.data.time[0].variables.o3_concentration.value,
+            apiDataResponse.data.time[0].variables.no2_concentration.value,
+            apiDataResponse.data.time[0].variables.pm10_concentration.value,
+            apiDataResponse.data.time[0].variables.pm25_concentration.value,
+          ),
+          topContributors: {
+            pm10: {
+              veistov:
+                (apiDataResponse.data.time[0].variables.pm10_local_fraction_traffic_nonexhaust.value / 100) *
+                apiDataResponse.data.time[0].variables.pm10_concentration.value,
+              vedfyring:
+                (apiDataResponse.data.time[0].variables.pm25_local_fraction_heating.value / 100) *
+                apiDataResponse.data.time[0].variables.pm10_concentration.value,
+              industri:
+                (apiDataResponse.data.time[0].variables.pm10_local_fraction_industry.value / 100) *
+                apiDataResponse.data.time[0].variables.pm10_concentration.value,
+              skip:
+                (apiDataResponse.data.time[0].variables.pm10_local_fraction_shipping.value / 100) *
+                apiDataResponse.data.time[0].variables.pm10_concentration.value,
+              eksos:
+                (apiDataResponse.data.time[0].variables.pm10_local_fraction_traffic_exhaust.value / 100) *
+                apiDataResponse.data.time[0].variables.pm10_concentration.value,
+              langtransport:
+                (apiDataResponse.data.time[0].variables.pm10_nonlocal_fraction.value / 100) *
+                apiDataResponse.data.time[0].variables.pm10_concentration.value,
+              seasalt:
+                (apiDataResponse.data.time[0].variables.pm10_nonlocal_fraction_seasalt.value / 100) *
+                apiDataResponse.data.time[0].variables.pm10_concentration.value,
+            },
+            pm25: {
+              veistov:
+                (apiDataResponse.data.time[0].variables.pm25_local_fraction_traffic_nonexhaust.value / 100) *
+                apiDataResponse.data.time[0].variables.pm25_concentration.value,
+              vedfyring:
+                (apiDataResponse.data.time[0].variables.pm25_local_fraction_heating.value / 100) *
+                apiDataResponse.data.time[0].variables.pm25_concentration.value,
+              industri:
+                (apiDataResponse.data.time[0].variables.pm25_local_fraction_industry.value / 100) *
+                apiDataResponse.data.time[0].variables.pm25_concentration.value,
+              langtransport:
+                (apiDataResponse.data.time[0].variables.pm25_nonlocal_fraction.value / 100) *
+                apiDataResponse.data.time[0].variables.pm25_concentration.value,
+              seasalt:
+                (apiDataResponse.data.time[0].variables.pm25_nonlocal_fraction_seasalt.value / 100) *
+                apiDataResponse.data.time[0].variables.pm25_concentration.value,
+              eksos:
+                (apiDataResponse.data.time[0].variables.pm25_local_fraction_traffic_exhaust.value / 100) *
+                apiDataResponse.data.time[0].variables.pm25_concentration.value,
+              skip:
+                (apiDataResponse.data.time[0].variables.pm25_local_fraction_shipping.value / 100) *
+                apiDataResponse.data.time[0].variables.pm25_concentration.value,
+            },
+            o3: {
+              langtransport:
+                (apiDataResponse.data.time[0].variables.o3_nonlocal_fraction.value / 100) *
+                apiDataResponse.data.time[0].variables.o3_concentration.value,
+            },
+            no2: {
+              langtransport:
+                (apiDataResponse.data.time[0].variables.no2_nonlocal_fraction.value / 100) *
+                apiDataResponse.data.time[0].variables.no2_concentration.value,
+              eksos:
+                (apiDataResponse.data.time[0].variables.no2_local_fraction_traffic_exhaust.value / 100) *
+                apiDataResponse.data.time[0].variables.no2_concentration.value,
+              skip:
+                (apiDataResponse.data.time[0].variables.no2_local_fraction_shipping.value / 100) *
+                apiDataResponse.data.time[0].variables.no2_concentration.value,
+              vedfyring:
+                (apiDataResponse.data.time[0].variables.no2_local_fraction_heating.value / 100) *
+                apiDataResponse.data.time[0].variables.no2_concentration.value,
+              industri:
+                (apiDataResponse.data.time[0].variables.no2_local_fraction_industry.value / 100) *
+                apiDataResponse.data.time[0].variables.no2_concentration.value,
+            },
+          },
         });
         setError(null);
         setStatus('success');
-      } else if (url.includes('waqi')) {
-        const apiResponse = await fetch(url);
+      } else if (userInput.includes('waqi')) {
+        const apiResponse = await fetch(userInput);
         console.log(apiResponse.status);
+        console.log(apiResponse);
         const apiDataResponse: WAQIResponse = await apiResponse.json();
         console.log(apiDataResponse.data.city.name);
         console.log(AQI(apiDataResponse.data.aqi));
@@ -317,12 +423,11 @@ const useDataFetcher = (userInput?: string): ApiResponse => {
                 to: new Date(apiDataResponse.data.time.v),
                 variables: {
                   AQI: {
-                    value: waqi(apiDataResponse.data.aqi),
-                    units: 'µg/m³',
-                    pm10: PM10AQI(apiDataResponse.data.iaqi.pm10.v),
-                    pm25: PM25AQI(apiDataResponse.data.iaqi.pm25.v),
-                    no2: NO2AQI(apiDataResponse.data.iaqi.no2.v),
-                    o3: O3AQI(apiDataResponse.data.iaqi.o3.v),
+                    value: waqi(apiDataResponse.data.aqi).toFixed(2),
+                    pm10: PM10AQI(apiDataResponse.data.iaqi.pm10.v).toFixed(2),
+                    pm25: PM25AQI(apiDataResponse.data.iaqi.pm25.v).toFixed(2),
+                    no2: NO2AQI(apiDataResponse.data.iaqi.no2.v).toFixed(2),
+                    o3: O3AQI(apiDataResponse.data.iaqi.o3.v).toFixed(2),
                   },
                   concentrations: {
                     PM10: {
