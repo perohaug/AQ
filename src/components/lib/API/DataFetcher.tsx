@@ -194,8 +194,6 @@ const useDataFetcher = (): ApiResponse => {
       }
       if (userInput.includes('met')) {
         const apiResponse = await fetch(userInput);
-        console.log(apiResponse.status);
-        console.log(apiResponse);
         const apiDataResponse: METResponse = await apiResponse.json();
         const timeData: stdtimes = {
           time: apiDataResponse.data.time.map((timeEntry: METTime) => ({
@@ -410,11 +408,9 @@ const useDataFetcher = (): ApiResponse => {
         setStatus('success');
       } else if (userInput.includes('waqi')) {
         const apiResponse = await fetch(userInput);
-        console.log(apiResponse.status);
-        console.log(apiResponse);
+
         const apiDataResponse: WAQIResponse = await apiResponse.json();
-        console.log(apiDataResponse.data.city.name);
-        console.log(AQI(apiDataResponse.data.aqi));
+
         setApiData({
           data: {
             time: [

@@ -75,39 +75,36 @@ function ParticleExplanation() {
       </div>
       {/* Description for the first SVG */}
       {expanded.particle1 && (
-        <div className="mt-2 ml-8" style={{ maxWidth: '350px' }}>
-          <p className="font-md text-m font-bold mt-2 mb-5">Store partikler</p>
-          <p className="text-m ml-2">
-            <b> Hovedkilde:</b> Hovedveier (Partikler fra dekk og asfalt)
+        <div className="mt-10 ml-12" style={{ maxWidth: '350px' }}>
+          <p className="text-m font-bold mt-2 mb-5 ml-28">Store partikler</p>
+          <p className="text-m mb-3">
+            Hovedkilden til de store partiklene er <b>hovedveier</b> (Partikler fra dekk og asfalt)
           </p>
-          <p className="text-m ml-2">
-            <b>Effekt:</b> Disse partiklene blir ofte filtrert ut før de når de dypere delene av lungene.
-          </p>
+          <p className="text-m">Disse partiklene blir ofte filtrert ut før de når de dypere delene av lungene.</p>
         </div>
       )}
       {/* Description for the second SVG */}
       {expanded.particle2 && (
-        <div className="mt-2 ml-12" style={{ maxWidth: '350px' }}>
+        <div className="mt-10 ml-12" style={{ maxWidth: '350px' }}>
           <p className="text-m font-bold mt-2 mb-5 ml-28">Små partikler</p>
-          <p className="text-m">
-            <b> Hovedkilde:</b> Røyk fra vedfyring og eksos
+          <p className="text-m mb-3">
+            Hovedkilde til de små partiklene er <b>røyk fra vedfyring og eksos</b>
           </p>
           <p className="text-m">
-            <b>Effekt:</b> Disse partiklene blir i mindre grad filtrert og har større evne til å trenge dypere inn i
-            lungene
+            Disse partiklene blir i mindre grad filtrert og har større evne til å trenge dypere inn i lungene
           </p>
         </div>
       )}
       {/* Description for the third SVG */}
       {expanded.particle3 && (
-        <div className="mt-2 ml-12" style={{ maxWidth: '350px' }}>
-          <p className="text-m font-bold mb-5 ml-60">Gasser</p>
-          <p className="text-m">
-            <b> Hovedkilde:</b> Veitrafikk
+        <div className="mt-10 ml-12" style={{ maxWidth: '350px' }}>
+          <p className="text-m font-bold mt-2 mb-5 ml-28">Gasser</p>
+          <p className="text-m mb-3">
+            Hovedkilden til gassene er <b>veitrafikk</b>
           </p>
           <p className="text-m">
-            <b>Effekt:</b> Kortvarig eksponering for høye nivåer av NO2 kan føre til irritasjon i de øvre luftveiene
-            (feks nese og svelg)
+            Kortvarig eksponering for høye nivåer av gasser kan føre til irritasjon i de øvre luftveiene (feks nese og
+            svelg)
           </p>
         </div>
       )}

@@ -5,20 +5,15 @@ import exhaust from '~/icons/exhaust-pipe 1.png';
 
 type MainPollutantsProps = {
   data: APIStandard | null;
-  city: any;
 };
 
 function MainPollutants(props: MainPollutantsProps) {
-  const { data, city } = props;
+  const { data } = props;
 
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const openModal = () => {
-    setIsModalOpen(true);
-  };
-
-  const closeModal = () => {
-    setIsModalOpen(false);
+    setIsModalOpen(!isModalOpen);
   };
 
   const dominantPollutantFactorString = 'vedfyring';
@@ -40,7 +35,7 @@ function MainPollutants(props: MainPollutantsProps) {
           <circle cx="35" cy="35" r="35" fill="#FF155C" />
         </svg>
       );
-    } else if (data?.dominantPollutant == 'o3') {
+    } else if (data?.dominantPollutant == 'o3' || 'no2') {
       dominantPollutantName = 'gasser';
       return (
         <svg className="w-40 h-40" viewBox="0 0 70 70">
@@ -66,7 +61,7 @@ function MainPollutants(props: MainPollutantsProps) {
             className="badge badge-lg text-xl  text-white font-light  px-[0.65em] pb-[0.8em] pt-[0.7em] mb-10 mt-20"
             style={{ backgroundColor: '#192E54', borderColor: '#192E54' }}
           >
-            Forurenser luften mest i {city} nå
+            Forurenser luften mest i {data?.location.name} nå
           </div>
           {data?.dominantPollutant && dominantPollutantFactor && (
             <div
@@ -77,21 +72,17 @@ function MainPollutants(props: MainPollutantsProps) {
               {dominantPollutantSVG()}
             </div>
           )}
-        </div>
-        {isModalOpen && (
-          <div className="fixed inset-0 z-10 flex items-center justify-center">
-            <div className="absolute inset-0 bg-black opacity-5" onClick={closeModal}></div>
-            <div className="bg-white p-10 rounded-lg z-20 flex flex-col items-center justify-center">
-              <p className="font-bold mb-6">{city} </p>
-              <p className="font-light mb-6">
-                Det er <b>{dominantPollutantName}</b> som forurenser mest akkruat nå
+          {isModalOpen && (
+            <div className="mt-10">
+              <p className="font-normal mb-6">
+                Det er <b className="font-bold">{dominantPollutantName}</b> som forurenser mest akkurat nå
               </p>
               <p className="font-light mb-6">
-                Dette stammer i aller størst grad fra <b>{dominantPollutantFactorString}</b>
+                Dette stammer i aller størst grad fra <b className="font-bold">{dominantPollutantFactorString}</b>
               </p>
             </div>
-          </div>
-        )}
+          )}
+        </div>
       </>
     </>
   );

@@ -33,17 +33,15 @@ interface Station {
 }
 function LearnMore() {
   const [isClicked, setIsClicked] = useState(false);
-  const [city, setCity] = useState('Bangkok');
 
   const currentAQ = aqMessage['moderate'];
 
   const { fetchData, status, data, error }: ApiResponse = useDataFetcher();
   const [stations, setStations] = useState<Station[]>([]);
-  const [selectedStation, setSelectedStation] = useState<string | null>(null);
+  const [selectedStation, setSelectedStation] = useState<string | null>('NO0102A');
   const [isViewMore, setIsViewMore] = useState(false);
 
   useEffect(() => {
-    fetchData('Bangkok');
     const fetchStations = async () => {
       try {
         const res = await fetch('https://api.met.no/weatherapi/airqualityforecast/0.1/stations');
@@ -54,7 +52,8 @@ function LearnMore() {
       }
     };
     fetchStations();
-  }, [fetchData]);
+    handleSubmit();
+  }, []);
 
   const inputRef: any = useRef();
   const validStations = [
@@ -72,10 +71,7 @@ function LearnMore() {
 
   const dominantPollutant = data?.dominantPollutant;
 
-  console.log(data?.location);
-
   const handleSubmit = async () => {
-    setCity(inputRef.current.value);
     if (selectedStation?.startsWith('NO') || validStations.includes(selectedStation || '')) {
       console.log('selectedStation:', selectedStation);
       console.log('InputRef:', inputRef);
@@ -143,17 +139,18 @@ function LearnMore() {
   };
 
   const handleCompareClickExit = async () => {
-    setCity('Bangkok');
     setIsViewMore(false); // Close the compare section
     await fetchData('Bangkok'); // Fetch Trondheim data
   };
+
+  console.log(inputRef);
 
   return (
     <>
       <Head title="TOP PAGE" />
 
       <div className="bg-background relative">
-        <div className="absolute top-1/2 mt-20">
+        <div className="absolute top-1/2 mt-20 ">
           <AirFlowSVG />
         </div>
         <div className="absolute left-0 w-full flex justify-center items-center">
@@ -205,13 +202,7 @@ function LearnMore() {
                     <div className="relative flex itms-center inline-block ml-20">
                       <Select
                         className="rounded-lg w-48"
-                        options={
-                          allOptions
-                          //   stations.map((station) => ({
-                          //   value: station.eoi,
-                          //   label: station.name + ', ' + station.delomrade.name + ', ' + station.kommune.name,
-                          // }))
-                        }
+                        options={allOptions}
                         placeholder="Skriv inn by.."
                         isSearchable={true}
                         onChange={(selectedOption) => setSelectedStation(selectedOption?.value || null)}
@@ -225,30 +216,12 @@ function LearnMore() {
                         Søk
                       </button>
                     </div>
-                    {/*data && (
-                      <div>
-                        <p> AQI: {data.data.time[0].variables.AQI.value}</p>
-                        <p>
-                          total value={data.data.time[0].variables.concentrations.PM10.origin?.langtransport?.value}
-                        </p>
-                        <p>Status her da? ={status}</p>
-                      </div>
-                    )}*/}
                   </div>
                 </div>
               </div>
             )}
-            {/*<div className=" mt-40">
-              <svg width="70" height="70" onClick={handleSvgClick}>
-                <circle cx="35" cy="35" r="35" fill="#192E54" />
-                <text x="50%" y="50%" textAnchor="middle" fill="#FFFFFF" fontSize="24" dy=".3em">
-                  ?
-                </text>
-              </svg>
-              {isClicked && <div className="absolute z-20 text-grey-900">Trang?</div>}
-            </div>*/}
           </div>
-          {currentAQ != aqMessage['low'] && <MainPollutants data={data} city={city} />}
+          {currentAQ != aqMessage['low'] && <MainPollutants data={data} />}
         </div>
       </div>
     </>
