@@ -96,7 +96,7 @@ const InnerRouter = () => {
         },
         {
           path: 'map',
-          element: <AQMap />,
+          element: <AQMap lat={0} lon={0} AQI={0} station={''} />,
         },
       ],
     },

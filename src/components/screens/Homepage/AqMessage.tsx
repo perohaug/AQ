@@ -22,12 +22,12 @@ function AqMessage() {
               cx={40}
               cy={40}
               r={20}
-              fill={aqMessage['low'].color} // Adjust opacity as needed (0.3 for example)
+              fill={aqMessage['high'].color} // Adjust opacity as needed (0.3 for example)
               opacity={0.5}
               style={{ animation: 'expandShrink 1s infinite alternate' }}
             />
             {/* Tinier circle */}
-            <circle cx={40} cy={40} r={25} fill={aqMessage['low'].color} /> {/* Adjust the radius as needed */}
+            <circle cx={40} cy={40} r={25} fill={aqMessage['high'].color} /> {/* Adjust the radius as needed */}
           </svg>
           <style>
             {`
@@ -46,7 +46,7 @@ function AqMessage() {
           </style>
         </div>
         <div className="mt-5">
-          <p className="font-light text-3xl">{aqMessage['low'].message}</p>
+          <p className="font-light text-3xl">{aqMessage['high'].message}</p>
         </div>
         <Link to="/map">
           <svg
