@@ -9,6 +9,7 @@ function AqMessage() {
     setIsModalOpen(true);
   };
 
+  console.log('lol');
   const closeModal = () => {
     setIsModalOpen(false);
   };
