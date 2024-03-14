@@ -156,12 +156,12 @@ function Index() {
                   <p>Status her da? ={status}</p>
                 </div>
               )}
-              <div className="">
+              {/* <div className="">
                 <BouncingSVGElements
                   pm25={data?.data.time[0].variables.AQI.pm25}
                   pm10={data?.data.time[0].variables.AQI.pm10}
                 />
-              </div>
+              </div> */}
             </div>
             {data?.location && (
               <div className="">
