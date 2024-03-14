@@ -187,7 +187,6 @@ const useDataFetcher = (): ApiResponse => {
   const [error, setError] = useState<string | null>(null);
 
   const fetchData = useCallback(async (userInput: string) => {
-    // const url = `https://api.waqi.info/feed/${userInput}/?token=22f37ad5c0fae31b55ee3304697b74c44a1a4cd0`;
     try {
       if (!userInput) {
         throw new Error('URL is undefined');

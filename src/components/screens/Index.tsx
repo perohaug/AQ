@@ -7,7 +7,6 @@ import MyMap from '../lib/Map/MyMap';
 
 interface otherOpt {
   value: string;
-  // eoi: string;
   label: string;
 }
 
@@ -31,7 +30,7 @@ interface Station {
 function Index() {
   const { fetchData, status, data, error }: ApiResponse = useDataFetcher();
   const [stations, setStations] = useState<Station[]>([]);
-  const [selectedStation, setSelectedStation] = useState<string | null>(null);
+  const [selectedStation, setSelectedStation] = useState<string | null>('NO0060A');
 
   useEffect(() => {
     const fetchStations = async () => {
@@ -44,6 +43,7 @@ function Index() {
       }
     };
     fetchStations();
+    handleSubmit();
   }, []);
 
   const inputRef: any = useRef();
@@ -69,7 +69,6 @@ function Index() {
       await fetchData(`https://api.waqi.info/feed/${selectedStation}/?token=22f37ad5c0fae31b55ee3304697b74c44a1a4cd0`);
     }
   };
-
   const listWithOtherOptions: otherOpt[] = [
     {
       value: 'amsterdam',
@@ -126,27 +125,13 @@ function Index() {
               <div className="text-center p-8">
                 <Select
                   className="mt-2 mb-2"
-                  options={
-                    allOptions
-                    //   stations.map((station) => ({
-                    //   value: station.eoi,
-                    //   label: station.name + ', ' + station.delomrade.name + ', ' + station.kommune.name,
-                    // }))
-                  }
+                  options={allOptions}
                   placeholder="Choose a station"
                   isSearchable={true}
                   onChange={(selectedOption) => setSelectedStation(selectedOption?.value || null)}
                   ref={inputRef}
                 />
-                {/* <input ref={inputRef} type="text" className=" w-1/2 border-2" placeholder="Enter user input" />
-                <datalist id="stations">
-                  {stations.map((station) => (
-                    <option
-                      key={station.eoi}
-                      value={station.name + ', ' + station.delomrade.name + ', ' + station.kommune.name}
-                    />
-                  ))}
-                </datalist> */}
+
                 <button onClick={handleSubmit}>Search for Data</button>
               </div>
               {data && (
@@ -177,12 +162,18 @@ function Index() {
                   pm10={data?.data.time[0].variables.AQI.pm10}
                 />
               </div>
-              {data?.location && (
-                <div className="overflow-hidden w-2/3 p-18 items-center h-80 ml-auto mr-auto mt-20">
-                  <MyMap latitude={data.location.latitude} longitude={data.location.longitude} />
-                </div>
-              )}
             </div>
+            {data?.location && (
+              <div className="">
+                <MyMap
+                  latitude={data.location.latitude}
+                  longitude={data.location.longitude}
+                  AQI={data.data.time[0].variables.AQI.value}
+                  station={data.location.name}
+                />
+              </div>
+            )}
+            <div id="map"></div>
           </div>
         </div>
       </div>
