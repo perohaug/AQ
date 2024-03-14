@@ -33,7 +33,7 @@ export const PM10: React.FC<SVGProps<SVGCircleElement>> = () => (
   <circle cx="0" cy="0" r="12" fill="#FF6C6C" stroke="#FF6C6C" strokeWidth={3} id="pm10">
     <animateMotion
       dur={`${generateRandomDuration()}s`}
-      begin={`${generateRandomDuration() / 4}s`}
+      begin={`${generateRandomDuration() % 1}s`}
       repeatCount="indefinite"
       fill="freeze" // "freeze" or "remove"
     >
