@@ -125,7 +125,6 @@ const AQI: React.FC = () => {
         console.error('Error fetching stations:', error);
       }
     };
-    fetchData('mexico city');
     fetchStations();
   }, []);
 

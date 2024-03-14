@@ -20,7 +20,7 @@ export const PM25: React.FC<SVGProps<SVGCircleElement>> = () => (
   <circle cx="0" cy="0" r="3" fill="#FF155C" stroke="#FF155C" strokeWidth={5} id="pm25">
     <animateMotion
       dur={`${generateRandomDuration()}s`}
-      begin={`${generateRandomDuration() / 4}s`}
+      begin={`${generateRandomDuration() % 1}s`}
       repeatCount="indefinite"
       fill="freeze" // "freeze" or "remove"
     >
