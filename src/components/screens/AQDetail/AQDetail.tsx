@@ -3,11 +3,11 @@ import { Head } from '../../shared/Head';
 import AirFlowSVG from '../../svgs/AirFlowSVG';
 import HumanBody from '../../svgs/HumanBodySVG';
 import ParticleExplanation from './ParticleExplanation';
-import MainPollutants from './MainPollutants';
 import { aqMessage } from '../TextContent/aqMessageInfo';
 import useDataFetcher, { ApiResponse } from '~/components/lib/API/DataFetcher';
 import BouncingSVGElements from '~/components/lib/BouncingSVGElements';
 import Select from 'react-select';
+import MainPollutants from './MainPollutants';
 
 interface otherOpt {
   value: string;
@@ -214,7 +214,7 @@ function LearnMore() {
               </div>
             )}
           </div>
-          <div>{currentAQ != aqMessage['low'] && <MainPollutants data={data} />}</div>
+          <div className="absolute ">{currentAQ != aqMessage['low'] && <MainPollutants data={data} />}</div>
         </div>
       </div>
     </>
