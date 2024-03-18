@@ -1,4 +1,5 @@
 export interface AQIint {
+  text: string;
   value: any;
   pm10: any;
   pm25: any;
@@ -6,9 +7,21 @@ export interface AQIint {
   o3: any;
 }
 
+export interface Contributor {
+  stdconcentration: string;
+  topContributors: string;
+}
 export interface stdconcentration {
   value: number;
   units: string;
+  topContributers?: {
+    veistov?: number;
+    eksos?: number;
+    langtransport?: number;
+    skip?: number;
+    vedfyring?: number;
+    industri?: number;
+  };
   origin?:
     | {
         langtransport?: {
@@ -64,6 +77,7 @@ export interface stdtime {
   from: Date;
   to: Date;
   variables: stdvariables;
+  topContribs?: Contributor;
 }
 
 export interface stdtimes {
@@ -72,24 +86,9 @@ export interface stdtimes {
 
 export interface APIStandard {
   data: stdtimes;
-  dominantPollutant?: any;
+  dominantPollutant?: string;
   location: stdlocation;
   stationID?: string;
-  topContributors?: contributer;
-}
-
-export interface contributer {
-  [key: string]: poll;
-}
-
-export interface poll {
-  veistov?: number;
-  eksos?: number;
-  langtransport?: number;
-  skip?: number;
-  vedfyring?: number;
-  industri?: number;
-  seasalt?: number;
 }
 
 export interface METResponse {
@@ -133,35 +132,39 @@ export interface METTime {
 }
 
 export interface METVariables {
-  AQI: Aqi;
-  no2_concentration: No2Concentration;
-  AQI_no2: AqiNo2;
-  no2_nonlocal_fraction: No2NonlocalFraction;
-  no2_local_fraction_traffic_exhaust: No2LocalFractionTrafficExhaust;
-  no2_local_fraction_shipping: No2LocalFractionShipping;
-  no2_local_fraction_heating: No2LocalFractionHeating;
-  no2_local_fraction_industry: No2LocalFractionIndustry;
-  pm10_concentration: Pm10Concentration;
-  AQI_pm10: AqiPm10;
-  pm10_nonlocal_fraction: Pm10NonlocalFraction;
-  pm10_nonlocal_fraction_seasalt: Pm10NonlocalFractionSeasalt;
-  pm10_local_fraction_traffic_exhaust: Pm10LocalFractionTrafficExhaust;
-  pm10_local_fraction_traffic_nonexhaust: Pm10LocalFractionTrafficNonexhaust;
-  pm10_local_fraction_shipping: Pm10LocalFractionShipping;
-  pm10_local_fraction_heating: Pm10LocalFractionHeating;
-  pm10_local_fraction_industry: Pm10LocalFractionIndustry;
-  pm25_concentration: Pm25Concentration;
-  AQI_pm25: AqiPm25;
-  pm25_nonlocal_fraction: Pm25NonlocalFraction;
-  pm25_nonlocal_fraction_seasalt: Pm25NonlocalFractionSeasalt;
-  pm25_local_fraction_traffic_exhaust: Pm25LocalFractionTrafficExhaust;
-  pm25_local_fraction_traffic_nonexhaust: Pm25LocalFractionTrafficNonexhaust;
-  pm25_local_fraction_shipping: Pm25LocalFractionShipping;
-  pm25_local_fraction_heating: Pm25LocalFractionHeating;
-  pm25_local_fraction_industry: Pm25LocalFractionIndustry;
-  o3_concentration: O3Concentration;
-  AQI_o3: AqiO3;
-  o3_nonlocal_fraction: O3NonlocalFraction;
+  [key: string]: {
+    value: number;
+    units: string;
+  };
+  // AQI: Aqi;
+  // no2_concentration: No2Concentration;
+  // AQI_no2: AqiNo2;
+  // no2_nonlocal_fraction: No2NonlocalFraction;
+  // no2_local_fraction_traffic_exhaust: No2LocalFractionTrafficExhaust;
+  // no2_local_fraction_shipping: No2LocalFractionShipping;
+  // no2_local_fraction_heating: No2LocalFractionHeating;
+  // no2_local_fraction_industry: No2LocalFractionIndustry;
+  // pm10_concentration: Pm10Concentration;
+  // AQI_pm10: AqiPm10;
+  // pm10_nonlocal_fraction: Pm10NonlocalFraction;
+  // pm10_nonlocal_fraction_seasalt: Pm10NonlocalFractionSeasalt;
+  // pm10_local_fraction_traffic_exhaust: Pm10LocalFractionTrafficExhaust;
+  // pm10_local_fraction_traffic_nonexhaust: Pm10LocalFractionTrafficNonexhaust;
+  // pm10_local_fraction_shipping: Pm10LocalFractionShipping;
+  // pm10_local_fraction_heating: Pm10LocalFractionHeating;
+  // pm10_local_fraction_industry: Pm10LocalFractionIndustry;
+  // pm25_concentration: Pm25Concentration;
+  // AQI_pm25: AqiPm25;
+  // pm25_nonlocal_fraction: Pm25NonlocalFraction;
+  // pm25_nonlocal_fraction_seasalt: Pm25NonlocalFractionSeasalt;
+  // pm25_local_fraction_traffic_exhaust: Pm25LocalFractionTrafficExhaust;
+  // pm25_local_fraction_traffic_nonexhaust: Pm25LocalFractionTrafficNonexhaust;
+  // pm25_local_fraction_shipping: Pm25LocalFractionShipping;
+  // pm25_local_fraction_heating: Pm25LocalFractionHeating;
+  // pm25_local_fraction_industry: Pm25LocalFractionIndustry;
+  // o3_concentration: O3Concentration;
+  // AQI_o3: AqiO3;
+  // o3_nonlocal_fraction: O3NonlocalFraction;
 }
 
 export interface Aqi {

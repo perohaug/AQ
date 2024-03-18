@@ -34,12 +34,13 @@ interface Station {
 function LearnMore() {
   const [isClicked, setIsClicked] = useState(false);
 
-  const currentAQ = aqMessage['moderate'];
-
   const { fetchData, status, data, error }: ApiResponse = useDataFetcher();
   const [stations, setStations] = useState<Station[]>([]);
   const [selectedStation, setSelectedStation] = useState<string | null>('NO0102A');
   const [isViewMore, setIsViewMore] = useState(false);
+
+  const aqValue = data?.data.time[0].variables.AQI.text;
+  const aqColor = aqValue ? aqMessage[aqValue].color : 'low';
 
   useEffect(() => {
     const fetchStations = async () => {
@@ -140,10 +141,8 @@ function LearnMore() {
 
   const handleCompareClickExit = async () => {
     setIsViewMore(false); // Close the compare section
-    await fetchData('Bangkok'); // Fetch Trondheim data
+    await fetchData(`https://api.met.no/weatherapi/airqualityforecast/0.1/?station=NO0102A`); // Fetch Trondheim data
   };
-
-  console.log(inputRef);
 
   return (
     <>
@@ -151,7 +150,7 @@ function LearnMore() {
 
       <div className="bg-background relative">
         <div className="absolute top-1/2 mt-20 ">
-          <AirFlowSVG />
+          <AirFlowSVG aqColor={aqColor} />
         </div>
         <div className="absolute left-0 w-full flex justify-center items-center">
           <BouncingSVGElements
@@ -214,7 +213,7 @@ function LearnMore() {
               </div>
             )}
           </div>
-          <div className="absolute ">{currentAQ != aqMessage['low'] && <MainPollutants data={data} />}</div>
+          <div className="absolute ">{<MainPollutants data={data} />}</div>
         </div>
       </div>
     </>
