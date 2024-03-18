@@ -64,12 +64,7 @@ function ParticleExplanation() {
           onClick={() => handleExpand('particle3')}
         >
           <svg className="w-12 h-12" viewBox="0 0 70 70">
-            <defs>
-              <filter id="blurFilter" x="0" y="0" width="100%" height="100%">
-                <feGaussianBlur in="SourceGraphic" stdDeviation="3" />
-              </filter>
-            </defs>
-            <circle cx="35" cy="35" r="35" fill="#5A4858" filter="url(#blurFilter)" />
+            <circle cx="35" cy="35" r="35" fill="#5A4858" />
           </svg>
         </div>
       </div>

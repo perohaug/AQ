@@ -3,12 +3,12 @@ import { Head } from '../../shared/Head';
 import AirFlowSVG from '../../svgs/AirFlowSVG';
 import HumanBody from '../../svgs/HumanBodySVG';
 import ParticleExplanation from './ParticleExplanation';
-import MainPollutants from './MainPollutants';
 import { aqMessage } from '../TextContent/aqMessageInfo';
 import useDataFetcher, { ApiResponse } from '~/components/lib/API/DataFetcher';
 import BouncingSVGElements from '~/components/lib/BouncingSVGElements';
 import Select from 'react-select';
 import { stdconcentration, stdconcentrations } from '~/components/lib/API/APIResponse';
+import MainPollutants from './MainPollutants';
 
 interface otherOpt {
   value: string;
@@ -34,12 +34,13 @@ interface Station {
 function LearnMore() {
   const [isClicked, setIsClicked] = useState(false);
 
-  const currentAQ = aqMessage['moderate'];
-
   const { fetchData, status, data, error }: ApiResponse = useDataFetcher();
   const [stations, setStations] = useState<Station[]>([]);
   const [selectedStation, setSelectedStation] = useState<string | null>('NO0102A');
   const [isViewMore, setIsViewMore] = useState(false);
+
+  const aqValue = data?.data.time[0].variables.AQI.text;
+  const aqColor = aqValue ? aqMessage[aqValue].color : 'low';
 
   useEffect(() => {
     const fetchStations = async () => {
@@ -80,45 +81,6 @@ function LearnMore() {
       await fetchData(`https://api.waqi.info/feed/${selectedStation}/?token=22f37ad5c0fae31b55ee3304697b74c44a1a4cd0`);
     }
   };
-
-  // interface Contributor {
-  //   stdconcentration: string;
-  //   topContributors: string;
-  // }
-
-  // function findTopContributors(stdconcentrations: stdconcentrations | undefined): Contributor | undefined {
-  //   const topContributors: Contributor[] = [];
-
-  //   // Iterate over each stdconcentration
-  //   for (const concentration in stdconcentrations) {
-  //     const stdconcentration = stdconcentrations[concentration];
-  //     let maxContributor: string = '';
-  //     let maxValue: number = 0;
-
-  //     // Iterate over each topContributors property
-  //     for (const [contributor, value] of Object.entries(stdconcentration.topContributers || {})) {
-  //       if (value && value > maxValue) {
-  //         maxContributor = contributor;
-  //         maxValue = value;
-  //       }
-  //     }
-
-  //     // Push the highest contributor for the current stdconcentration
-  //     topContributors.push({ stdconcentration: concentration, topContributors: maxContributor });
-  //   }
-  //   const topCont: Contributor | undefined = topContributors.find((entry) =>
-  //     entry.stdconcentration.toLowerCase().includes(dominantPollutant.toLowerCase()),
-  //   );
-  //   if (topCont?.topContributors == '') {
-  //     topCont.topContributors = 'ingen data for dette utenfor Norge.';
-  //   }
-  //   console.log(topCont);
-  //   console.log(topCont?.topContributors);
-  //   console.log(topContributors[3].stdconcentration.toLowerCase().includes(dominantPollutant));
-  //   return topCont;
-  // }
-  // console.log('stdconcentrations:', data?.data.time[0].variables.concentrations);
-  // console.log("Let's see the contribs:", findTopContributors(data?.data.time[0].variables.concentrations));
 
   const handleKeyPress = (event: { key: string }) => {
     if (event.key === 'Enter') {
@@ -186,7 +148,7 @@ function LearnMore() {
 
       <div className="bg-background relative">
         <div className="absolute top-1/2 mt-20 ">
-          <AirFlowSVG />
+          <AirFlowSVG aqColor={aqColor} />
         </div>
         <div className="absolute left-0 w-full flex justify-center items-center">
           <BouncingSVGElements
@@ -211,7 +173,7 @@ function LearnMore() {
                   style={{ width: '160px', height: '160px', backgroundColor: '#FC8861' }}
                   onClick={handleCompareClick}
                 >
-                  Sammenlign luften i Trondheim med andre byer
+                  Utforsk luften i andre byer!
                 </button>
               </div>
             )}
@@ -221,21 +183,14 @@ function LearnMore() {
               <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 mt-20">
                 <div className="flex items-center mt-80">
                   <button
-                    className="ml-20 absolute rounded-full bg-blue-800 text-white text-lg px-4 py-2 mb-20 hover:scale-110 transition-transform duration-300"
+                    className="absolute mb-8 ml-60 rounded-full bg-blue-800 text-white text-lg px-4 py-2 mb-10 hover:scale-110 transition-transform duration-300"
                     style={{ width: '60px', height: '60px', backgroundColor: '#FC8861' }}
                     onClick={handleCompareClickExit}
                   >
                     <p className="text-3xl mb-1">x</p>
                   </button>
-                  <div className="flex items-center mt-20 ml-20">
-                    <div
-                      className="badge badge-lg text-xl text-white font-light px-[0.9em] pb-[0.8em] pt-[0.7em] top-1/2 mr-6"
-                      style={{ backgroundColor: '#192E54', borderColor: '#192E54' }}
-                    >
-                      Trondheim
-                    </div>
-
-                    <div className="relative flex itms-center inline-block ml-20">
+                  <div className="flex items-center mt-24 ml-30">
+                    <div className="relative flex itms-center inline-block ml-8">
                       <Select
                         className="rounded-lg w-48"
                         options={allOptions}
@@ -257,7 +212,7 @@ function LearnMore() {
               </div>
             )}
           </div>
-          {data && currentAQ != aqMessage[data.data.time[0].variables.AQI.text] && (
+          {data && aqMessage[data.data.time[0].variables.AQI.text] && (
             <MainPollutants
               highestPoll={data.dominantPollutant}
               origin={data.data.time[0].variables.concentrations}
