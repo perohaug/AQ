@@ -76,25 +76,25 @@ function MainPollutants({ highestPoll, origin, location }: MainPollutantsProps) 
   function dominantPollutantFactor() {
     if (maxContributer === 'vedfyring') {
       dominantPollutantFactorString = 'vedfyring';
-      return <img src={bonfire} alt="" />;
+      return <img className="max-h-20" src={bonfire} alt="" />;
     } else if (maxContributer === 'eksos') {
       dominantPollutantFactorString = 'eksos';
-      return <img src={exhaust} alt="" />;
+      return <img className="max-h-20" src={exhaust} alt="" />;
     } else if (maxContributer === 'industri') {
       dominantPollutantFactorString = 'industri';
-      return <img src={exhaust} alt="" />;
+      return <img className="max-h-20" src={exhaust} alt="" />;
     } else if (maxContributer === 'langtransport') {
       dominantPollutantFactorString = 'langtransport';
       return <img className="max-h-20" src={longdistance} alt="" />;
     } else if (maxContributer === 'veistov') {
       dominantPollutantFactorString = 'veistøv';
-      return <img src={exhaust} alt="" />;
+      return <img className="max-h-20" src={exhaust} alt="" />;
     } else if (maxContributer === 'skip') {
       dominantPollutantFactorString = 'skip';
-      return <img src={ship} alt="" />;
+      return <img className="max-h-20" src={ship} alt="" />;
     } else {
       dominantPollutantFactorString = 'utilgjengelig utenfor Norge';
-      return <img src={exhaust} alt="" />;
+      return <img className="max-h-20" src={exhaust} alt="" />;
     }
   }
 
