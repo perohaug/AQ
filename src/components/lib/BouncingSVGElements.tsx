@@ -1,17 +1,19 @@
 import React, { useEffect } from 'react';
-import { PM25, PM10, RightLane, LeftLane } from './elements/constants';
+import { PM25, PM10, RightLane, LeftLane, GasParticle } from './elements/constants';
 
 // Make an interface that takes in two numbers, both should represent the amount props in the PM25 and PM10 components.
 
 interface BouncingSVGElementsProps {
   pm25: number;
   pm10: number;
+  gas: number;
   height: number;
   showLungs: Boolean;
 }
 
-const BouncingSVGElements: React.FC<BouncingSVGElementsProps> = ({ pm10, pm25, height, showLungs }) => {
+const BouncingSVGElements: React.FC<BouncingSVGElementsProps> = ({ pm10, pm25, gas, height, showLungs }) => {
   {
+    console.log('gas', gas);
     const generateRandomDelay = () => {
       return Math.floor(Math.random() * (20 - 5 + 1) + 5); // Random number between 5 and 20
     };
@@ -32,6 +34,15 @@ const BouncingSVGElements: React.FC<BouncingSVGElementsProps> = ({ pm10, pm25, h
         pm10Elements.push(<PM10 key={`pm10-${i}`} style={{ animationDuration: `${delay}s` }} />);
       }
       return pm10Elements;
+    };
+
+    const generateGasElements = () => {
+      const gasElements = [];
+      for (let i = 0; i < gas * 7; i++) {
+        const delay = generateRandomDelay();
+        gasElements.push(<GasParticle key={`gas-${i}`} style={{ animationDuration: `${delay}s` }} />);
+      }
+      return gasElements;
     };
     return (
       <div className="relative">
@@ -65,6 +76,11 @@ const BouncingSVGElements: React.FC<BouncingSVGElementsProps> = ({ pm10, pm25, h
                 id="left-lane"
               />
               <path
+                d="M76.8979 244.592C140.292 240.208 265.939 238.282 282.53 244.592C298.716 250.749 302.395 254.945 304.234 273.414C305.705 288.189 304.847 317.094 304.234 319.7"
+                stroke="none"
+                id="gas-lane"
+              />
+              <path
                 d="M76.8979 244.592C140.292 240.208 265.939 238.282 282.53 244.592C298.716 250.749 302.395 254.945 304.234 273.414C305.678 287.917 304.878 441.291 304.268 520.332C304.246 523.149 305.394 525.785 307.499 527.658C338.289 555.044 410.313 605.857 477.824 611.47C565.355 618.747 501.362 761.777 494.374 764.016C487.386 766.256 474.147 839.03 431.117 820.557C388.087 802.083 374.847 774.373 372.64 750.021C370.434 725.67 357.194 645.618 372.64 628.544C376.68 624.079 387.62 617.978 399.962 611.406C410.027 606.047 477.993 616.336 484.972 625.353L491.348 633.59C493.255 636.054 493.905 639.267 493.105 642.279L469.56 730.893C469.191 732.281 468.527 733.574 467.614 734.683L439.719 768.555C435.443 773.747 427.365 773.322 423.657 767.711L389.685 716.306C388.281 714.182 387.74 711.604 388.172 709.095L398.737 647.738C399.7 642.148 405.114 638.477 410.663 639.651L456.776 649.412C463.044 650.739 466.465 657.535 463.797 663.36L444.05 706.473C441.432 712.19 434.251 714.1 429.138 710.44L347.5 652"
                 stroke="none"
                 id="right-lane"
@@ -74,6 +90,7 @@ const BouncingSVGElements: React.FC<BouncingSVGElementsProps> = ({ pm10, pm25, h
 
           {generatePM25Elements()}
           {generatePM10Elements()}
+          {generateGasElements()}
         </svg>
       </div>
     );

@@ -8,10 +8,10 @@ import { aqMessage } from '../TextContent/aqMessageInfo';
 import useDataFetcher, { ApiResponse } from '~/components/lib/API/DataFetcher';
 import BouncingSVGElements from '~/components/lib/BouncingSVGElements';
 import Select from 'react-select';
+import { stdconcentration, stdconcentrations } from '~/components/lib/API/APIResponse';
 
 interface otherOpt {
   value: string;
-  // eoi: string;
   label: string;
 }
 
@@ -69,7 +69,7 @@ function LearnMore() {
     'Vollapa',
   ];
 
-  const dominantPollutant = data?.dominantPollutant;
+  const dominantPollutant: string = data?.dominantPollutant ?? '';
 
   const handleSubmit = async () => {
     if (selectedStation?.startsWith('NO') || validStations.includes(selectedStation || '')) {
@@ -80,6 +80,45 @@ function LearnMore() {
       await fetchData(`https://api.waqi.info/feed/${selectedStation}/?token=22f37ad5c0fae31b55ee3304697b74c44a1a4cd0`);
     }
   };
+
+  // interface Contributor {
+  //   stdconcentration: string;
+  //   topContributors: string;
+  // }
+
+  // function findTopContributors(stdconcentrations: stdconcentrations | undefined): Contributor | undefined {
+  //   const topContributors: Contributor[] = [];
+
+  //   // Iterate over each stdconcentration
+  //   for (const concentration in stdconcentrations) {
+  //     const stdconcentration = stdconcentrations[concentration];
+  //     let maxContributor: string = '';
+  //     let maxValue: number = 0;
+
+  //     // Iterate over each topContributors property
+  //     for (const [contributor, value] of Object.entries(stdconcentration.topContributers || {})) {
+  //       if (value && value > maxValue) {
+  //         maxContributor = contributor;
+  //         maxValue = value;
+  //       }
+  //     }
+
+  //     // Push the highest contributor for the current stdconcentration
+  //     topContributors.push({ stdconcentration: concentration, topContributors: maxContributor });
+  //   }
+  //   const topCont: Contributor | undefined = topContributors.find((entry) =>
+  //     entry.stdconcentration.toLowerCase().includes(dominantPollutant.toLowerCase()),
+  //   );
+  //   if (topCont?.topContributors == '') {
+  //     topCont.topContributors = 'ingen data for dette utenfor Norge.';
+  //   }
+  //   console.log(topCont);
+  //   console.log(topCont?.topContributors);
+  //   console.log(topContributors[3].stdconcentration.toLowerCase().includes(dominantPollutant));
+  //   return topCont;
+  // }
+  // console.log('stdconcentrations:', data?.data.time[0].variables.concentrations);
+  // console.log("Let's see the contribs:", findTopContributors(data?.data.time[0].variables.concentrations));
 
   const handleKeyPress = (event: { key: string }) => {
     if (event.key === 'Enter') {
@@ -130,21 +169,18 @@ function LearnMore() {
     ...listWithOtherOptions,
   ];
 
-  //const handleSvgClick = () => {
-  //  setIsClicked(!isClicked); // Toggle the state when the SVG is clicked
-  // };
-
   const handleCompareClick = () => {
     setIsViewMore(!isViewMore);
   };
 
   const handleCompareClickExit = async () => {
     setIsViewMore(false); // Close the compare section
-    await fetchData('Bangkok'); // Fetch Trondheim data
+    await fetchData(`https://api.met.no/weatherapi/airqualityforecast/0.1/?station=NO0102A`); // Fetch Trondheim data
   };
+  const gasConc: number =
+    +(data?.data.time[0].variables.AQI.no2 as number) + +(data?.data.time[0].variables.AQI.o3 as number);
 
-  console.log(inputRef);
-
+  console.log('test', data?.data.time[0].variables.AQI.text);
   return (
     <>
       <Head title="TOP PAGE" />
@@ -157,6 +193,7 @@ function LearnMore() {
           <BouncingSVGElements
             pm10={data?.data.time[0].variables.AQI.pm10}
             pm25={data?.data.time[0].variables.AQI.pm25}
+            gas={gasConc}
             showLungs={true}
             height={900}
           />
@@ -221,7 +258,13 @@ function LearnMore() {
               </div>
             )}
           </div>
-          {currentAQ != aqMessage['low'] && <MainPollutants data={data} />}
+          {data && currentAQ != aqMessage[data.data.time[0].variables.AQI.text] && (
+            <MainPollutants
+              highestPoll={data.dominantPollutant}
+              origin={data.data.time[0].topContribs?.topContributors}
+              location={data.location.name}
+            />
+          )}
         </div>
       </div>
     </>

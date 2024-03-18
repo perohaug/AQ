@@ -4,11 +4,14 @@ import bonfire from '~/icons/bonfire 1.png';
 import exhaust from '~/icons/exhaust-pipe 1.png';
 
 type MainPollutantsProps = {
-  data: APIStandard | null;
+  highestPoll: string | undefined;
+  origin: string | undefined;
+  location: string | undefined;
 };
 
-function MainPollutants(props: MainPollutantsProps) {
-  const { data } = props;
+function MainPollutants({ highestPoll, origin, location }: MainPollutantsProps) {
+  // const { data } = props;
+  // console.log('PROPS', props);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -16,26 +19,26 @@ function MainPollutants(props: MainPollutantsProps) {
     setIsModalOpen(!isModalOpen);
   };
 
-  const dominantPollutantFactorString = 'vedfyring';
+  var dominantPollutantFactorString = '';
 
   var dominantPollutantName = '';
 
   function dominantPollutantSVG() {
-    if (data?.dominantPollutant == 'pm25') {
+    if (highestPoll?.toLowerCase() == 'pm25') {
       dominantPollutantName = 'små partikler';
       return (
         <svg className="w-40 h-40" viewBox="0 0 70 70">
           <circle cx="35" cy="35" r="35" fill="#FF155C" />
         </svg>
       );
-    } else if (data?.dominantPollutant == 'pm10') {
+    } else if (highestPoll?.toLowerCase() == 'pm10') {
       dominantPollutantName = 'store partikler';
       return (
         <svg className="w-40 h-40" viewBox="0 0 70 70">
           <circle cx="35" cy="35" r="35" fill="#FF155C" />
         </svg>
       );
-    } else if (data?.dominantPollutant == 'o3' || 'no2') {
+    } else if (highestPoll?.toLowerCase() == 'o3' || 'no2') {
       dominantPollutantName = 'gasser';
       return (
         <svg className="w-40 h-40" viewBox="0 0 70 70">
@@ -44,11 +47,31 @@ function MainPollutants(props: MainPollutantsProps) {
       );
     }
   }
-
+  console.log('skjer her a?', origin);
   function dominantPollutantFactor() {
-    if (dominantPollutantFactorString == 'vedfyring') {
+    if (origin === 'vedfyring') {
+      dominantPollutantFactorString = 'vedfyring';
+      console.log(origin);
       return <img src={bonfire} alt="" />;
-    } else if (dominantPollutantFactorString == 'eksos') {
+    } else if (origin === 'eksos') {
+      dominantPollutantFactorString = 'eksos';
+      console.log(origin);
+      return <img src={exhaust} alt="" />;
+    } else if (origin === 'industri') {
+      console.log(origin);
+      dominantPollutantFactorString = 'industri';
+      return <img src={exhaust} alt="" />;
+    } else if (origin === 'langtransport') {
+      console.log(origin);
+      dominantPollutantFactorString = 'langtransport';
+      return <img src={exhaust} alt="" />;
+    } else if (origin === 'veistov') {
+      console.log(origin);
+      dominantPollutantFactorString = 'veistøv';
+      return <img src={exhaust} alt="" />;
+    } else {
+      console.log(origin);
+      dominantPollutantFactorString = 'utilgjengelig utenfor Norge';
       return <img src={exhaust} alt="" />;
     }
   }
@@ -61,9 +84,9 @@ function MainPollutants(props: MainPollutantsProps) {
             className="badge badge-lg text-xl  text-white font-light  px-[0.65em] pb-[0.8em] pt-[0.7em] mb-10 mt-20"
             style={{ backgroundColor: '#192E54', borderColor: '#192E54' }}
           >
-            Forurenser luften mest i {data?.location.name} nå
+            Forurenser luften mest i {location} nå
           </div>
-          {data?.dominantPollutant && dominantPollutantFactor && (
+          {highestPoll && (
             <div
               className="flex items-center justify-center hover:scale-110 transition-transform duration-300"
               onClick={openModal}

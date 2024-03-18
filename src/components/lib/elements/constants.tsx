@@ -42,6 +42,24 @@ export const PM10: React.FC<SVGProps<SVGCircleElement>> = () => (
   </circle>
 );
 
+export const GasParticle: React.FC<SVGProps<SVGCircleElement>> = () => (
+  <circle cx="0" cy="0" r="9" fill="#5A4858" filter="url(#blurFilter)" id="gas">
+    <defs>
+      <filter id="blurFilter" x="0" y="0" width="100%" height="100%">
+        <feGaussianBlur in="SourceGraphic" stdDeviation="3" />
+      </filter>
+    </defs>
+    <animateMotion
+      dur={`${generateRandomDuration() / 3}s`}
+      begin={`${generateRandomDuration() % 1}s`}
+      repeatCount="indefinite"
+      fill="freeze" // "freeze" or "remove"
+    >
+      <mpath href="#gas-lane" />
+    </animateMotion>
+  </circle>
+);
+
 interface LaneProps extends SVGProps<SVGPathElement> {
   id: string;
 }

@@ -1,9 +1,10 @@
 import { Dialog } from '@headlessui/react';
-import { lazy, Suspense, useState } from 'react';
+import { lazy, Suspense, useState, useEffect, useRef } from 'react';
 import { Outlet, RouteObject, useRoutes, BrowserRouter, Link } from 'react-router-dom';
 import AQMap from '../screens/AQMap';
 import { aqMessage } from '../screens/TextContent/aqMessageInfo';
 import { Header } from './Header';
+import useDataFetcher, { ApiResponse } from '../lib/API/DataFetcher';
 
 const Loading = () => <p className="p-4 w-full h-full text-center">Loading...</p>;
 
