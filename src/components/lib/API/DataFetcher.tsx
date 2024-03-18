@@ -110,7 +110,7 @@ function findTopContributors(
   if (topCont?.topContributors == '') {
     topCont.topContributors = 'ukjente kilder';
   }
-  console.log('Balle', topCont?.stdconcentration);
+  console.log('Balle', topCont);
   return topCont;
 }
 
@@ -243,15 +243,6 @@ const useDataFetcher = (): ApiResponse => {
           time: apiDataResponse.data.time.map((timeEntry: METTime) => ({
             from: new Date(timeEntry.from),
             to: new Date(timeEntry.to),
-            // topContribs: (apiData.data.time[0].topContribs = findTopContributors(
-            //   domPoll(
-            //     apiDataResponse.data.time[0].variables.o3_concentration.value,
-            //     apiDataResponse.data.time[0].variables.no2_concentration.value,
-            //     apiDataResponse.data.time[0].variables.pm10_concentration.value,
-            //     apiDataResponse.data.time[0].variables.pm25_concentration.value,
-            //   ),
-            //   apiDataResponse.data.time[0].variables,
-            // )),
             variables: {
               AQI: {
                 text: aqiTxt(timeEntry.variables.AQI.value),
@@ -469,10 +460,6 @@ const useDataFetcher = (): ApiResponse => {
               {
                 from: new Date(apiDataResponse.data.time.s),
                 to: new Date(apiDataResponse.data.time.v),
-                topContribs: {
-                  stdconcentration: apiDataResponse.data.dominentpol,
-                  topContributors: 'ingen data for dette utenfor Norge.',
-                },
                 variables: {
                   AQI: {
                     text: aqiTxt(waqi(apiDataResponse.data.aqi)),
@@ -521,11 +508,7 @@ const useDataFetcher = (): ApiResponse => {
       setStatus('error');
     }
   }, []);
-  // apiData.data.time[0].topContribs = findTopContributors(
-  //   apiData?.dominantPollutant,
-  //   apiData.data.time[0].variables.concentrations,
-  // );
-  console.log(apiData);
+
   return { fetchData, data: apiData, status, error };
 };
 

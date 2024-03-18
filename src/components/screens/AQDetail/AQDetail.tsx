@@ -180,7 +180,6 @@ function LearnMore() {
   const gasConc: number =
     +(data?.data.time[0].variables.AQI.no2 as number) + +(data?.data.time[0].variables.AQI.o3 as number);
 
-  console.log('test', data?.data.time[0].variables.AQI.text);
   return (
     <>
       <Head title="TOP PAGE" />
@@ -261,7 +260,7 @@ function LearnMore() {
           {data && currentAQ != aqMessage[data.data.time[0].variables.AQI.text] && (
             <MainPollutants
               highestPoll={data.dominantPollutant}
-              origin={data.data.time[0].topContribs?.topContributors}
+              origin={data.data.time[0].variables.concentrations}
               location={data.location.name}
             />
           )}

@@ -1,12 +1,12 @@
 import { useState } from 'react';
-import { APIStandard } from '~/components/lib/API/APIResponse';
+import { APIStandard, stdconcentration, stdconcentrations } from '~/components/lib/API/APIResponse';
 import bonfire from '~/icons/bonfire 1.png';
 import exhaust from '~/icons/exhaust-pipe 1.png';
 
 type MainPollutantsProps = {
-  highestPoll: string | undefined;
-  origin: string | undefined;
-  location: string | undefined;
+  highestPoll: string;
+  origin: stdconcentrations;
+  location: string;
 };
 
 function MainPollutants({ highestPoll, origin, location }: MainPollutantsProps) {
@@ -47,30 +47,47 @@ function MainPollutants({ highestPoll, origin, location }: MainPollutantsProps) 
       );
     }
   }
-  console.log('skjer her a?', origin);
+
+  function findTopContributer(data: stdconcentrations, dom: string) {
+    const pollutantData = data[dom.toUpperCase()];
+
+    if (pollutantData) {
+      const topContributers = pollutantData.topContributers;
+      let maxContributer: string | null = null;
+      let maxValue = Number.NEGATIVE_INFINITY;
+
+      for (const key in topContributers) {
+        if (topContributers.hasOwnProperty(key)) {
+          const value = topContributers[key];
+          if (value && value > maxValue) {
+            maxContributer = key;
+            maxValue = value;
+          }
+        }
+      }
+      return maxContributer;
+    }
+  }
+
+  const maxContributer = findTopContributer(origin, highestPoll);
+
   function dominantPollutantFactor() {
-    if (origin === 'vedfyring') {
+    if (maxContributer === 'vedfyring') {
       dominantPollutantFactorString = 'vedfyring';
-      console.log(origin);
       return <img src={bonfire} alt="" />;
-    } else if (origin === 'eksos') {
+    } else if (maxContributer === 'eksos') {
       dominantPollutantFactorString = 'eksos';
-      console.log(origin);
       return <img src={exhaust} alt="" />;
-    } else if (origin === 'industri') {
-      console.log(origin);
+    } else if (maxContributer === 'industri') {
       dominantPollutantFactorString = 'industri';
       return <img src={exhaust} alt="" />;
-    } else if (origin === 'langtransport') {
-      console.log(origin);
+    } else if (maxContributer === 'langtransport') {
       dominantPollutantFactorString = 'langtransport';
       return <img src={exhaust} alt="" />;
-    } else if (origin === 'veistov') {
-      console.log(origin);
+    } else if (maxContributer === 'veistov') {
       dominantPollutantFactorString = 'veistøv';
       return <img src={exhaust} alt="" />;
     } else {
-      console.log(origin);
       dominantPollutantFactorString = 'utilgjengelig utenfor Norge';
       return <img src={exhaust} alt="" />;
     }

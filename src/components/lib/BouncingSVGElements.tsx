@@ -13,7 +13,6 @@ interface BouncingSVGElementsProps {
 
 const BouncingSVGElements: React.FC<BouncingSVGElementsProps> = ({ pm10, pm25, gas, height, showLungs }) => {
   {
-    console.log('gas', gas);
     const generateRandomDelay = () => {
       return Math.floor(Math.random() * (20 - 5 + 1) + 5); // Random number between 5 and 20
     };

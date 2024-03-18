@@ -77,7 +77,6 @@ export interface stdtime {
   from: Date;
   to: Date;
   variables: stdvariables;
-  topContribs?: Contributor;
 }
 
 export interface stdtimes {
@@ -86,7 +85,7 @@ export interface stdtimes {
 
 export interface APIStandard {
   data: stdtimes;
-  dominantPollutant?: string;
+  dominantPollutant: string;
   location: stdlocation;
   stationID?: string;
 }
