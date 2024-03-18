@@ -175,7 +175,7 @@ function LearnMore() {
                   style={{ width: '160px', height: '160px', backgroundColor: '#FC8861' }}
                   onClick={handleCompareClick}
                 >
-                  Sammenlign luften i Trondheim med andre byer
+                  Utforsk luften i andre byer!
                 </button>
               </div>
             )}
@@ -185,21 +185,14 @@ function LearnMore() {
               <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 mt-20">
                 <div className="flex items-center mt-80">
                   <button
-                    className="ml-20 absolute rounded-full bg-blue-800 text-white text-lg px-4 py-2 mb-20 hover:scale-110 transition-transform duration-300"
+                    className="absolute mb-8 ml-60 rounded-full bg-blue-800 text-white text-lg px-4 py-2 mb-10 hover:scale-110 transition-transform duration-300"
                     style={{ width: '60px', height: '60px', backgroundColor: '#FC8861' }}
                     onClick={handleCompareClickExit}
                   >
                     <p className="text-3xl mb-1">x</p>
                   </button>
-                  <div className="flex items-center mt-20 ml-20">
-                    <div
-                      className="badge badge-lg text-xl text-white font-light px-[0.9em] pb-[0.8em] pt-[0.7em] top-1/2 mr-6"
-                      style={{ backgroundColor: '#192E54', borderColor: '#192E54' }}
-                    >
-                      Trondheim
-                    </div>
-
-                    <div className="relative flex itms-center inline-block ml-20">
+                  <div className="flex items-center mt-24 ml-30">
+                    <div className="relative flex itms-center inline-block ml-8">
                       <Select
                         className="rounded-lg w-48"
                         options={allOptions}
@@ -221,7 +214,7 @@ function LearnMore() {
               </div>
             )}
           </div>
-          {currentAQ != aqMessage['low'] && <MainPollutants data={data} />}
+          <div>{currentAQ != aqMessage['low'] && <MainPollutants data={data} />}</div>
         </div>
       </div>
     </>
