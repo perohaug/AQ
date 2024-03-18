@@ -85,7 +85,7 @@ function MainPollutants({ highestPoll, origin, location }: MainPollutantsProps) 
       return <img src={exhaust} alt="" />;
     } else if (maxContributer === 'langtransport') {
       dominantPollutantFactorString = 'langtransport';
-      return <img src={longdistance} alt="" />;
+      return <img className="max-h-20" src={longdistance} alt="" />;
     } else if (maxContributer === 'veistov') {
       dominantPollutantFactorString = 'veistøv';
       return <img src={exhaust} alt="" />;
@@ -112,7 +112,7 @@ function MainPollutants({ highestPoll, origin, location }: MainPollutantsProps) 
             className="flex items-center justify-center hover:scale-110 transition-transform duration-300"
             onClick={openModal}
           >
-            <div className="absolute ">{dominantPollutantFactor()}</div>
+            <div className="absolute">{dominantPollutantFactor()}</div>
             {dominantPollutantSVG()}
           </div>
         )}

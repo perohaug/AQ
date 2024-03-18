@@ -212,13 +212,15 @@ function LearnMore() {
               </div>
             )}
           </div>
-          {data && aqMessage[data.data.time[0].variables.AQI.text] && (
-            <MainPollutants
-              highestPoll={data.dominantPollutant}
-              origin={data.data.time[0].variables.concentrations}
-              location={data.location.name}
-            />
-          )}
+          <div className="">
+            {data && aqMessage[data.data.time[0].variables.AQI.text] && (
+              <MainPollutants
+                highestPoll={data.dominantPollutant}
+                origin={data.data.time[0].variables.concentrations}
+                location={data.location.name}
+              />
+            )}
+          </div>
         </div>
       </div>
     </>
