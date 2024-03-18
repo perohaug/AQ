@@ -7,8 +7,10 @@ import AirFlowSVG from '../../svgs/AirFlowSVG';
 import { Link } from 'react-router-dom';
 import ChatBubble from './ChatBubble';
 
-function UserGroups() {
+function UserGroups({ aqValue = 'low' }: { aqValue?: string }) {
   const [activeSVG, setActiveSVG] = useState(1);
+
+  const aqMessageValue = aqMessage[aqValue];
 
   const handleSVGClick = (svgId: any) => {
     setActiveSVG(svgId);
@@ -21,7 +23,7 @@ function UserGroups() {
           className="badge badge-lg text-xl  text-white font-light pb-[0.8em] pt-[0.7em]"
           style={{ backgroundColor: '#192E54', borderColor: '#192E54' }}
         >
-          {aqMessage['low'].userGroupInfo[activeSVG].name}
+          {aqMessageValue.userGroupInfo[activeSVG].name}
         </div>
       ) : (
         <div
@@ -33,7 +35,7 @@ function UserGroups() {
       )}
 
       <div className="relative flex  items-center">
-        <AirFlowSVG />
+        <AirFlowSVG aqColor={aqMessageValue.color} />
         <div className="absolute left-60">
           <Link to="/learn">
             <button
@@ -49,7 +51,7 @@ function UserGroups() {
         </div>
         <UserGroupsSVG handleSVGClick={handleSVGClick} activeSVG={activeSVG} />
         <div className="absolute right-20" style={{ top: '180px' }}>
-          <ChatBubble svg={activeSVG} />
+          <ChatBubble aqMessageValue={aqMessageValue} svg={activeSVG} />
         </div>
       </div>
     </>

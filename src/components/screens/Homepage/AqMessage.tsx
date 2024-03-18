@@ -2,8 +2,10 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { aqMessage } from '../TextContent/aqMessageInfo';
 
-function AqMessage() {
+function AqMessage({ aqValue = 'low' }: { aqValue?: string }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const aqMessageValue = aqMessage[aqValue];
 
   const openModal = () => {
     setIsModalOpen(true);
@@ -22,12 +24,12 @@ function AqMessage() {
               cx={40}
               cy={40}
               r={20}
-              fill={aqMessage['high'].color} // Adjust opacity as needed (0.3 for example)
+              fill={aqMessage[aqValue].color} // Adjust opacity as needed (0.3 for example)
               opacity={0.5}
               style={{ animation: 'expandShrink 1s infinite alternate' }}
             />
             {/* Tinier circle */}
-            <circle cx={40} cy={40} r={25} fill={aqMessage['high'].color} /> {/* Adjust the radius as needed */}
+            <circle cx={40} cy={40} r={25} fill={aqMessageValue.color} /> {/* Adjust the radius as needed */}
           </svg>
           <style>
             {`
@@ -46,7 +48,7 @@ function AqMessage() {
           </style>
         </div>
         <div className="mt-5">
-          <p className="font-light text-3xl">{aqMessage['high'].message}</p>
+          <p className="font-light text-3xl">{aqMessageValue.message}</p>
         </div>
         <Link to="/map">
           <svg

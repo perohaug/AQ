@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import { Head } from '~/components/shared/Head';
 import BouncingSVGElements from '~/components/lib/BouncingSVGElements';
 import useDataFetcher, { ApiResponse } from '~/components/lib/API/DataFetcher';
@@ -12,8 +12,12 @@ function Index() {
   const inputRef: any = useRef();
 
   const handleSubmit = async () => {
-    await fetchData(inputRef.current.value);
+    await fetchData('https://api.met.no/weatherapi/airqualityforecast/0.1/?station=NO0103A');
   };
+
+  useEffect(() => {
+    handleSubmit();
+  }, []);
 
   return (
     <>
@@ -24,8 +28,8 @@ function Index() {
           <div style={{ display: 'flex', justifyContent: 'center' }}>
             <h1 className="text-9xl rock-3d-logo">JegPuster</h1>
           </div>
-          <AqMessage />
-          <UserGroups />
+          <AqMessage aqValue={data?.data.time[0].variables.AQI.text} />
+          <UserGroups aqValue={data?.data.time[0].variables.AQI.text} />
         </div>
       </div>
     </>

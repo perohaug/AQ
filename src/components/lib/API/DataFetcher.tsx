@@ -1,11 +1,11 @@
 import { useState, useEffect, useCallback } from 'react';
 import {
   APIStandard,
+  Contributor,
   METResponse,
   METTime,
   METVariables,
   WAQIResponse,
-  poll,
   stdconcentration,
   stdconcentrations,
   stdtime,
@@ -22,13 +22,13 @@ export interface ApiResponse {
 function domPoll(O3: number, NO2: number, PM10: number, PM25: number) {
   const max = Math.max(O3, NO2, PM10, PM25);
   if (max === O3) {
-    return 'O₃'; // Ozon
+    return 'o3'; // Ozon
   } else if (max === NO2) {
-    return 'NO₂'; // Nitrogendioksid
+    return 'no2'; // Nitrogendioksid
   } else if (max === PM10) {
-    return 'PM₁₀'; // Store svevestøv
+    return 'pm10'; // Store svevestøv
   } else {
-    return 'PM₂.₅'; // Små svevestøv
+    return 'pm25'; // Små svevestøv
   }
 }
 
@@ -78,6 +78,40 @@ function PM10AQI(x: number) {
   }
 
   return aqi;
+}
+
+function findTopContributors(
+  dominantPollutant: string | undefined,
+  stdconcentrations: METVariables | undefined,
+): Contributor | undefined {
+  const topContributors: Contributor[] = [];
+
+  // Iterate over each stdconcentration
+  for (const concentration in stdconcentrations) {
+    const stdconcentration = stdconcentrations[concentration];
+    // console.log('stdconcentration:', stdconcentration);
+    let maxContributor: string = '';
+    let maxValue: number = 0;
+
+    // Iterate over each topContributors property
+    for (const [contributor, value] of Object.entries(stdconcentration.value || {})) {
+      if (value && value > maxValue) {
+        maxContributor = contributor;
+        maxValue = value;
+      }
+    }
+
+    // Push the highest contributor for the current stdconcentration
+    topContributors.push({ stdconcentration: concentration, topContributors: maxContributor });
+  }
+  const topCont: Contributor | undefined = topContributors.find((entry) =>
+    entry.stdconcentration.toLowerCase().includes(dominantPollutant?.toLowerCase() ?? ''),
+  );
+  if (topCont?.topContributors == '') {
+    topCont.topContributors = 'ukjente kilder';
+  }
+  console.log('Balle', topCont?.stdconcentration);
+  return topCont;
 }
 
 function NO2AQI(x: number) {
@@ -181,11 +215,22 @@ function AQI(x: number) {
   return aqi;
 }
 
+function aqiTxt(aqi: number) {
+  if (aqi < 2.0) {
+    return 'low';
+  } else if (aqi < 3.0) {
+    return 'moderate';
+  } else if (aqi < 4.0) {
+    return 'high';
+  } else {
+    return 'veryhigh';
+  }
+}
+
 const useDataFetcher = (): ApiResponse => {
   const [apiData, setApiData] = useState<APIStandard>(null as unknown as APIStandard);
   const [status, setStatus] = useState<'success' | 'loading' | 'error'>('loading');
   const [error, setError] = useState<string | null>(null);
-
   const fetchData = useCallback(async (userInput: string) => {
     try {
       if (!userInput) {
@@ -198,8 +243,18 @@ const useDataFetcher = (): ApiResponse => {
           time: apiDataResponse.data.time.map((timeEntry: METTime) => ({
             from: new Date(timeEntry.from),
             to: new Date(timeEntry.to),
+            // topContribs: (apiData.data.time[0].topContribs = findTopContributors(
+            //   domPoll(
+            //     apiDataResponse.data.time[0].variables.o3_concentration.value,
+            //     apiDataResponse.data.time[0].variables.no2_concentration.value,
+            //     apiDataResponse.data.time[0].variables.pm10_concentration.value,
+            //     apiDataResponse.data.time[0].variables.pm25_concentration.value,
+            //   ),
+            //   apiDataResponse.data.time[0].variables,
+            // )),
             variables: {
               AQI: {
+                text: aqiTxt(timeEntry.variables.AQI.value),
                 value: timeEntry.variables.AQI.value.toFixed(2),
                 pm10: timeEntry.variables.AQI_pm10.value.toFixed(2),
                 pm25: timeEntry.variables.AQI_pm25.value.toFixed(2),
@@ -210,6 +265,29 @@ const useDataFetcher = (): ApiResponse => {
                 PM10: {
                   value: timeEntry.variables.pm10_concentration.value,
                   units: 'µg/m³',
+                  topContributers: {
+                    veistov:
+                      (apiDataResponse.data.time[0].variables.pm10_local_fraction_traffic_nonexhaust.value / 100) *
+                      apiDataResponse.data.time[0].variables.pm10_concentration.value,
+                    vedfyring:
+                      (apiDataResponse.data.time[0].variables.pm10_local_fraction_heating.value / 100) *
+                      apiDataResponse.data.time[0].variables.pm10_concentration.value,
+                    industri:
+                      (apiDataResponse.data.time[0].variables.pm10_local_fraction_industry.value / 100) *
+                      apiDataResponse.data.time[0].variables.pm10_concentration.value,
+                    skip:
+                      (apiDataResponse.data.time[0].variables.pm10_local_fraction_shipping.value / 100) *
+                      apiDataResponse.data.time[0].variables.pm10_concentration.value,
+                    eksos:
+                      (apiDataResponse.data.time[0].variables.pm10_local_fraction_traffic_exhaust.value / 100) *
+                      apiDataResponse.data.time[0].variables.pm10_concentration.value,
+                    langtransport:
+                      (apiDataResponse.data.time[0].variables.pm10_nonlocal_fraction.value / 100) *
+                      apiDataResponse.data.time[0].variables.pm10_concentration.value,
+                    seasalt:
+                      (apiDataResponse.data.time[0].variables.pm10_nonlocal_fraction_seasalt.value / 100) *
+                      apiDataResponse.data.time[0].variables.pm10_concentration.value,
+                  },
                   origin: {
                     langtransport: {
                       value: timeEntry.variables.pm10_nonlocal_fraction.value,
@@ -244,6 +322,29 @@ const useDataFetcher = (): ApiResponse => {
                 PM25: {
                   value: timeEntry.variables.pm25_concentration.value,
                   units: 'µg/m³',
+                  topContributers: {
+                    veistov:
+                      (apiDataResponse.data.time[0].variables.pm25_local_fraction_traffic_nonexhaust.value / 100) *
+                      apiDataResponse.data.time[0].variables.pm25_concentration.value,
+                    vedfyring:
+                      (apiDataResponse.data.time[0].variables.pm25_local_fraction_heating.value / 100) *
+                      apiDataResponse.data.time[0].variables.pm25_concentration.value,
+                    industri:
+                      (apiDataResponse.data.time[0].variables.pm25_local_fraction_industry.value / 100) *
+                      apiDataResponse.data.time[0].variables.pm25_concentration.value,
+                    skip:
+                      (apiDataResponse.data.time[0].variables.pm25_local_fraction_shipping.value / 100) *
+                      apiDataResponse.data.time[0].variables.pm25_concentration.value,
+                    eksos:
+                      (apiDataResponse.data.time[0].variables.pm25_local_fraction_traffic_exhaust.value / 100) *
+                      apiDataResponse.data.time[0].variables.pm25_concentration.value,
+                    langtransport:
+                      (apiDataResponse.data.time[0].variables.pm25_nonlocal_fraction.value / 100) *
+                      apiDataResponse.data.time[0].variables.pm25_concentration.value,
+                    seasalt:
+                      (apiDataResponse.data.time[0].variables.pm25_nonlocal_fraction_seasalt.value / 100) *
+                      apiDataResponse.data.time[0].variables.pm25_concentration.value,
+                  },
                   origin: {
                     langtransport: {
                       value: timeEntry.variables.pm25_nonlocal_fraction.value,
@@ -278,6 +379,23 @@ const useDataFetcher = (): ApiResponse => {
                 NO2: {
                   value: timeEntry.variables.no2_concentration.value,
                   units: 'µg/m³',
+                  topContributers: {
+                    vedfyring:
+                      (apiDataResponse.data.time[0].variables.no2_local_fraction_heating.value / 100) *
+                      apiDataResponse.data.time[0].variables.no2_concentration.value,
+                    industri:
+                      (apiDataResponse.data.time[0].variables.no2_local_fraction_industry.value / 100) *
+                      apiDataResponse.data.time[0].variables.no2_concentration.value,
+                    skip:
+                      (apiDataResponse.data.time[0].variables.no2_local_fraction_shipping.value / 100) *
+                      apiDataResponse.data.time[0].variables.no2_concentration.value,
+                    eksos:
+                      (apiDataResponse.data.time[0].variables.no2_local_fraction_traffic_exhaust.value / 100) *
+                      apiDataResponse.data.time[0].variables.no2_concentration.value,
+                    langtransport:
+                      (apiDataResponse.data.time[0].variables.no2_nonlocal_fraction.value / 100) *
+                      apiDataResponse.data.time[0].variables.no2_concentration.value,
+                  },
                   origin: {
                     langtransport: {
                       value: timeEntry.variables.no2_nonlocal_fraction.value,
@@ -304,6 +422,11 @@ const useDataFetcher = (): ApiResponse => {
                 O3: {
                   value: timeEntry.variables.o3_concentration.value,
                   units: 'µg/m³',
+                  topContributers: {
+                    langtransport:
+                      (apiDataResponse.data.time[0].variables.o3_nonlocal_fraction.value / 100) *
+                      apiDataResponse.data.time[0].variables.o3_concentration.value,
+                  },
                   origin: {
                     langtransport: {
                       value: timeEntry.variables.o3_nonlocal_fraction.value,
@@ -332,76 +455,6 @@ const useDataFetcher = (): ApiResponse => {
             apiDataResponse.data.time[0].variables.pm10_concentration.value,
             apiDataResponse.data.time[0].variables.pm25_concentration.value,
           ),
-          topContributors: {
-            pm10: {
-              veistov:
-                (apiDataResponse.data.time[0].variables.pm10_local_fraction_traffic_nonexhaust.value / 100) *
-                apiDataResponse.data.time[0].variables.pm10_concentration.value,
-              vedfyring:
-                (apiDataResponse.data.time[0].variables.pm25_local_fraction_heating.value / 100) *
-                apiDataResponse.data.time[0].variables.pm10_concentration.value,
-              industri:
-                (apiDataResponse.data.time[0].variables.pm10_local_fraction_industry.value / 100) *
-                apiDataResponse.data.time[0].variables.pm10_concentration.value,
-              skip:
-                (apiDataResponse.data.time[0].variables.pm10_local_fraction_shipping.value / 100) *
-                apiDataResponse.data.time[0].variables.pm10_concentration.value,
-              eksos:
-                (apiDataResponse.data.time[0].variables.pm10_local_fraction_traffic_exhaust.value / 100) *
-                apiDataResponse.data.time[0].variables.pm10_concentration.value,
-              langtransport:
-                (apiDataResponse.data.time[0].variables.pm10_nonlocal_fraction.value / 100) *
-                apiDataResponse.data.time[0].variables.pm10_concentration.value,
-              seasalt:
-                (apiDataResponse.data.time[0].variables.pm10_nonlocal_fraction_seasalt.value / 100) *
-                apiDataResponse.data.time[0].variables.pm10_concentration.value,
-            },
-            pm25: {
-              veistov:
-                (apiDataResponse.data.time[0].variables.pm25_local_fraction_traffic_nonexhaust.value / 100) *
-                apiDataResponse.data.time[0].variables.pm25_concentration.value,
-              vedfyring:
-                (apiDataResponse.data.time[0].variables.pm25_local_fraction_heating.value / 100) *
-                apiDataResponse.data.time[0].variables.pm25_concentration.value,
-              industri:
-                (apiDataResponse.data.time[0].variables.pm25_local_fraction_industry.value / 100) *
-                apiDataResponse.data.time[0].variables.pm25_concentration.value,
-              langtransport:
-                (apiDataResponse.data.time[0].variables.pm25_nonlocal_fraction.value / 100) *
-                apiDataResponse.data.time[0].variables.pm25_concentration.value,
-              seasalt:
-                (apiDataResponse.data.time[0].variables.pm25_nonlocal_fraction_seasalt.value / 100) *
-                apiDataResponse.data.time[0].variables.pm25_concentration.value,
-              eksos:
-                (apiDataResponse.data.time[0].variables.pm25_local_fraction_traffic_exhaust.value / 100) *
-                apiDataResponse.data.time[0].variables.pm25_concentration.value,
-              skip:
-                (apiDataResponse.data.time[0].variables.pm25_local_fraction_shipping.value / 100) *
-                apiDataResponse.data.time[0].variables.pm25_concentration.value,
-            },
-            o3: {
-              langtransport:
-                (apiDataResponse.data.time[0].variables.o3_nonlocal_fraction.value / 100) *
-                apiDataResponse.data.time[0].variables.o3_concentration.value,
-            },
-            no2: {
-              langtransport:
-                (apiDataResponse.data.time[0].variables.no2_nonlocal_fraction.value / 100) *
-                apiDataResponse.data.time[0].variables.no2_concentration.value,
-              eksos:
-                (apiDataResponse.data.time[0].variables.no2_local_fraction_traffic_exhaust.value / 100) *
-                apiDataResponse.data.time[0].variables.no2_concentration.value,
-              skip:
-                (apiDataResponse.data.time[0].variables.no2_local_fraction_shipping.value / 100) *
-                apiDataResponse.data.time[0].variables.no2_concentration.value,
-              vedfyring:
-                (apiDataResponse.data.time[0].variables.no2_local_fraction_heating.value / 100) *
-                apiDataResponse.data.time[0].variables.no2_concentration.value,
-              industri:
-                (apiDataResponse.data.time[0].variables.no2_local_fraction_industry.value / 100) *
-                apiDataResponse.data.time[0].variables.no2_concentration.value,
-            },
-          },
         });
         setError(null);
         setStatus('success');
@@ -416,8 +469,13 @@ const useDataFetcher = (): ApiResponse => {
               {
                 from: new Date(apiDataResponse.data.time.s),
                 to: new Date(apiDataResponse.data.time.v),
+                topContribs: {
+                  stdconcentration: apiDataResponse.data.dominentpol,
+                  topContributors: 'ingen data for dette utenfor Norge.',
+                },
                 variables: {
                   AQI: {
+                    text: aqiTxt(waqi(apiDataResponse.data.aqi)),
                     value: waqi(apiDataResponse.data.aqi).toFixed(2),
                     pm10: PM10AQI(apiDataResponse.data.iaqi.pm10.v).toFixed(2),
                     pm25: PM25AQI(apiDataResponse.data.iaqi.pm25.v).toFixed(2),
@@ -428,22 +486,18 @@ const useDataFetcher = (): ApiResponse => {
                     PM10: {
                       value: apiDataResponse.data.iaqi.pm10.v,
                       units: 'µg/m³',
-                      origin: {},
                     },
                     PM25: {
                       value: apiDataResponse.data.iaqi.pm25.v,
                       units: 'µg/m³',
-                      origin: {},
                     },
                     NO2: {
                       value: apiDataResponse.data.iaqi.no2.v,
                       units: 'µg/m³',
-                      origin: {},
                     },
                     O3: {
                       value: apiDataResponse.data.iaqi.o3.v,
                       units: 'µg/m³',
-                      origin: {},
                     },
                   },
                 },
@@ -467,7 +521,11 @@ const useDataFetcher = (): ApiResponse => {
       setStatus('error');
     }
   }, []);
-
+  // apiData.data.time[0].topContribs = findTopContributors(
+  //   apiData?.dominantPollutant,
+  //   apiData.data.time[0].variables.concentrations,
+  // );
+  console.log(apiData);
   return { fetchData, data: apiData, status, error };
 };
 
