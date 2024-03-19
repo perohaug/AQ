@@ -20,14 +20,14 @@ function UserGroups({ aqValue = 'low' }: { aqValue?: string }) {
     <>
       {userGroupInfoLow[activeSVG].id > 1 ? (
         <div
-          className="badge badge-lg text-xl  text-white font-light pb-[0.8em] pt-[0.7em]"
+          className="mt-5 badge badge-lg text-2xl  text-white font-light pb-[0.8em] pt-[0.7em]"
           style={{ backgroundColor: '#192E54', borderColor: '#192E54' }}
         >
           {aqMessageValue.userGroupInfo[activeSVG].name}
         </div>
       ) : (
         <div
-          className="badge badge-lg text-xl  text-white font-light  px-[0.65em] pb-[0.8em] pt-[0.7em]"
+          className="mt-5 badge badge-lg text-2xl  text-white font-light  px-[0.65em] pb-[0.8em] pt-[0.7em]"
           style={{ backgroundColor: '#192E54', borderColor: '#192E54' }}
         >
           Generell befolkning
@@ -39,7 +39,7 @@ function UserGroups({ aqValue = 'low' }: { aqValue?: string }) {
         <div className="absolute left-60">
           <Link to="/learn">
             <button
-              className="rounded-full bg-blue-800 text-white text-xl px-4 py-2 hover:scale-105 transition-transform duration-300"
+              className="rounded-full bg-blue-800 text-white text-2xl px-4 py-2 hover:scale-105 transition-transform duration-300"
               style={{ width: '200px', height: '200px', backgroundColor: '#FC8861' }}
             >
               Se mer om luften!
