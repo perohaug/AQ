@@ -17,7 +17,7 @@ export const aqMessage: AQMessage =
 
         low: {
             color: '#9BE4E6',
-            risk: 'Lav helserisiko',
+            risk: 'Liten eller ingen helserisiko',
             message: 'Nyt dagen ute!',
             userGroupInfo: userGroupInfoLow,
         },

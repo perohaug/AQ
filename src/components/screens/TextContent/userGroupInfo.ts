@@ -54,7 +54,7 @@ export const userGroupInfoModerate: UserGroupInfo = {
     3: {
         id: 3,
         name: "Eldre",
-        healthMessage: "Ved forverrede luftveis- eller hjerte- og karsymptomer, begrens utendørsaktivitet i forurensede områder.",
+        healthMessage: "Ved forverrede symptomer i luftveiene  eller i hjert- og karsystemet, bør du vurdere å redusere høy fysisk aktvitet i de mest forurensede områdene.",
     },
     4: {
         id: 4,
@@ -64,12 +64,12 @@ export const userGroupInfoModerate: UserGroupInfo = {
     5: {
         id: 5,
         name: "Astmatikere og luftveisplager",
-        healthMessage: "De med forverrede luftveis-symptomer bør vurdere å redusere aktivitet i forurensede områder."
+        healthMessage: "Ved forverrede luftveis-symptomer, bør du vurdere å redusere høy fysisk aktivitet i de mest forurensede områdene."
     },
     6: {
         id: 6,
         name: "Hjerte- og karsykdommer",
-        healthMessage: "Ved forverrede symptomer, reduser utendørsaktivitet i forurensede områder."
+        healthMessage: "Ved forverrede symptomer, bør du vurdere å redusere høy fysisk aktivitet i de mest forurensede områdene."
     },
 };
 
@@ -77,32 +77,32 @@ export const userGroupInfoHigh: UserGroupInfo = {
     1: {
         id: 1,
         name: "Generell befolkning",
-        healthMessage: "Hvis du har hoste eller sår hals, bør du vurdere å redusere høy fysisk aktivitet i de mest forurensede uteområdene."
+        healthMessage: "Hoste eller sår hals? Da bør du vurdere å redusere høy fysisk aktivitet i de mest forurensede områdene."
     },
     2: {
         id: 2, 
         name: "Gravide",
-        healthMessage: "Er du gravid og har luftveis-symptomer bør du begrense oppholdstiden i de mest forurensede uteområdene."
+        healthMessage: "Luftveissymptomer? Da bør du begrense oppholdstiden i de mest forurensede områdene."
     },
     3: {
         id: 3,
         name: "Eldre",
-        healthMessage: "Personer med luftveis- eller hjerte- og karsykdom bør redusere høy fysisk aktivitet og begrense oppholdstiden i de mest forurensede uteområdene."
+        healthMessage: "Luftveis- eller hjerte- og karsykdom? Da bør du redusere høy fysisk aktivitet og begrense oppholdstiden i de mest forurensede områdene."
     },
     4: {
         id: 4,
         name: "Barn",
-        healthMessage: "Barn med luftveis-symptomer bør du begrense oppholdstiden i de mest forurensede uteområdene."
+        healthMessage: "Luftveissymptomer? Da bør du begrense oppholdstiden i de mest forurensede områdene."
     },
     5: {
         id: 5,
         name: "Astmatikere og luftveisplager",
-        healthMessage: "Alvorlig luftveissykdom eller som opplever du forverring av din astma? Da bør redusere høy fysisk aktivitet og begrense oppholdstiden i de mest forurensede uteområdene."
+        healthMessage: "Alvorlig luftveissykdom eller forverring av astma? Da bør du redusere høy fysisk aktivitet og begrense oppholdstiden i de mest forurensede områdene."
     },
     6: {
         id: 6,
         name: "Hjerte- og karsykdommer",
-        healthMessage: "Alvorlig hjerte- og karsykdom? Da bør du redusere høy fysisk aktivitet og begrense oppholdstiden i de mest forurensede uteområdene."
+        healthMessage: "Alvorlig hjerte- og karsykdom? Da bør du redusere høy fysisk aktivitet og begrense oppholdstiden i de mest forurensede områdene."
     },
 
 };
@@ -112,32 +112,32 @@ export const userGroupInfoVeryHigh: UserGroupInfo = {
     1: {
         id: 1,
         name: "Generell befolkning",
-        healthMessage: "Reduser utendørs fysisk aktivitet og begrens oppholdstiden i de mest forurensede uteområdene, spesielt hvis du har symptomer som hoste ellers sår hals."
+        healthMessage: "Reduser utendørs fysisk aktivitet og begrens oppholdstiden i de mest forurensede områdene, spesielt hvis du har symptomer som hoste ellers sår hals."
     },
     2: {
         id: 2, 
         name: "Gravide",
-        healthMessage: "Reduser fysisk aktivitet og begrens oppholdstiden i de mest forurensede uteområdene."
+        healthMessage: "Reduser fysisk aktivitet og begrens oppholdstiden i de mest forurensede områdene."
     },
     3: {
         id: 3,
         name: "Eldre",
-        healthMessage: "Reduser fysisk aktivitet og begrens oppholdstiden i de mest forurensede uteområdene."
+        healthMessage: "Reduser fysisk aktivitet og begrens oppholdstiden i de mest forurensede områdene."
     },
     4: {
         id: 4,
         name: "Barn",
-        healthMessage: "Reduser fysisk aktivitet og begrens oppholdstiden i de mest forurensede uteområdene."
+        healthMessage: "Reduser fysisk aktivitet og begrens oppholdstiden i de mest forurensede områdene."
     },
     5: {
         id: 5,
         name: "Astmatikere og luftveisplager",
-        healthMessage: "Bør ikke oppholde seg i de mest forurensede uteområdene."
+        healthMessage: "Du bør ikke oppholde deg i de mest forurensede områdene."
     },
     6: {
         id: 6,
         name: "Hjerte- og karsykdommer",
-        healthMessage: "Bør ikke oppholde seg i de mest forurensede uteområdene."
+        healthMessage: "Du bør ikke oppholde deg i de mest forurensede uteområdene."
     },
  
 };
