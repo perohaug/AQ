@@ -14,6 +14,19 @@ const AQPage = lazy(() => import('~/components/screens/AQ'));
 const LearnMore = lazy(() => import('~/components/screens/AQDetail/AQDetail'));
 
 function Layout() {
+  const { fetchData, status, data, error }: ApiResponse = useDataFetcher();
+  const handleSubmit = async () => {
+    await fetchData('https://api.met.no/weatherapi/airqualityforecast/0.1/?station=NO0102A');
+    // await fetchData('https://api.waqi.info/feed/bangkok/?token=22f37ad5c0fae31b55ee3304697b74c44a1a4cd0');
+  };
+
+  useEffect(() => {
+    handleSubmit();
+    console.log('kjører dette?', data);
+  }, []);
+
+  const aqMessageValue = aqMessage[data?.data.time[0].variables.AQI.text || 'low'];
+
   return (
     <div>
       {/* Insert style tag on the nav-tag */}
@@ -32,12 +45,12 @@ function Layout() {
                       cx={40}
                       cy={40}
                       r={20}
-                      fill={aqMessage['low'].color} // Adjust opacity as needed (0.3 for example)
+                      fill={aqMessageValue.color} // Adjust opacity as needed (0.3 for example)
                       opacity={0.5}
                       style={{ animation: 'expandShrink 1s infinite alternate' }}
                     />
                     {/* Tinier circle */}
-                    <circle cx={40} cy={40} r={25} fill={aqMessage['low'].color} /> {/* Adjust the radius as needed */}
+                    <circle cx={40} cy={40} r={25} fill={aqMessageValue.color} /> {/* Adjust the radius as needed */}
                   </svg>
                   <style>
                     {`
@@ -109,3 +122,6 @@ const InnerRouter = () => {
     </div>
   );
 };
+function fetchData(arg0: string) {
+  throw new Error('Function not implemented.');
+}

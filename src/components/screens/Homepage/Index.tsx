@@ -12,7 +12,8 @@ function Index() {
   const inputRef: any = useRef();
 
   const handleSubmit = async () => {
-    await fetchData('https://api.met.no/weatherapi/airqualityforecast/0.1/?station=NO0103A');
+    await fetchData('https://api.met.no/weatherapi/airqualityforecast/0.1/?station=NO0102A');
+    // await fetchData('https://api.waqi.info/feed/bangkok/?token=22f37ad5c0fae31b55ee3304697b74c44a1a4cd0');
   };
 
   useEffect(() => {
