@@ -32,43 +32,26 @@ function Layout() {
       {/* Insert style tag on the nav-tag */}
       <nav className="p-4 grid-rows-2 flex items-center justify-start bg-primary">
         {location.pathname !== '/' && (
-          <Link className="text-2xl font-light whitespace-nowrap dark:text-grey" to="/">
+          <Link className="text-2xl font-light whitespace-nowrap dark:text-grey mt-2" to="/">
             <div className="flex flex-row">
-              <h1 className="text-5xl rock-3d-logo mt-2">
-                {' '}
-                <b>JegPuster</b>
-              </h1>
-              <div className="mr-10">
-                <div className="mr-3">
-                  <svg width={80} height={80}>
-                    <circle
-                      cx={40}
-                      cy={40}
-                      r={20}
-                      fill={aqMessageValue.color} // Adjust opacity as needed (0.3 for example)
-                      opacity={0.5}
-                      style={{ animation: 'expandShrink 1s infinite alternate' }}
-                    />
-                    {/* Tinier circle */}
-                    <circle cx={40} cy={40} r={25} fill={aqMessageValue.color} /> {/* Adjust the radius as needed */}
-                  </svg>
-                  <style>
-                    {`
-        @keyframes expandShrink {
-          0% {
-            r: 30; // Initial radius
-          }
-          50% {
-            r: 35; // Maximum radius
-          }
-          100% {
-            r: 40; // Back to the initial radius
-          }
-        }
-      `}
-                  </style>
-                </div>
-              </div>
+              <svg
+                className="mt-1"
+                xmlns="http://www.w3.org/2000/svg"
+                width="39"
+                height="24"
+                viewBox="0 0 39 24"
+                fill="none"
+              >
+                <path d="M6 12H38" stroke="#3D4043" stroke-linecap="round" stroke-linejoin="round" />
+                <path
+                  d="M12 3L6 12L12 21"
+                  stroke="#3D4043"
+                  stroke-miterlimit="16"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+              <p className="ml-5">Trondheim</p>
             </div>
           </Link>
         )}

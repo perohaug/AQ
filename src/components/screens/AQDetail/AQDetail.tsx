@@ -145,8 +145,47 @@ function LearnMore() {
   return (
     <>
       <Head title="TOP PAGE" />
-
       <div className="bg-background relative">
+        <div className="flex flex-row justify-center mb-10">
+          <h1 className="text-5xl rock-3d-logo">
+            {' '}
+            <b>JegPuster</b>
+          </h1>
+          <p className="mt-4 ml-2 mr-2 text-3xl">
+            i {data && data.location.name !== 'E6-Tiller' ? data.location.name : 'Trondheim'}
+          </p>
+          <div className="mr-10">
+            <div className="mr-3">
+              <svg width={80} height={80}>
+                <circle
+                  cx={40}
+                  cy={40}
+                  r={20}
+                  fill={aqColor} // Adjust opacity as needed (0.3 for example)
+                  opacity={0.5}
+                  style={{ animation: 'expandShrink 1s infinite alternate' }}
+                />
+                {/* Tinier circle */}
+                <circle cx={40} cy={40} r={25} fill={aqColor} /> {/* Adjust the radius as needed */}
+              </svg>
+              <style>
+                {`
+        @keyframes expandShrink {
+          0% {
+            r: 30; // Initial radius
+          }
+          50% {
+            r: 35; // Maximum radius
+          }
+          100% {
+            r: 40; // Back to the initial radius
+          }
+        }
+      `}
+              </style>
+            </div>
+          </div>
+        </div>
         <div className="absolute top-1/2 mt-20 ">
           <AirFlowSVG aqColor={aqColor} />
         </div>
@@ -183,7 +222,7 @@ function LearnMore() {
               <div className="absolute top-1/4 mt-60 ml-60 transform mt-20">
                 <div className="flex items-center mt-36">
                   <button
-                    className="absolute mb-8 ml-80 rounded-full bg-blue-800 text-white text-lg px-4 py-2 mb-10 hover:scale-110 transition-transform duration-300"
+                    className="absolute ml-40 rounded-full bg-blue-800 text-white text-lg px-4 py-2 mb-10 hover:scale-110 transition-transform duration-300"
                     style={{ width: '60px', height: '60px', backgroundColor: '#FC8861' }}
                     onClick={handleCompareClickExit}
                   >

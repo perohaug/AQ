@@ -29,21 +29,21 @@ function MainPollutants({ highestPoll, origin, location }: MainPollutantsProps) 
 
   function dominantPollutantSVG() {
     if (highestPoll?.toLowerCase() == 'pm25') {
-      dominantPollutantName = 'små partikler';
+      dominantPollutantName = 'Små partikler';
       return (
         <svg className="w-40 h-40" viewBox="0 0 70 70">
           <circle cx="35" cy="35" r="35" fill="#FF155C" />
         </svg>
       );
     } else if (highestPoll?.toLowerCase() == 'pm10') {
-      dominantPollutantName = 'store partikler';
+      dominantPollutantName = 'Store partikler';
       return (
         <svg className="w-40 h-40" viewBox="0 0 70 70">
           <circle cx="35" cy="35" r="35" fill="#FF155C" />
         </svg>
       );
     } else if (highestPoll?.toLowerCase() == 'o3' || 'no2') {
-      dominantPollutantName = 'gasser';
+      dominantPollutantName = 'Gasser';
       return (
         <svg className="w-40 h-40" viewBox="0 0 70 70">
           <circle cx="35" cy="35" r="35" fill="#5A4858" />
@@ -97,39 +97,39 @@ function MainPollutants({ highestPoll, origin, location }: MainPollutantsProps) 
       return <img className="max-h-20" src={ship} alt="" />;
     } else {
       dominantPollutantFactorString = 'utilgjengelig utenfor Norge';
-      return <img className="max-h-20" src={exhaust} alt="" />;
+      return;
     }
   }
 
   return (
     <div className="absolute flex flex-row">
-      <div className="absolute flex flex-col items-center mt-20 ml-52" style={{ width: '450px' }}>
+      <div className="absolute flex flex-col items-center ml-52" style={{ width: '450px' }}>
         {/**City name */}
         <div
           className="mb-8 badge badge-lg text-xl text-white font-light px-[0.65em] pb-[0.8em] pt-[0.7em]"
           style={{ backgroundColor: '#192E54', borderColor: '#192E54' }}
         >
-          {location !== 'E6-Tiller' ? location : 'Trondheim'}
+          Forurenser luften mest nå
         </div>
         <div className="flex flex-row justify-center">
           {/**Pollutant info */}
           {highestPoll && (
-            <div
-              className="flex items-center justify-center hover:scale-110 transition-transform duration-300"
-              onClick={openModal}
-            >
-              <div className="absolute">{dominantPollutantFactor()}</div>
-              {dominantPollutantSVG()}
+            <div className="flex flex-col  items-center">
+              <div
+                className="flex items-center justify-center hover:scale-110 transition-transform duration-300"
+                onClick={openModal}
+              >
+                <div className="absolute">{dominantPollutantFactor()}</div>
+                {dominantPollutantSVG()}
+              </div>
+              <p className="font-normal text-xl mt-5">{dominantPollutantName}</p>
             </div>
           )}
         </div>
 
         {/**Open modal info */}
         {isModalOpen && (
-          <div className="mx-4 mt-10 flex flex-col items-center">
-            <p className="font-normal mb-6">
-              Det er <b className="font-bold">{dominantPollutantName}</b> som forurenser mest akkurat nå
-            </p>
+          <div className="mx-4 mt-5 flex flex-col items-center">
             <p className="font-light mb-6">
               {dominantPollutantFactorString === 'utilgjengelig utenfor Norge' ? (
                 ''
@@ -144,7 +144,7 @@ function MainPollutants({ highestPoll, origin, location }: MainPollutantsProps) 
       </div>
       {showButtonDescription && (
         <svg
-          className="ml-52 mt-28"
+          className="ml-52 mt-10"
           xmlns="http://www.w3.org/2000/svg"
           width="150"
           height="70"
