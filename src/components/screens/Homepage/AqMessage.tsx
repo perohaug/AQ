@@ -78,18 +78,18 @@ function AqMessage({ aqValue = 'low' }: { aqValue?: string }) {
       </div>
 
       {isModalOpen && (
-        <div className="fixed inset-0 z-10 flex items-center justify-center">
+        <div className="fixed inset-0 z-10 flex flex-col items-center justify-center">
           <div className="absolute inset-0 bg-black opacity-5" onClick={closeModal}></div>
           <div className="bg-white p-10 rounded-lg z-20">
-            <p className="font-bold mb-6">Helserisiko</p>
+            <p className="font-bold mb-6">Mulighet for påvirkning av helse</p>
 
             <div className="flex items-center mb-3">
               <svg width={40} height={40} className=" mr-5">
                 <circle cx={20} cy={20} r={20} fill={aqMessage['low'].color} />
               </svg>
-              <p>Liten</p>
+              <p>Liten eller ingen</p>
             </div>
-            <div className="flex items-center mb-3">
+            <div className="flex  items-center mb-3">
               <svg width={40} height={40} className="mr-5">
                 <circle cx={20} cy={20} r={20} fill={aqMessage['moderate'].color} />
               </svg>

@@ -48,12 +48,12 @@ function ChatBubble(props: ChatBubbleProps) {
           content: '.';
           overflow: hidden;
           vertical-align: bottom;
-          animation: typing 2s steps(1) infinite;
+          animation: typing 1s steps(1) infinite;
           width: 1ch;
         }
       `}</style>
       <div
-        className={`chat-bubble bg-white text-2xl font-light text-black px-4 py-3 mr-10 max-w-600 transition-all duration-200`}
+        className={`chat-bubble bg-white text-2xl font-light text-black px-4 py-3 mr-10 max-w-600 transition-all`}
         style={{
           overflow: 'hidden',
           whiteSpace: 'nowrap',
