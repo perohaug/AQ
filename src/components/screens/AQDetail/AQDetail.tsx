@@ -180,17 +180,17 @@ function LearnMore() {
 
             {/* Search city */}
             {isViewMore && (
-              <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 mt-20">
-                <div className="flex items-center mt-80">
+              <div className="absolute top-1/4 mt-60 ml-60 transform mt-20">
+                <div className="flex items-center mt-36">
                   <button
-                    className="absolute mb-8 ml-60 rounded-full bg-blue-800 text-white text-lg px-4 py-2 mb-10 hover:scale-110 transition-transform duration-300"
+                    className="absolute mb-8 ml-80 rounded-full bg-blue-800 text-white text-lg px-4 py-2 mb-10 hover:scale-110 transition-transform duration-300"
                     style={{ width: '60px', height: '60px', backgroundColor: '#FC8861' }}
                     onClick={handleCompareClickExit}
                   >
                     <p className="text-3xl mb-1">x</p>
                   </button>
                   <div className="flex items-center mt-24 ml-30">
-                    <div className="relative flex itms-center inline-block ml-8">
+                    <div className="relative flex itms-center inline-block ml-20">
                       <Select
                         className="rounded-lg w-48"
                         options={allOptions}
