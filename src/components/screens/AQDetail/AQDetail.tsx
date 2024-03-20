@@ -186,7 +186,7 @@ function LearnMore() {
             </div>
           </div>
         </div>
-        <div className="absolute top-1/2 mt-20 ">
+        <div className="absolute top-1/2 mt-28 ">
           <AirFlowSVG aqColor={aqColor} />
         </div>
         <div className="absolute left-0 w-full flex justify-center items-center">
@@ -222,7 +222,7 @@ function LearnMore() {
               <div className="absolute top-1/4 mt-60 ml-60 transform mt-20">
                 <div className="flex items-center mt-36">
                   <button
-                    className="absolute ml-40 rounded-full bg-blue-800 text-white text-lg px-4 py-2 mb-10 hover:scale-110 transition-transform duration-300"
+                    className="absolute ml-80 rounded-full bg-blue-800 text-white text-lg px-4 py-2 mb-10 hover:scale-110 transition-transform duration-300"
                     style={{ width: '60px', height: '60px', backgroundColor: '#FC8861' }}
                     onClick={handleCompareClickExit}
                   >
@@ -231,12 +231,18 @@ function LearnMore() {
                   <div className="flex items-center mt-24 ml-30">
                     <div className="relative flex itms-center inline-block ml-20">
                       <Select
-                        className="rounded-lg w-48"
+                        className="rounded-full w-48"
                         options={allOptions}
                         placeholder="Skriv inn by.."
                         isSearchable={true}
                         onChange={(selectedOption) => setSelectedStation(selectedOption?.value || null)}
                         ref={inputRef}
+                        styles={{
+                          control: (provided) => ({
+                            ...provided,
+                            borderRadius: '6rem', // Adjust the border-radius as needed
+                          }),
+                        }}
                       />
                       <button
                         style={{ backgroundColor: '#FC8861' }}
