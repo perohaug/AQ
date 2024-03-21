@@ -45,7 +45,11 @@ function ParticleExplanation() {
           <svg className="mb-3 w-20 h-20" viewBox="0 0 70 70">
             <circle cx="35" cy="35" r="35" fill="#FF6C6C" />
           </svg>
-          {expanded.particle1 ? <p className="font-medium">Store partikler</p> : <p className="font-light"> Store partikler</p>}
+          {expanded.particle1 ? (
+            <p className="font-medium">Store partikler</p>
+          ) : (
+            <p className="font-light"> Store partikler</p>
+          )}
         </div>
         {/* Second SVG */}
         <div
@@ -55,7 +59,11 @@ function ParticleExplanation() {
           <svg className="mb-3  w-10 h-10" viewBox="0 0 70 70">
             <circle cx="35" cy="35" r="35" fill="#FF155C" />
           </svg>
-          {expanded.particle2 ? <p className="font-medium">Små partikler</p> : <p className="font-light"> Små partikler</p>}
+          {expanded.particle2 ? (
+            <p className="font-medium">Små partikler</p>
+          ) : (
+            <p className="font-light"> Små partikler</p>
+          )}
         </div>
         {/* Third SVG */}
         <div
@@ -74,7 +82,10 @@ function ParticleExplanation() {
           <p className="text-m mb-3">
             Hovedkilde er <b>hovedveier</b>, inkludert partikler fra dekk og asfalt
           </p>
-          <p className="text-m">Disse partiklene blir ofte filtrert ut før de når de dypere delene av lungene.</p>
+          <p className="text-m">
+            Disse partiklene blir ofte fanget opp av slimhinnen og transportert ut igjen slik at de ikke når de dypere
+            delene av lungene.
+          </p>
         </div>
       )}
       {/* Description for the second SVG */}
