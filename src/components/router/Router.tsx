@@ -52,14 +52,22 @@ function Layout() {
                     stroke-linejoin="round"
                   />
                 </svg>
-                <p className="ml-5 font-extralight" onMouseEnter={(e) => (e.target.style.fontWeight = '250')}>
+                <p
+                  className="ml-5 font-extralight"
+                  onMouseEnter={(e) => (e.target.style.fontWeight = '250')}
+                  onMouseLeave={(e) => (e.target.style.fontWeight = '200')}
+                >
                   Trondheim
                 </p>
               </div>
             </Link>
             <Link to="/map">
               <div className="flex justify-end font-light text-xl">
-                <p className="mt-1 font-extralight" onMouseEnter={(e) => (e.target.style.fontWeight = '250')}>
+                <p
+                  className="mt-1 font-extralight"
+                  onMouseEnter={(e) => (e.target.style.fontWeight = '250')}
+                  onMouseLeave={(e) => (e.target.style.fontWeight = '200')}
+                >
                   Se luftkvalitet i kart
                 </p>
                 <svg
@@ -90,7 +98,11 @@ function Layout() {
         ) : (
           <Link to="/map">
             <div className="flex justify-end font-light text-xl">
-              <p className="mt-1 font-extralight" onMouseEnter={(e) => (e.target.style.fontWeight = '250')}>
+              <p
+                className="mt-1 font-extralight"
+                onMouseEnter={(e) => (e.target.style.fontWeight = '250')}
+                onMouseLeave={(e) => (e.target.style.fontWeight = '200')}
+              >
                 Se luftkvalitet i kart
               </p>
               <svg
