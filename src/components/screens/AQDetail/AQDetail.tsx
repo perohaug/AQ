@@ -70,8 +70,6 @@ function LearnMore() {
     'Vollapa',
   ];
 
-  const dominantPollutant: string = data?.dominantPollutant ?? '';
-
   const handleSubmit = async () => {
     if (selectedStation?.startsWith('NO') || validStations.includes(selectedStation || '')) {
       console.log('selectedStation:', selectedStation);
@@ -79,12 +77,6 @@ function LearnMore() {
       await fetchData(`https://api.met.no/weatherapi/airqualityforecast/0.1/?station=${selectedStation}`);
     } else {
       await fetchData(`https://api.waqi.info/feed/${selectedStation}/?token=22f37ad5c0fae31b55ee3304697b74c44a1a4cd0`);
-    }
-  };
-
-  const handleKeyPress = (event: { key: string }) => {
-    if (event.key === 'Enter') {
-      handleSubmit();
     }
   };
 
@@ -104,10 +96,6 @@ function LearnMore() {
     {
       value: 'bali',
       label: 'Ghusuri, Howrah, India',
-    },
-    {
-      value: 'jakarta',
-      label: 'Jakarta, Indonesia',
     },
     {
       value: 'bangkok',
