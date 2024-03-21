@@ -62,7 +62,7 @@ function UserGroups({ aqValue = 'low' }: { aqValue?: string }) {
         <div className="absolute left-60">
           <Link to="/learn">
             <button
-              className="rounded-full bg-blue-800 text-white text-2xl px-4 py-2 hover:scale-105 transition-transform duration-300"
+              className="rounded-full bg-blue-800 text-white text-2xl px-4 py-2 hover:scale-105 transition-transform duration-300 font-extralight"
               style={{ width: '200px', height: '200px', backgroundColor: '#FC8861' }}
             >
               Se mer om luften!

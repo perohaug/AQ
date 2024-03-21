@@ -9,6 +9,7 @@ import BouncingSVGElements from '~/components/lib/BouncingSVGElements';
 import Select from 'react-select';
 import { stdconcentration, stdconcentrations } from '~/components/lib/API/APIResponse';
 import MainPollutants from './MainPollutants';
+import HealthRiskModal from '../HealthRiskModal';
 
 interface otherOpt {
   value: string;
@@ -33,6 +34,16 @@ interface Station {
 }
 function LearnMore() {
   const [isClicked, setIsClicked] = useState(false);
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
 
   const { fetchData, status, data, error }: ApiResponse = useDataFetcher();
   const [stations, setStations] = useState<Station[]>([]);
@@ -151,12 +162,12 @@ function LearnMore() {
             {' '}
             <b>JegPuster</b>
           </h1>
-          <p className="mt-4 ml-2 mr-2 text-3xl">
+          <p className="mt-4 ml-2 mr-2 text-3xl font-extralight">
             i {data && data.location.name !== 'E6-Tiller' ? data.location.name : 'Trondheim'}
           </p>
-          <div className="mr-10">
+          <div className="mr-10 cursor-pointer">
             <div className="mr-3">
-              <svg width={80} height={80}>
+              <svg width={80} height={80} onClick={openModal}>
                 <circle
                   cx={40}
                   cy={40}
@@ -184,6 +195,7 @@ function LearnMore() {
       `}
               </style>
             </div>
+            {isModalOpen && <HealthRiskModal closeModal={closeModal} />}
           </div>
         </div>
         <div className="absolute top-1/2 mt-28 ">
@@ -208,7 +220,7 @@ function LearnMore() {
             {!isViewMore && (
               <div className="absolute top-1/2 mt-80 ml-80">
                 <button
-                  className="rounded-full bg-blue-800 text-white text-lg px-4 hover:scale-110 transition-transform duration-300 py-2 mt-20"
+                  className="rounded-full bg-blue-800 text-white text-lg px-4 hover:scale-110 transition-transform duration-300 py-2 mt-20 font-extralight"
                   style={{ width: '160px', height: '160px', backgroundColor: '#FC8861' }}
                   onClick={handleCompareClick}
                 >

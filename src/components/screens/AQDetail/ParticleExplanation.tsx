@@ -39,33 +39,33 @@ function ParticleExplanation() {
       <div className="flex flex-row items-center ml-12">
         {/* First SVG */}
         <div
-          className="flex flex-col items-center justify-start hover:scale-110 transition-transform duration-300"
+          className="cursor-pointer flex flex-col items-center justify-start hover:scale-110 transition-transform duration-300"
           onClick={() => handleExpand('particle1')}
         >
           <svg className="mb-3 w-20 h-20" viewBox="0 0 70 70">
             <circle cx="35" cy="35" r="35" fill="#FF6C6C" />
           </svg>
-          <p>{expanded.particle1 ? <b>Store partikler</b> : 'Store partikler'}</p>
+          {expanded.particle1 ? <p className="font-medium">Store partikler</p> : <p className="font-light"> Store partikler</p>}
         </div>
         {/* Second SVG */}
         <div
-          className="ml-16 flex flex-col items-center justify-start mt-5 hover:scale-110 transition-transform duration-300"
+          className="cursor-pointer ml-16 flex flex-col items-center justify-start mt-5 hover:scale-110 transition-transform duration-300"
           onClick={() => handleExpand('particle2')}
         >
           <svg className="mb-3  w-10 h-10" viewBox="0 0 70 70">
             <circle cx="35" cy="35" r="35" fill="#FF155C" />
           </svg>
-          <p>{expanded.particle2 ? <b>Små partikler</b> : 'Små partikler'}</p>
+          {expanded.particle2 ? <p className="font-medium">Små partikler</p> : <p className="font-light"> Små partikler</p>}
         </div>
         {/* Third SVG */}
         <div
-          className="ml-16 flex flex-col items-center justify-start hover:scale-110 transition-transform duration-300"
+          className="cursor-pointer ml-16 flex flex-col items-center justify-start hover:scale-110 transition-transform duration-300"
           onClick={() => handleExpand('particle3')}
         >
           <svg className="mb-3 w-12 h-12" viewBox="0 0 70 70">
             <circle cx="35" cy="35" r="35" fill="#5A4858" />
           </svg>
-          <p>{expanded.particle3 ? <b>Gasser</b> : 'Gasser'}</p>
+          {expanded.particle3 ? <p className="font-medium">Gasser</p> : <p className="font-light"> Gasser</p>}
         </div>
       </div>
       {/* Description for the first SVG */}

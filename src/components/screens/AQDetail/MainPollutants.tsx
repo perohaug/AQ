@@ -116,13 +116,14 @@ function MainPollutants({ highestPoll, origin, location }: MainPollutantsProps) 
           {highestPoll && (
             <div className="flex flex-col  items-center">
               <div
-                className="flex items-center justify-center hover:scale-110 transition-transform duration-300"
+                className="cursor-pointer flex items-center justify-center hover:scale-110 transition-transform duration-300"
                 onClick={openModal}
               >
                 <div className="absolute">{dominantPollutantFactor()}</div>
+
                 {dominantPollutantSVG()}
               </div>
-              <p className="font-normal text-xl mt-5">{dominantPollutantName}</p>
+              <p className="font-light text-xl mt-5">{dominantPollutantName}</p>
             </div>
           )}
         </div>
@@ -135,7 +136,7 @@ function MainPollutants({ highestPoll, origin, location }: MainPollutantsProps) 
                 ''
               ) : (
                 <>
-                  Dette stammer i aller størst grad fra <b className="font-bold">{dominantPollutantFactorString}</b>
+                  Stammer i aller størst grad fra <b className="font-bold">{dominantPollutantFactorString}</b>
                 </>
               )}
             </p>
