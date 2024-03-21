@@ -27,6 +27,16 @@ function Layout() {
 
   const aqMessageValue = aqMessage[data?.data.time[0].variables.AQI.text || 'low'];
 
+  const handleMouseLeave = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
+    const target = e.target as HTMLElement;
+    target.style.fontWeight = '200';
+  };
+
+  const handleMouseEnter= (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
+    const target = e.target as HTMLElement;
+    target.style.fontWeight = '250';
+  };
+
   return (
     <div>
       {/* Insert style tag on the nav-tag */}
@@ -54,8 +64,8 @@ function Layout() {
                 </svg>
                 <p
                   className="ml-5 font-extralight"
-                  onMouseEnter={(e) => (e.target.style.fontWeight = '250')}
-                  onMouseLeave={(e) => (e.target.style.fontWeight = '200')}
+                  onMouseEnter={handleMouseEnter}
+                  onMouseLeave={handleMouseLeave}
                 >
                   Trondheim
                 </p>
@@ -65,8 +75,8 @@ function Layout() {
               <div className="flex justify-end font-light text-xl">
                 <p
                   className="mt-1 font-extralight"
-                  onMouseEnter={(e) => (e.target.style.fontWeight = '250')}
-                  onMouseLeave={(e) => (e.target.style.fontWeight = '200')}
+                  onMouseEnter={handleMouseEnter}
+                  onMouseLeave={handleMouseLeave}
                 >
                   Se luftkvalitet i kart
                 </p>
@@ -100,8 +110,8 @@ function Layout() {
             <div className="flex justify-end font-light text-xl">
               <p
                 className="mt-1 font-extralight"
-                onMouseEnter={(e) => (e.target.style.fontWeight = '250')}
-                onMouseLeave={(e) => (e.target.style.fontWeight = '200')}
+                onMouseEnter={handleMouseEnter}
+                onMouseLeave={handleMouseLeave}
               >
                 Se luftkvalitet i kart
               </p>
