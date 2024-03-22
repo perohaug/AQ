@@ -34,18 +34,17 @@ function AqMessage({ aqValue = 'low' }: { aqValue?: string }) {
           </svg>
           <style>
             {`
-        @keyframes expandShrink {
-          0% {
-            r: 30; // Initial radius
-          }
-          50% {
-            r: 35; // Maximum radius
-          }
-          100% {
-            r: 40; // Back to the initial radius
-          }
-        }
-      `}
+            @keyframes expandShrink {
+              0% {
+                r: 30; // Initial radius
+              }
+              50% {
+                r: 35; // Maximum radius
+              }
+              100% {
+                r: 40; // Back to the initial radius
+              }
+            }`}
           </style>
         </div>
         <div className="mt-5">

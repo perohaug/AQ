@@ -1,54 +1,16 @@
-// import React, { Component, useEffect, useState } from 'react';
-// import { Marker, Popup, MapContainer, TileLayer, useMapEvents, useMap } from 'react-leaflet';
-// import 'leaflet/dist/leaflet.css';
-// import L, { LatLngExpression } from 'leaflet';
-
-// interface MyMapProps {
-//   latitude: number;
-//   longitude: number;
-//   station: string;
-//   AQI: number;
-// }
-
-// const MyMap: React.FC<MyMapProps> = ({ latitude, longitude, station, AQI }) => {
-//   const coordinates: [number, number] = [longitude, latitude];
-//   console.log(coordinates);
-
-//   return (
-//     <MapContainer
-//       style={{ height: 536 }}
-//       className="overflow-auto"
-//       center={coordinates}
-//       zoom={12}
-//       scrollWheelZoom={true}
-//     >
-//       <TileLayer
-//         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-//         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-//       />
-//       <Marker position={coordinates}>
-//         <Popup>
-//           {station} har en
-//           <br />
-//           luftkvalitet på {AQI}/5
-//         </Popup>
-//       </Marker>
-//     </MapContainer>
-//   );
-// };
-
-// export default MyMap;
-
 import React, { useEffect } from 'react';
-import { Marker, Popup, MapContainer, TileLayer, useMap } from 'react-leaflet';
+import { Marker, Popup, MapContainer, TileLayer, useMap, LayerGroup, Circle } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
-import L, { LatLngExpression } from 'leaflet';
+import { aqMessage } from './../../screens/TextContent/aqMessageInfo';
+import L, { LatLngBoundsExpression, LatLngExpression, map } from 'leaflet';
+import { Station } from '../../screens/AQMap';
 
 interface MyMapProps {
   latitude: number;
   longitude: number;
   station: string;
-  AQI: number;
+  AQI: string;
+  allStations: Station[];
 }
 
 const ChangeView: React.FC<{ center: LatLngExpression; zoom: number }> = ({ center, zoom }) => {
@@ -59,31 +21,131 @@ const ChangeView: React.FC<{ center: LatLngExpression; zoom: number }> = ({ cent
   return null;
 };
 
-const MyMap: React.FC<MyMapProps> = ({ latitude, longitude, station, AQI }) => {
+const MyMap: React.FC<MyMapProps> = ({ latitude, longitude, station, AQI, allStations }) => {
   const coordinates: [number, number] = [longitude, latitude];
+  const aqMessageValue = aqMessage[AQI];
 
   return (
     <MapContainer
-      style={{ height: 536 }}
-      className="overflow-auto"
+      style={{ height: 500, zIndex: 1, width: '70%' }}
+      className="overflow-auto m-auto "
       center={coordinates}
-      zoom={12}
-      scrollWheelZoom={true}
+      zoom={14}
+      scrollWheelZoom={false}
     >
-      <ChangeView center={coordinates} zoom={15} />
+      <ChangeView center={coordinates} zoom={13} />
       <TileLayer
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
-      <Marker position={coordinates}>
-        <Popup>
-          {station} har en
-          <br />
-          luftkvalitet på {AQI}/5
-        </Popup>
-      </Marker>
+      <LayerGroup>
+        {/* {allStations.map((station) => (
+          <Circle
+            center={[station.latitude, station.longitude]}
+            key={station.eoi}
+            radius={2000}
+            pathOptions={{
+              stroke: false,
+              fillColor: aqMessageValue.color,
+              fillOpacity: 0.2,
+            }}
+          >
+            Mulig å lage en clickable marker?
+            <Circle
+              radius={90}
+              center={[station.latitude, station.longitude]}
+              key={station.eoi}
+              pathOptions={{
+                fillColor: aqMessageValue.color,
+                // color: aqMessageValue.color,
+                stroke: false,
+                fillOpacity: 1,
+              }}
+            />
+            <Popup>
+              {station.name} har en luftkvalitet
+              <br />
+              som tilsier {aqMessage[AQI].risk.toLowerCase()}.
+            </Popup>
+          </Circle>
+        ))} */}
+
+        <Circle
+          radius={100}
+          center={coordinates}
+          pathOptions={{
+            fillColor: aqMessageValue.color,
+            // color: aqMessageValue.color,
+            stroke: false,
+            fillOpacity: 1,
+          }}
+        />
+        <Circle
+          radius={2000}
+          center={coordinates}
+          pathOptions={{
+            fillColor: aqMessageValue.color,
+            // color: aqMessageValue.color,
+            stroke: false,
+            fillOpacity: 0.5,
+          }}
+        >
+          <Popup>
+            {station} har en luftkvalitet
+            <br />
+            som tilsier {aqMessageValue.risk.toLowerCase()}.
+          </Popup>
+        </Circle>
+      </LayerGroup>
     </MapContainer>
   );
 };
 
 export default MyMap;
+
+{
+  /* <Circle
+            radius={1000}
+            center={coordinates}
+            pathOptions={{
+              // fillColor: `linear-gradient(${aqMessageValue.color}, #ffffff);`,
+              fillColor: aqMessageValue.color,
+              // color: aqMessageValue.color,
+              stroke: false,
+              fillOpacity: 0.3,
+            }}
+          />
+          <Circle
+            radius={1200}
+            center={coordinates}
+            pathOptions={{
+              // fillColor: `linear-gradient(${aqMessageValue.color}, #ffffff);`,
+              fillColor: aqMessageValue.color,
+              // color: aqMessageValue.color,
+              stroke: false,
+              fillOpacity: 0.3,
+            }}
+          />
+          <Circle
+            radius={500}
+            center={coordinates}
+            pathOptions={{
+              // fillColor: `linear-gradient(${aqMessageValue.color}, #ffffff);`,
+              fillColor: aqMessageValue.color,
+              color: aqMessageValue.color,
+              stroke: false,
+              fillOpacity: 0.6,
+            }}
+          />
+          <Circle
+            radius={1500}
+            center={coordinates}
+            pathOptions={{
+              // fillColor: `linear-gradient(${aqMessageValue.color}, #ffffff);`,
+              fillColor: aqMessageValue.color,
+              // color: aqMessageValue.color,
+              stroke: false,
+              fillOpacity: 0.3,
+            }}
+          /> */
+}

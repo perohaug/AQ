@@ -12,6 +12,7 @@ const IndexScreen = lazy(() => import('~/components/screens/Homepage/Index'));
 const Page404Screen = lazy(() => import('~/components/screens/404'));
 const AQPage = lazy(() => import('~/components/screens/AQ'));
 const LearnMore = lazy(() => import('~/components/screens/AQDetail/AQDetail'));
+const Map = lazy(() => import('~/components/screens/AQMap'));
 
 function Layout() {
   const { fetchData, status, data, error }: ApiResponse = useDataFetcher();
@@ -19,20 +20,23 @@ function Layout() {
     await fetchData('https://api.met.no/weatherapi/airqualityforecast/0.1/?station=NO0102A');
     // await fetchData('https://api.waqi.info/feed/bangkok/?token=22f37ad5c0fae31b55ee3304697b74c44a1a4cd0');
   };
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     handleSubmit();
-    console.log('kjører dette?', data);
   }, []);
 
-  const aqMessageValue = aqMessage[data?.data.time[0].variables.AQI.text || 'low'];
+  const aqMessageValue = aqMessage[data?.data.time[0].variables.AQI.text || 'high'];
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
 
   const handleMouseLeave = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
     const target = e.target as HTMLElement;
     target.style.fontWeight = '200';
   };
 
-  const handleMouseEnter= (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
+  const handleMouseEnter = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
     const target = e.target as HTMLElement;
     target.style.fontWeight = '250';
   };
@@ -62,22 +66,14 @@ function Layout() {
                     stroke-linejoin="round"
                   />
                 </svg>
-                <p
-                  className="ml-5 font-extralight"
-                  onMouseEnter={handleMouseEnter}
-                  onMouseLeave={handleMouseLeave}
-                >
+                <p className="ml-5 font-extralight" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
                   Trondheim
                 </p>
               </div>
             </Link>
             <Link to="/map">
               <div className="flex justify-end font-light text-xl">
-                <p
-                  className="mt-1 font-extralight"
-                  onMouseEnter={handleMouseEnter}
-                  onMouseLeave={handleMouseLeave}
-                >
+                <p className="mt-1 font-extralight" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
                   Se luftkvalitet i kart
                 </p>
                 <svg
@@ -108,11 +104,7 @@ function Layout() {
         ) : (
           <Link to="/map">
             <div className="flex justify-end font-light text-xl">
-              <p
-                className="mt-1 font-extralight"
-                onMouseEnter={handleMouseEnter}
-                onMouseLeave={handleMouseLeave}
-              >
+              <p className="mt-1 font-extralight" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
                 Se luftkvalitet i kart
               </p>
               <svg
@@ -178,7 +170,7 @@ const InnerRouter = () => {
         },
         {
           path: 'map',
-          element: <AQMap lat={0} lon={0} AQI={0} station={''} />,
+          element: <Map />,
         },
       ],
     },

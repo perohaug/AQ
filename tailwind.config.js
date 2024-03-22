@@ -30,6 +30,7 @@ module.exports = {
           neutral: '#3d4451',
           badgeColor: '#192E54',
           'base-100': '#ffffff',
+          knapp: '#FC8861',
         },
       },
     ],
