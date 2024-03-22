@@ -82,7 +82,7 @@ function ChatBubble(props: ChatBubbleProps) {
         }}
       >
         {showText ? (
-          aqMessageValue.color !== '#9BE4E6' ? (
+          aqMessageValue.color !== aqMessage['low'].color ? (
             <span>
               {aqMessageValue.userGroupInfo[svg].healthMessage}
               <Link to="/map" className="font-normal">

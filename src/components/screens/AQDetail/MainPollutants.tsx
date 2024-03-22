@@ -20,7 +20,7 @@ function MainPollutants({ highestPoll, origin, location }: MainPollutantsProps) 
 
   const openModal = () => {
     setIsModalOpen(!isModalOpen);
-    setShowButtonDescription(true);
+    setShowButtonDescription(false);
   };
 
   var dominantPollutantFactorString = '';
@@ -130,10 +130,10 @@ function MainPollutants({ highestPoll, origin, location }: MainPollutantsProps) 
 
         {/**Open modal info */}
         {isModalOpen && (
-          <div className="mx-4 mt-5 flex flex-col items-center text-lg font-light">
+          <div className="mx-4 mt-5 flex flex-col items-center text-center text-lg font-light">
             <p className="font-light mb-6">
               {dominantPollutantFactorString === 'utilgjengelig utenfor Norge' ? (
-                ''
+                <p>Data for hva dette stammer av er {dominantPollutantFactorString}</p>
               ) : (
                 <>
                   Stammer i aller størst grad fra <b className="font-medium">{dominantPollutantFactorString}</b>
