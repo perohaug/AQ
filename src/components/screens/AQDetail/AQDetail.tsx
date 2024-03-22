@@ -9,6 +9,7 @@ import BouncingSVGElements from '~/components/lib/BouncingSVGElements';
 import Select from 'react-select';
 import { stdconcentration, stdconcentrations } from '~/components/lib/API/APIResponse';
 import MainPollutants from './MainPollutants';
+import HealthRiskModal from '../HealthRiskModal';
 
 interface otherOpt {
   value: string;
@@ -33,6 +34,16 @@ interface Station {
 }
 function LearnMore() {
   const [isClicked, setIsClicked] = useState(false);
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
 
   const { fetchData, status, data, error }: ApiResponse = useDataFetcher();
   const [stations, setStations] = useState<Station[]>([]);
@@ -133,9 +144,49 @@ function LearnMore() {
   return (
     <>
       <Head title="TOP PAGE" />
-
       <div className="bg-background relative">
-        <div className="absolute top-1/2 mt-20 ">
+        <div className="flex flex-row justify-center mb-10">
+          <h1 className="text-5xl rock-3d-logo">
+            {' '}
+            <b>JegPuster</b>
+          </h1>
+          <p className="mt-4 ml-2 mr-2 text-3xl font-extralight">
+            i {data && data.location.name !== 'E6-Tiller' ? data.location.name : 'Trondheim'}
+          </p>
+          <div className="mr-10 cursor-pointer">
+            <div className="mr-3">
+              <svg width={80} height={80} onClick={openModal}>
+                <circle
+                  cx={40}
+                  cy={40}
+                  r={20}
+                  fill={aqColor} // Adjust opacity as needed (0.3 for example)
+                  opacity={0.5}
+                  style={{ animation: 'expandShrink 1s infinite alternate' }}
+                />
+                {/* Tinier circle */}
+                <circle cx={40} cy={40} r={25} fill={aqColor} /> {/* Adjust the radius as needed */}
+              </svg>
+              <style>
+                {`
+        @keyframes expandShrink {
+          0% {
+            r: 30; // Initial radius
+          }
+          50% {
+            r: 35; // Maximum radius
+          }
+          100% {
+            r: 40; // Back to the initial radius
+          }
+        }
+      `}
+              </style>
+            </div>
+            {isModalOpen && <HealthRiskModal closeModal={closeModal} />}
+          </div>
+        </div>
+        <div className="absolute top-1/2 mt-28 ">
           <AirFlowSVG aqColor={aqColor} />
         </div>
         <div className="absolute left-0 w-full flex justify-center items-center">
@@ -157,7 +208,7 @@ function LearnMore() {
             {!isViewMore && (
               <div className="absolute top-1/2 mt-80 ml-80">
                 <button
-                  className="rounded-full bg-blue-800 text-white text-lg px-4 hover:scale-110 transition-transform duration-300 py-2 mt-20"
+                  className="rounded-full bg-blue-800 text-white text-lg px-4 hover:scale-110 transition-transform duration-300 py-2 mt-20 font-extralight"
                   style={{ width: '160px', height: '160px', backgroundColor: '#FC8861' }}
                   onClick={handleCompareClick}
                 >
@@ -168,24 +219,30 @@ function LearnMore() {
 
             {/* Search city */}
             {isViewMore && (
-              <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 mt-20">
-                <div className="flex items-center mt-80">
+              <div className="absolute top-1/4 mt-60 ml-60 transform mt-20">
+                <div className="flex items-center mt-36">
                   <button
-                    className="absolute mb-8 ml-60 rounded-full bg-blue-800 text-white text-lg px-4 py-2 mb-10 hover:scale-110 transition-transform duration-300"
+                    className="absolute ml-80 rounded-full bg-blue-800 text-white text-lg px-4 py-2 mb-10 hover:scale-110 transition-transform duration-300"
                     style={{ width: '60px', height: '60px', backgroundColor: '#FC8861' }}
                     onClick={handleCompareClickExit}
                   >
                     <p className="text-3xl mb-1">x</p>
                   </button>
                   <div className="flex items-center mt-24 ml-30">
-                    <div className="relative flex itms-center inline-block ml-8">
+                    <div className="relative flex itms-center inline-block ml-20">
                       <Select
-                        className="rounded-lg w-48"
+                        className="rounded-full w-48"
                         options={allOptions}
                         placeholder="Skriv inn by.."
                         isSearchable={true}
                         onChange={(selectedOption) => setSelectedStation(selectedOption?.value || null)}
                         ref={inputRef}
+                        styles={{
+                          control: (provided) => ({
+                            ...provided,
+                            borderRadius: '6rem', // Adjust the border-radius as needed
+                          }),
+                        }}
                       />
                       <button
                         style={{ backgroundColor: '#FC8861' }}
