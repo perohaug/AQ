@@ -30,6 +30,7 @@ export interface Station {
 
 function AQMap() {
   const { fetchData, status, data, error }: ApiResponse = useDataFetcher();
+  const { fetchData: fetchData2, status: status2, data: data2, error: error2 }: ApiResponse = useDataFetcher();
   const [stations, setStations] = useState<Station[]>([]);
   const [selectedStation, setSelectedStation] = useState<string | null>('NO0102A');
   // const [isViewMore, setIsViewMore] = useState(false);
@@ -143,7 +144,8 @@ function AQMap() {
               Søk
             </button>
           </div>
-          <div className="mt-5">
+          <div className="flex flex-wrap mt-5 display-inline w-full">
+            {/* <div className="flex"> */}
             <MyMap
               latitude={data?.location.latitude || 12.1}
               longitude={data?.location.longitude || 69}
@@ -151,6 +153,8 @@ function AQMap() {
               AQI={data?.data.time[0].variables.AQI.text || 'low'}
               allStations={stations}
             />
+            {/* </div> */}
+            {/* <div className="flex"> */}
             <MyMap
               latitude={2.1}
               longitude={9}
@@ -158,6 +162,7 @@ function AQMap() {
               AQI={data?.data.time[0].variables.AQI.text || 'low'}
               allStations={stations}
             />
+            {/* </div> */}
           </div>
         </div>
       </div>

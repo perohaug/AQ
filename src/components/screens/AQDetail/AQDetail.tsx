@@ -7,7 +7,7 @@ import { aqMessage } from '../TextContent/aqMessageInfo';
 import useDataFetcher, { ApiResponse } from '~/components/lib/API/DataFetcher';
 import BouncingSVGElements from '~/components/lib/BouncingSVGElements';
 import Select from 'react-select';
-import { stdconcentration, stdconcentrations } from '~/components/lib/API/APIResponse';
+import { APIStandard, stdconcentration, stdconcentrations } from '~/components/lib/API/APIResponse';
 import MainPollutants from './MainPollutants';
 import HealthRiskModal from '../HealthRiskModal';
 
@@ -45,10 +45,13 @@ function LearnMore() {
     setIsModalOpen(false);
   };
 
-  const { fetchData, status, data, error }: ApiResponse = useDataFetcher();
+  const { fetchData: fetchData, status: status, data: data, error: error }: ApiResponse = useDataFetcher();
+  const { fetchData: fetchData2, status: status2, data: data2, error: error2 }: ApiResponse = useDataFetcher();
   const [stations, setStations] = useState<Station[]>([]);
   const [selectedStation, setSelectedStation] = useState<string | null>('NO0102A');
   const [isViewMore, setIsViewMore] = useState(false);
+  // const [mainData, setMainData] = useState<APIStandard | null>(null);
+  const [compareData, setCompareData] = useState<APIStandard | null>(null);
 
   const aqValue = data?.data.time[0].variables.AQI.text;
   const aqColor = aqValue ? aqMessage[aqValue].color : 'low';
@@ -130,16 +133,22 @@ function LearnMore() {
     ...listWithOtherOptions,
   ];
 
-  const handleCompareClick = () => {
+  const handleCompareClick = async () => {
+    await fetchData2(`https://api.met.no/weatherapi/airqualityforecast/0.1/?station=NO0062A`);
+    setCompareData(data2);
     setIsViewMore(!isViewMore);
   };
 
   const handleCompareClickExit = async () => {
     setIsViewMore(false); // Close the compare section
+    setCompareData(null);
     await fetchData(`https://api.met.no/weatherapi/airqualityforecast/0.1/?station=NO0102A`); // Fetch Trondheim data
   };
   const gasConc: number =
     +(data?.data.time[0].variables.AQI.no2 as number) + +(data?.data.time[0].variables.AQI.o3 as number);
+  const gasConc2: number =
+    +(data2?.data.time[0].variables.AQI.no2 as number) + +(data2?.data.time[0].variables.AQI.o3 as number);
+  console.log('kai:', compareData);
 
   return (
     <>
@@ -169,18 +178,18 @@ function LearnMore() {
               </svg>
               <style>
                 {`
-        @keyframes expandShrink {
-          0% {
-            r: 30; // Initial radius
-          }
-          50% {
-            r: 35; // Maximum radius
-          }
-          100% {
-            r: 40; // Back to the initial radius
-          }
-        }
-      `}
+                @keyframes expandShrink {
+                  0% {
+                    r: 30; // Initial radius
+                  }
+                  50% {
+                    r: 35; // Maximum radius
+                  }
+                  100% {
+                    r: 40; // Back to the initial radius
+                  }
+                }
+                `}
               </style>
             </div>
             {isModalOpen && <HealthRiskModal closeModal={closeModal} />}
@@ -190,13 +199,29 @@ function LearnMore() {
           <AirFlowSVG aqColor={aqColor} />
         </div>
         <div className="absolute left-0 w-full flex justify-center items-center">
-          <BouncingSVGElements
-            pm10={data?.data.time[0].variables.AQI.pm10}
-            pm25={data?.data.time[0].variables.AQI.pm25}
-            gas={gasConc}
-            showLungs={true}
-            height={900}
-          />
+          {!isViewMore && (
+            <BouncingSVGElements
+              pm10={data?.data.time[0].variables.AQI.pm10}
+              pm25={data?.data.time[0].variables.AQI.pm25}
+              gas={gasConc}
+              showLungs={true}
+              height={900}
+              compare={false}
+            />
+          )}
+          {isViewMore && (
+            <BouncingSVGElements
+              pm10={data?.data.time[0].variables.AQI.pm10}
+              Bpm10={data2?.data.time[0].variables.AQI.pm10}
+              pm25={data?.data.time[0].variables.AQI.pm25}
+              Bpm25={data2?.data.time[0].variables.AQI.pm25}
+              gas={gasConc}
+              Bgas={gasConc2}
+              showLungs={true}
+              height={900}
+              compare={true}
+            />
+          )}
         </div>
 
         <div className="absolute flex flex-col top-1/2 left-20 mt-16">
@@ -216,8 +241,6 @@ function LearnMore() {
                 </button>
               </div>
             )}
-
-            {/* Search city */}
             {isViewMore && (
               <div className="absolute top-1/4 mt-60 ml-60 transform mt-20">
                 <div className="flex items-center mt-36">

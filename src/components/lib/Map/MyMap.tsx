@@ -27,55 +27,23 @@ const MyMap: React.FC<MyMapProps> = ({ latitude, longitude, station, AQI, allSta
 
   return (
     <MapContainer
-      style={{ height: 500, zIndex: 1, width: '70%' }}
-      className="overflow-auto m-auto "
+      // style={{ height: 500 }}
+      className="basis-1/3 m-auto z-0 h-[500px] bg-white border-2 border-gray-300 rounded-lg shadow-lg"
       center={coordinates}
       zoom={14}
       scrollWheelZoom={false}
     >
-      <ChangeView center={coordinates} zoom={13} />
+      <ChangeView center={coordinates} zoom={12} />
       <TileLayer
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
       <LayerGroup>
-        {/* {allStations.map((station) => (
-          <Circle
-            center={[station.latitude, station.longitude]}
-            key={station.eoi}
-            radius={2000}
-            pathOptions={{
-              stroke: false,
-              fillColor: aqMessageValue.color,
-              fillOpacity: 0.2,
-            }}
-          >
-            Mulig å lage en clickable marker?
-            <Circle
-              radius={90}
-              center={[station.latitude, station.longitude]}
-              key={station.eoi}
-              pathOptions={{
-                fillColor: aqMessageValue.color,
-                // color: aqMessageValue.color,
-                stroke: false,
-                fillOpacity: 1,
-              }}
-            />
-            <Popup>
-              {station.name} har en luftkvalitet
-              <br />
-              som tilsier {aqMessage[AQI].risk.toLowerCase()}.
-            </Popup>
-          </Circle>
-        ))} */}
-
         <Circle
           radius={100}
           center={coordinates}
           pathOptions={{
             fillColor: aqMessageValue.color,
-            // color: aqMessageValue.color,
             stroke: false,
             fillOpacity: 1,
           }}
@@ -85,7 +53,6 @@ const MyMap: React.FC<MyMapProps> = ({ latitude, longitude, station, AQI, allSta
           center={coordinates}
           pathOptions={{
             fillColor: aqMessageValue.color,
-            // color: aqMessageValue.color,
             stroke: false,
             fillOpacity: 0.5,
           }}
@@ -102,50 +69,3 @@ const MyMap: React.FC<MyMapProps> = ({ latitude, longitude, station, AQI, allSta
 };
 
 export default MyMap;
-
-{
-  /* <Circle
-            radius={1000}
-            center={coordinates}
-            pathOptions={{
-              // fillColor: `linear-gradient(${aqMessageValue.color}, #ffffff);`,
-              fillColor: aqMessageValue.color,
-              // color: aqMessageValue.color,
-              stroke: false,
-              fillOpacity: 0.3,
-            }}
-          />
-          <Circle
-            radius={1200}
-            center={coordinates}
-            pathOptions={{
-              // fillColor: `linear-gradient(${aqMessageValue.color}, #ffffff);`,
-              fillColor: aqMessageValue.color,
-              // color: aqMessageValue.color,
-              stroke: false,
-              fillOpacity: 0.3,
-            }}
-          />
-          <Circle
-            radius={500}
-            center={coordinates}
-            pathOptions={{
-              // fillColor: `linear-gradient(${aqMessageValue.color}, #ffffff);`,
-              fillColor: aqMessageValue.color,
-              color: aqMessageValue.color,
-              stroke: false,
-              fillOpacity: 0.6,
-            }}
-          />
-          <Circle
-            radius={1500}
-            center={coordinates}
-            pathOptions={{
-              // fillColor: `linear-gradient(${aqMessageValue.color}, #ffffff);`,
-              fillColor: aqMessageValue.color,
-              // color: aqMessageValue.color,
-              stroke: false,
-              fillOpacity: 0.3,
-            }}
-          /> */
-}

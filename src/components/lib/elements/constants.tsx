@@ -1,7 +1,7 @@
 import React, { SVGProps } from 'react';
 
-interface PMProps extends SVGProps<SVGCircleElement> {
-  amount: number;
+interface Props extends SVGProps<SVGCircleElement> {
+  lane?: string;
 }
 
 const generateRandomDuration = () => {
@@ -16,8 +16,8 @@ const getRandomLane = () => {
   return lanes[randomIndex];
 };
 
-export const PM25: React.FC<SVGProps<SVGCircleElement>> = () => (
-  <circle cx="0" cy="0" r="3" fill="#FF155C" stroke="#FF155C" strokeWidth={5} id="pm25">
+export const PM25: React.FC<Props> = ({}) => (
+  <circle cx="0" cy="0" r="3" fill="#FF155C" stroke="#FF155C" strokeWidth={5}>
     <animateMotion
       dur={`${generateRandomDuration()}s`}
       begin={`${generateRandomDuration() % 1}s`}
@@ -29,8 +29,8 @@ export const PM25: React.FC<SVGProps<SVGCircleElement>> = () => (
   </circle>
 );
 
-export const PM10: React.FC<SVGProps<SVGCircleElement>> = () => (
-  <circle cx="0" cy="0" r="12" fill="#FF6C6C" stroke="#FF6C6C" strokeWidth={3} id="pm10">
+export const PM10: React.FC<Props> = ({}) => (
+  <circle cx="0" cy="0" r="12" fill="#FF6C6C" stroke="#FF6C6C" strokeWidth={3}>
     <animateMotion
       dur={`${generateRandomDuration()}s`}
       begin={`${generateRandomDuration() % 1}s`}
@@ -42,15 +42,15 @@ export const PM10: React.FC<SVGProps<SVGCircleElement>> = () => (
   </circle>
 );
 
-export const GasParticle: React.FC<SVGProps<SVGCircleElement>> = () => (
-  <circle cx="0" cy="0" r="9" fill="#5A4858" id="gas">
+export const GasParticle: React.FC<Props> = ({ lane }) => (
+  <circle cx="0" cy="0" r="9" fill="#5A4858">
     <animateMotion
       dur={`${generateRandomDuration() / 3}s`}
       begin={`${generateRandomDuration() % 1}s`}
       repeatCount="indefinite"
       fill="freeze" // "freeze" or "remove"
     >
-      <mpath href="#gas-lane" />
+      <mpath href={lane} />
     </animateMotion>
   </circle>
 );
