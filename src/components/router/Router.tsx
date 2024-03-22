@@ -46,8 +46,8 @@ function Layout() {
       {/* Insert style tag on the nav-tag */}
       <nav className="p-4  bg-primary">
         {location.pathname !== '/' ? (
-          <div className="flex items-center justify-between">
-            <Link className="text-2xl font-light whitespace-nowrap dark:text-grey mt-2" to="/">
+          <div className="flex items-center justify-between text-2xl">
+            <Link className="font-light whitespace-nowrap dark:text-grey" to="/">
               <div className="flex flex-row">
                 <svg
                   className="mt-1"
@@ -72,8 +72,8 @@ function Layout() {
               </div>
             </Link>
             <Link to="/map">
-              <div className="flex justify-end font-light text-xl">
-                <p className="mt-1 font-extralight" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
+              <div className="flex justify-end font-light">
+                <p className="font-extralight" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
                   Se luftkvalitet i kart
                 </p>
                 <svg
@@ -83,7 +83,7 @@ function Layout() {
                   height="25"
                   viewBox="0 0 40 40"
                   fill="none"
-                  className=" ml-2"
+                  className="ml-2 mt-0.5"
                 >
                   <rect width="40" height="40" fill="url(#pattern7)" />
                   <defs>
@@ -103,8 +103,8 @@ function Layout() {
           </div>
         ) : (
           <Link to="/map">
-            <div className="flex justify-end font-light text-xl">
-              <p className="mt-1 font-extralight" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
+            <div className="flex justify-end font-light text-2xl">
+              <p className="font-extralight" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
                 Se luftkvalitet i kart
               </p>
               <svg
@@ -114,7 +114,7 @@ function Layout() {
                 height="25"
                 viewBox="0 0 40 40"
                 fill="none"
-                className=" ml-2"
+                className="ml-2 mt-0.5"
               >
                 <rect width="40" height="40" fill="url(#pattern7)" />
                 <defs>

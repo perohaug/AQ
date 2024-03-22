@@ -150,7 +150,7 @@ function LearnMore() {
             {' '}
             <b>JegPuster</b>
           </h1>
-          <p className="mt-4 ml-2 mr-2 text-3xl font-extralight">
+          <p className="mt-3 ml-2 mr-2 text-4xl font-extralight">
             i {data && data.location.name !== 'E6-Tiller' ? data.location.name : 'Trondheim'}
           </p>
           <div className="mr-10 cursor-pointer">
@@ -208,8 +208,8 @@ function LearnMore() {
             {!isViewMore && (
               <div className="absolute top-1/2 mt-80 ml-80">
                 <button
-                  className="rounded-full bg-blue-800 text-white text-lg px-4 hover:scale-110 transition-transform duration-300 py-2 mt-20 font-extralight"
-                  style={{ width: '160px', height: '160px', backgroundColor: '#FC8861' }}
+                  className="rounded-full bg-blue-800 text-white text-2xl px-4 hover:scale-110 transition-transform duration-300 py-2 mt-20 font-extralight"
+                  style={{ width: '180px', height: '180px', backgroundColor: '#FC8861' }}
                   onClick={handleCompareClick}
                 >
                   Utforsk luften i andre byer!

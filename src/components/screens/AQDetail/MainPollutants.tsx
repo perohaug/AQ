@@ -106,7 +106,7 @@ function MainPollutants({ highestPoll, origin, location }: MainPollutantsProps) 
       <div className="absolute flex flex-col items-center ml-52" style={{ width: '450px' }}>
         {/**City name */}
         <div
-          className="mb-8 badge badge-lg text-xl text-white font-light px-[0.65em] pb-[0.8em] pt-[0.7em]"
+          className="mb-8 badge badge-lg text-2xl text-white font-light px-[0.65em] pb-[0.8em] pt-[0.7em]"
           style={{ backgroundColor: '#192E54', borderColor: '#192E54' }}
         >
           Forurenser luften mest nå
@@ -130,13 +130,13 @@ function MainPollutants({ highestPoll, origin, location }: MainPollutantsProps) 
 
         {/**Open modal info */}
         {isModalOpen && (
-          <div className="mx-4 mt-5 flex flex-col items-center">
+          <div className="mx-4 mt-5 flex flex-col items-center text-lg font-light">
             <p className="font-light mb-6">
               {dominantPollutantFactorString === 'utilgjengelig utenfor Norge' ? (
                 ''
               ) : (
                 <>
-                  Stammer i aller størst grad fra <b className="font-bold">{dominantPollutantFactorString}</b>
+                  Stammer i aller størst grad fra <b className="font-medium">{dominantPollutantFactorString}</b>
                 </>
               )}
             </p>
