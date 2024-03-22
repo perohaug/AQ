@@ -9,7 +9,7 @@ interface otherOpt {
   label: string;
 }
 
-interface Station {
+export interface Station {
   name: string;
   eoi: string;
   grunnkrets: {
@@ -24,6 +24,8 @@ interface Station {
     name: string;
     areacode: string;
   };
+  latitude: number;
+  longitude: number;
 }
 
 function AQMap() {
@@ -31,8 +33,6 @@ function AQMap() {
   const [stations, setStations] = useState<Station[]>([]);
   const [selectedStation, setSelectedStation] = useState<string | null>('NO0102A');
   // const [isViewMore, setIsViewMore] = useState(false);
-
-  // const aqValue = data?.data.time[0].variables.AQI.text;
 
   useEffect(() => {
     const fetchStations = async () => {
@@ -149,6 +149,14 @@ function AQMap() {
               longitude={data?.location.longitude || 69}
               station={data?.location.name || 'Error'}
               AQI={data?.data.time[0].variables.AQI.text || 'low'}
+              allStations={stations}
+            />
+            <MyMap
+              latitude={2.1}
+              longitude={9}
+              station={data?.location.name || 'NO0102A'}
+              AQI={data?.data.time[0].variables.AQI.text || 'low'}
+              allStations={stations}
             />
           </div>
         </div>
