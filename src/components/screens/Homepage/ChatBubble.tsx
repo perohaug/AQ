@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { aqMessage } from '../TextContent/aqMessageInfo';
 import AqMessage from './AqMessage';
 
@@ -8,21 +9,30 @@ interface ChatBubbleProps {
     userGroupInfo: {
       [key: string]: any; // Adjust the type accordingly
     };
+    color: string;
   };
+  aqMessageStatment: string;
 }
 
 function ChatBubble(props: ChatBubbleProps) {
-  const { svg, aqMessageValue } = props;
+  const { svg, aqMessageValue, aqMessageStatment } = props;
   const [showText, setShowText] = useState(false);
+  const [showSecondText, setShowSecondText] = useState(false);
 
   useEffect(() => {
     setShowText(false); // Reset showText to false when svg prop changes
 
-    const timer = setTimeout(() => {
-      setShowText(true);
-    }, 2000);
+    const timer1 = setTimeout(() => {
+      setShowText(true); // Show the first message after 2 seconds
 
-    return () => clearTimeout(timer);
+      const timer2 = setTimeout(() => {
+        setShowSecondText(true); // Show the second message after additional delay
+      }, 2000); // Adjust the delay according to your preference
+
+      return () => clearTimeout(timer2); // Clear the timer for the second message
+    }, 2000); // Adjust the delay according to your preference
+
+    return () => clearTimeout(timer1); // Clear the timer for the first message
   }, [aqMessageValue, svg]); // Include svg in the dependency array
 
   const now = new Date();
@@ -52,17 +62,43 @@ function ChatBubble(props: ChatBubbleProps) {
           width: 1ch;
         }
       `}</style>
+
       <div
-        className={`chat-bubble bg-white text-3xl font-extralight text-black px-4 py-3 mr-10 max-w-600 transition-all font-extralight`}
+        className={`chat-bubble bg-white text-2xl text-start font-extralight text-black px-4 py-3 mt-5 mr-10 max-w-600 transition-all font-extralight`}
         style={{
           overflow: 'hidden',
-          whiteSpace: 'nowrap',
+          whiteSpace: 'normal',
+          maxWidth: '500px', // Allow text wrapping
         }}
       >
-        {showText ? aqMessageValue.userGroupInfo[svg].healthMessage : <span className="ellipsis"></span>}
+        {aqMessageStatment}
+      </div>
+      <div
+        className={`chat-bubble bg-white text-2xl text-start font-extralight text-black px-4 py-3 mt-5 mr-10 max-w-600 transition-all font-extralight`}
+        style={{
+          overflow: 'hidden',
+          whiteSpace: 'normal',
+          maxWidth: '800px', // Allow text wrapping
+        }}
+      >
+        {showText ? (
+          aqMessageValue.color !== '#9BE4E6' ? (
+            <span>
+              {aqMessageValue.userGroupInfo[svg].healthMessage}
+              <Link to="/map" className="font-normal">
+                {' '}
+                Se områder i kart
+              </Link>
+            </span>
+          ) : (
+            aqMessageValue.userGroupInfo[svg].healthMessage
+          )
+        ) : (
+          <span className="ellipsis"></span>
+        )}
       </div>
       <div className="chat-footer opacity-50 mr-10">
-        Sendt {hours}:{minutes}
+        Sent {hours}:{minutes}
       </div>
     </div>
   );
