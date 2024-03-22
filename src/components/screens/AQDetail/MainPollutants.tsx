@@ -106,7 +106,7 @@ function MainPollutants({ highestPoll, origin, location }: MainPollutantsProps) 
       <div className="absolute flex flex-col items-center ml-52" style={{ width: '450px' }}>
         {/**City name */}
         <div
-          className="mb-8 badge badge-lg text-2xl text-white font-light px-[0.65em] pb-[0.8em] pt-[0.7em]"
+          className="mb-8 badge badge-lg text-xl text-white font-light px-[0.65em] pb-[0.8em] pt-[0.7em]"
           style={{ backgroundColor: '#192E54', borderColor: '#192E54' }}
         >
           Forurenser luften mest nå

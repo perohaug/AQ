@@ -31,11 +31,11 @@ function ParticleExplanation() {
   return (
     <div>
       <div
-        className="badge badge-lg text-2xl text-white font-light px-[0.65em] pb-[0.8em] pt-[0.7em] mt-10 mb-10 ml-32"
+        className="badge badge-lg text-xl text-white font-light px-[0.65em] pb-[0.8em] pt-[0.7em] mt-10 mb-10 ml-32"
         style={{ backgroundColor: '#192E54', borderColor: '#192E54' }}
       >
         Hva er i luften?
-      </div>{' '}
+      </div>
       <div className="flex flex-row items-center">
         {/* First SVG */}
         <div
