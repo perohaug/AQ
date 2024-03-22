@@ -40,7 +40,7 @@ function ChatBubble(props: ChatBubbleProps) {
   const minutes = String(now.getMinutes()).padStart(2, '0');
 
   return (
-    <div className="relative chat chat-end mr-80 mt-20">
+    <div className="relative chat chat-end mr-80 mt-5">
       <style>{`
         @keyframes typing {
           0%, 30% {
