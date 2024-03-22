@@ -17,26 +17,26 @@ export const aqMessage: AQMessage =
 
         low: {
             color: '#9BE4E6',
-            risk: 'Lav helserisiko',
+            risk: 'Liten eller ingen mulighet for påvirkning av helse',
             message: 'Nyt dagen ute!',
             userGroupInfo: userGroupInfoLow,
         },
         moderate: {
             color: '#FEA837',
-            risk: 'Moderat helserisiko',
-            message: 'Nyt dagen ute, men for noen finnes det en liten helserisiko',
+            risk: 'Moderat mulighet for påvirkning av helse',
+            message: 'Nyt dagen ute, men for noen finnes det en liten mulighet for påvirkning av helse',
             userGroupInfo: userGroupInfoModerate,
         },
         high: {
             color: '#EB6758',
-            risk: 'Høy helserisiko',
-            message: 'Nyt dagen ute,  men for noen finnes det betydelig helserisiko',
+            risk: 'Høy mulighet for påvirkning av helse',
+            message: 'Nyt dagen ute,  men for noen finnes det betydelig mulighet for påvirkning av helse',
             userGroupInfo: userGroupInfoHigh,
         },
         veryhigh: {
             color: '#593E67',
-            risk: 'Svært høy helserisiko',
-            message: 'Nyt dagen ute,  men for noen finnes det en alvorlig helserisiko',
+            risk: 'Svært høy mulighet for påvirkning av helse',
+            message: 'Nyt dagen ute,  men for noen finnes det en alvorlig mulighet for påvirkning av helse',
             userGroupInfo: userGroupInfoVeryHigh,
         }
     }

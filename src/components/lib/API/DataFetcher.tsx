@@ -80,40 +80,6 @@ function PM10AQI(x: number) {
   return aqi;
 }
 
-function findTopContributors(
-  dominantPollutant: string | undefined,
-  stdconcentrations: METVariables | undefined,
-): Contributor | undefined {
-  const topContributors: Contributor[] = [];
-
-  // Iterate over each stdconcentration
-  for (const concentration in stdconcentrations) {
-    const stdconcentration = stdconcentrations[concentration];
-    // console.log('stdconcentration:', stdconcentration);
-    let maxContributor: string = '';
-    let maxValue: number = 0;
-
-    // Iterate over each topContributors property
-    for (const [contributor, value] of Object.entries(stdconcentration.value || {})) {
-      if (value && value > maxValue) {
-        maxContributor = contributor;
-        maxValue = value;
-      }
-    }
-
-    // Push the highest contributor for the current stdconcentration
-    topContributors.push({ stdconcentration: concentration, topContributors: maxContributor });
-  }
-  const topCont: Contributor | undefined = topContributors.find((entry) =>
-    entry.stdconcentration.toLowerCase().includes(dominantPollutant?.toLowerCase() ?? ''),
-  );
-  if (topCont?.topContributors == '') {
-    topCont.topContributors = 'ukjente kilder';
-  }
-  console.log('Balle', topCont?.stdconcentration);
-  return topCont;
-}
-
 function NO2AQI(x: number) {
   let aqi = 1;
   if (x < 0) {
@@ -243,15 +209,6 @@ const useDataFetcher = (): ApiResponse => {
           time: apiDataResponse.data.time.map((timeEntry: METTime) => ({
             from: new Date(timeEntry.from),
             to: new Date(timeEntry.to),
-            // topContribs: (apiData.data.time[0].topContribs = findTopContributors(
-            //   domPoll(
-            //     apiDataResponse.data.time[0].variables.o3_concentration.value,
-            //     apiDataResponse.data.time[0].variables.no2_concentration.value,
-            //     apiDataResponse.data.time[0].variables.pm10_concentration.value,
-            //     apiDataResponse.data.time[0].variables.pm25_concentration.value,
-            //   ),
-            //   apiDataResponse.data.time[0].variables,
-            // )),
             variables: {
               AQI: {
                 text: aqiTxt(timeEntry.variables.AQI.value),

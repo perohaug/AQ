@@ -42,6 +42,19 @@ export const PM10: React.FC<SVGProps<SVGCircleElement>> = () => (
   </circle>
 );
 
+export const GasParticle: React.FC<SVGProps<SVGCircleElement>> = () => (
+  <circle cx="0" cy="0" r="9" fill="#5A4858" id="gas">
+    <animateMotion
+      dur={`${generateRandomDuration() / 3}s`}
+      begin={`${generateRandomDuration() % 1}s`}
+      repeatCount="indefinite"
+      fill="freeze" // "freeze" or "remove"
+    >
+      <mpath href="#gas-lane" />
+    </animateMotion>
+  </circle>
+);
+
 interface LaneProps extends SVGProps<SVGPathElement> {
   id: string;
 }
