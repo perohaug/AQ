@@ -225,8 +225,8 @@ function LearnMore() {
                     Trondheim
                   </div>
                   <div
-                    className=" badge badge-lg text-xl text-white font-light px-[0.65em] pb-[0.8em] pt-[0.7em]  mt-44  ml-14"
-                    style={{ backgroundColor: '#192E54', borderColor: '#192E54' }}
+                    className="badge badge-lg text-xl text-white font-light px-[0.65em] pb-[0.8em] pt-[0.7em] mt-44 ml-14"
+                    style={{ backgroundColor: '#192E54', borderColor: '#192E54', whiteSpace: 'nowrap' }}
                   >
                     {data?.location.name}
                   </div>
