@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { particleInfo } from '../TextContent/particleInfo';
 
 type ExpandedState = {
   particle1: boolean;
@@ -42,27 +43,27 @@ function ParticleExplanation() {
           className="cursor-pointer flex flex-col items-center justify-start hover:scale-110 transition-transform duration-300"
           onClick={() => handleExpand('particle1')}
         >
-          <svg className="mb-3 w-20 h-20" viewBox="0 0 70 70">
-            <circle cx="35" cy="35" r="35" fill="#FF6C6C" />
+          <svg className="mb-3 w-16 h-16" viewBox="0 0 70 70">
+            <circle cx="35" cy="35" r="35" fill={particleInfo.stor.color} />
           </svg>
           {expanded.particle1 ? (
-            <p className="font-medium text-lg">Store partikler</p>
+            <p className="font-medium text-lg">{particleInfo.stor.name}</p>
           ) : (
-            <p className="font-light text-lg"> Store partikler</p>
+            <p className="font-light text-lg"> {particleInfo.stor.name}</p>
           )}
         </div>
         {/* Second SVG */}
         <div
-          className="cursor-pointer ml-6 flex flex-col items-center justify-start mt-5 hover:scale-110 transition-transform duration-300"
+          className="cursor-pointer ml-4 flex flex-col items-center justify-start mt-5 hover:scale-110 transition-transform duration-300"
           onClick={() => handleExpand('particle2')}
         >
           <svg className="mb-3  w-10 h-10" viewBox="0 0 70 70">
-            <circle cx="35" cy="35" r="35" fill="#FF155C" />
+            <circle cx="35" cy="35" r="35" fill={particleInfo.liten.color} />
           </svg>
           {expanded.particle2 ? (
-            <p className="font-medium text-lg">Små partikler</p>
+            <p className="font-medium text-lg">{particleInfo.liten.name}</p>
           ) : (
-            <p className="font-light text-lg"> Små partikler</p>
+            <p className="font-light text-lg"> {particleInfo.liten.name}</p>
           )}
         </div>
         {/* Third SVG */}
@@ -71,12 +72,12 @@ function ParticleExplanation() {
           onClick={() => handleExpand('particle3')}
         >
           <svg className="mb-3 w-12 h-12" viewBox="0 0 70 70">
-            <circle cx="35" cy="35" r="35" fill="#5A4858" />
+            <circle cx="35" cy="35" r="35" fill={particleInfo.gass1.color} />
           </svg>
           {expanded.particle3 ? (
-            <p className="font-medium text-lg">Gasser</p>
+            <p className="font-medium text-lg">{particleInfo.gass1.name}</p>
           ) : (
-            <p className="font-light text-lg"> Gasser</p>
+            <p className="font-light text-lg"> {particleInfo.gass1.name}</p>
           )}
         </div>
         {/* Fourth SVG */}
@@ -85,12 +86,12 @@ function ParticleExplanation() {
           onClick={() => handleExpand('particle4')}
         >
           <svg className="mb-3 w-10 h-10" viewBox="0 0 70 70">
-            <circle cx="35" cy="35" r="35" fill="#5A4858" />
+            <circle cx="35" cy="35" r="35" fill={particleInfo.gass2.color} />
           </svg>
           {expanded.particle4 ? (
-            <p className="font-medium text-lg">Gass 2</p>
+            <p className="font-medium text-lg">{particleInfo.gass2.name}</p>
           ) : (
-            <p className="font-light text-lg"> Gass 2</p>
+            <p className="font-light text-lg"> {particleInfo.gass2.name}</p>
           )}
         </div>
       </div>

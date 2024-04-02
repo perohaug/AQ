@@ -63,7 +63,7 @@ function UserGroups({ aqValue = 'low' }: { aqValue?: string }) {
           <Link to="/learn">
             <button
               className="rounded-full bg-blue-800 text-white text-3xl px-4 py-2 hover:scale-105 transition-transform duration-300 font-extralight"
-              style={{ width: '200px', height: '200px', backgroundColor: '#FC8861' }}
+              style={{ width: '200px', height: '200px', backgroundColor: '#fb5607' }}
             >
               Se mer om luften!
             </button>
@@ -74,8 +74,7 @@ function UserGroups({ aqValue = 'low' }: { aqValue?: string }) {
         </div>
         <UserGroupsSVG handleSVGClick={handleSVGClick} activeSVG={activeSVG} />
         <div className="absolute right-20" style={{ top: '180px' }}>
-
-          <ChatBubble aqMessageValue={aqMessageValue}  aqMessageStatment={aqMessageValue.message} svg={activeSVG} />
+          <ChatBubble aqMessageValue={aqMessageValue} aqMessageStatment={aqMessageValue.message} svg={activeSVG} />
         </div>
       </div>
     </>

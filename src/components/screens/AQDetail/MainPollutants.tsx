@@ -4,6 +4,7 @@ import bonfire from '~/icons/bonfire.png';
 import exhaust from '~/icons/exhaust.png';
 import longdistance from '~/icons/longdist.png';
 import ship from '~/icons/ship.png';
+import { particleInfo } from '../TextContent/particleInfo';
 
 type MainPollutantsProps = {
   highestPoll: string;
@@ -29,24 +30,31 @@ function MainPollutants({ highestPoll, origin, location }: MainPollutantsProps) 
 
   function dominantPollutantSVG() {
     if (highestPoll?.toLowerCase() == 'pm25') {
-      dominantPollutantName = 'Små partikler';
+      dominantPollutantName = particleInfo.liten.name;
       return (
         <svg className="w-40 h-40" viewBox="0 0 70 70">
-          <circle cx="35" cy="35" r="35" fill="#FF155C" />
+          <circle cx="35" cy="35" r="35" fill={particleInfo.liten.color} />
         </svg>
       );
     } else if (highestPoll?.toLowerCase() == 'pm10') {
-      dominantPollutantName = 'Store partikler';
+      dominantPollutantName = particleInfo.stor.name;
       return (
         <svg className="w-40 h-40" viewBox="0 0 70 70">
-          <circle cx="35" cy="35" r="35" fill="#FF155C" />
+          <circle cx="35" cy="35" r="35" fill={particleInfo.stor.color} />
         </svg>
       );
-    } else if (highestPoll?.toLowerCase() == 'o3' || 'no2') {
-      dominantPollutantName = 'Gasser';
+    } else if (highestPoll?.toLowerCase() == 'o3') {
+      dominantPollutantName = particleInfo.gass1.name;
       return (
         <svg className="w-40 h-40" viewBox="0 0 70 70">
-          <circle cx="35" cy="35" r="35" fill="#5A4858" />
+          <circle cx="35" cy="35" r="35" fill={particleInfo.gass1.color} />
+        </svg>
+      );
+    } else if (highestPoll?.toLowerCase() == 'no2') {
+      dominantPollutantName = particleInfo.gass2.name;
+      return (
+        <svg className="w-40 h-40" viewBox="0 0 70 70">
+          <circle cx="35" cy="35" r="35" fill={particleInfo.gass2.color} />
         </svg>
       );
     }

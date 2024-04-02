@@ -207,7 +207,7 @@ function LearnMore() {
             <div className="absolute top-1/2 mt-60 ml-80">
               <button
                 className="ml-20 rounded-full bg-blue-800 text-white text-2xl px-4 hover:scale-110 transition-transform duration-300 py-2 mt-20 font-extralight"
-                style={{ width: '160px', height: '160px', backgroundColor: '#FC8861' }}
+                style={{ width: '160px', height: '160px', backgroundColor: '#fb5607' }}
                 onClick={handleCompareClick}
               >
                 Utforsk luften i andre byer!
@@ -269,7 +269,7 @@ function LearnMore() {
                         }}
                       />
                       <button
-                        style={{ backgroundColor: '#FC8861' }}
+                        style={{ backgroundColor: '#fb5607' }}
                         className="ml-2 rounded-full text-white py-2 px-4  hover:bg-opacity-90 focus:outline-none "
                         onClick={handleSubmit}
                       >
