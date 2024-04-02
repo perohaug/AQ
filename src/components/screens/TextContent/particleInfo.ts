@@ -19,10 +19,10 @@ export const particleInfo: ParticleInfo =
         },
         gass1: {
             color: '#a57f60',       
-            name: 'O3'
+            name: 'Ozongass'
         },
         gass2: {
             color: '#ffffff',        
-            name: 'NO2'
+            name: 'Nitrogengass'
         }
     }
