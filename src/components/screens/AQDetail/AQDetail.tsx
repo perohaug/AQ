@@ -90,7 +90,7 @@ function LearnMore() {
     } else {
       await fetchData(`https://api.waqi.info/feed/${selectedStation}/?token=22f37ad5c0fae31b55ee3304697b74c44a1a4cd0`);
     }
-  };
+  };  
 
   const listWithOtherOptions: otherOpt[] = [
     {
@@ -277,13 +277,12 @@ function LearnMore() {
                         Søk
                       </button>
                     </div>
-                    <button
-                      className="rounded-full bg-blue-800 text-white text-2xl px-4 hover:scale-110 transition-transform duration-300 py-2 mt-10 font-extralight"
-                      style={{ width: '120px', height: '120px', backgroundColor: '#fb5607' }}
-                      onClick={handleCompareClick}
-                    >
-                      <Link to="/map">Se i kart</Link>
-                    </button>
+                      <button
+                        className="rounded-full bg-blue-800 text-white text-2xl px-4 hover:scale-110 transition-transform duration-300 py-2 mt-10 font-extralight"
+                        style={{ width: '120px', height: '120px', backgroundColor: '#fb5607' }}
+                      >
+                        <Link to="/map">Se i kart</Link>
+                      </button>
                   </div>
                 </div>
               </>
