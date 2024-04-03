@@ -217,15 +217,15 @@ function LearnMore() {
             {/* Search city */}
             {isViewMore && (
               <>
-                <div className="absolute top-1/2 mt-80 flex flex-row mr-10">
+                <div className="absolute top-1/2 mt-80 flex flex-row justify-between space-x-32">
                   <div
-                    className="badge badge-lg text-xl text-white font-light px-[0.65em] pb-[0.8em] pt-[0.7em] mr-30 mt-44 mr-14"
+                    className="badge badge-lg text-xl text-white font-light px-[0.65em] pb-[0.8em] pt-[0.7em] mr-0 mt-44 mr-14"
                     style={{ backgroundColor: '#192E54', borderColor: '#192E54' }}
                   >
                     Trondheim
                   </div>
                   <div
-                    className="badge badge-lg text-xl text-white font-light px-[0.65em] pb-[0.8em] pt-[0.7em] mt-44 ml-14"
+                    className="badge badge-lg text-xl text-white font-light px-[0.65em] pb-[0.8em] pt-[0.7em] mt-44"
                     style={{ backgroundColor: '#192E54', borderColor: '#192E54', whiteSpace: 'nowrap' }}
                   >
                     {data?.location.name}
