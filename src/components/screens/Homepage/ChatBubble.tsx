@@ -85,7 +85,7 @@ function ChatBubble(props: ChatBubbleProps) {
           aqMessageValue.color !== aqMessage['low'].color ? (
             <span>
               {aqMessageValue.userGroupInfo[svg].healthMessage}
-              <Link to="/map" className="font-normal">
+              <Link to="/map" className="font-normal ml-2">
                 Se områder i kart
               </Link>
             </span>
