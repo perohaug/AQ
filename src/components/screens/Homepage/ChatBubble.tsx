@@ -86,7 +86,6 @@ function ChatBubble(props: ChatBubbleProps) {
             <span>
               {aqMessageValue.userGroupInfo[svg].healthMessage}
               <Link to="/map" className="font-normal">
-                {' '}
                 Se områder i kart
               </Link>
             </span>

@@ -10,6 +10,7 @@ import Select from 'react-select';
 import { stdconcentration, stdconcentrations } from '~/components/lib/API/APIResponse';
 import MainPollutants from './MainPollutants';
 import HealthRiskModal from '../HealthRiskModal';
+import { Link } from 'react-router-dom';
 
 interface otherOpt {
   value: string;
@@ -232,8 +233,8 @@ function LearnMore() {
                   </div>
                 </div>
                 <div className="absolute top-1/4 left-1/4 ml-72 mt-80 transform">
-                  <div className="flex items-center mt-40 ml-30">
-                    <div className="relative flex itms-center inline-block ml-20 text-xl">
+                  <div className="flex flex-col items-center mt-40 ml-30">
+                    <div className="relative flex itmes-center inline-block ml-20 text-xl">
                       <Select
                         className="rounded-full w-60"
                         options={allOptions}
@@ -270,12 +271,19 @@ function LearnMore() {
                       />
                       <button
                         style={{ backgroundColor: '#fb5607' }}
-                        className="ml-2 rounded-full text-white py-2 px-4  hover:bg-opacity-90 focus:outline-none "
+                        className="ml-2 rounded-full text-white py-2 px-4  hover:bg-opacity-90 focus:outline-none hover:scale-110 transition-transform duration-300 "
                         onClick={handleSubmit}
                       >
                         Søk
                       </button>
                     </div>
+                    <button
+                      className="rounded-full bg-blue-800 text-white text-2xl px-4 hover:scale-110 transition-transform duration-300 py-2 mt-10 font-extralight"
+                      style={{ width: '120px', height: '120px', backgroundColor: '#fb5607' }}
+                      onClick={handleCompareClick}
+                    >
+                      <Link to="/map">Se i kart</Link>
+                    </button>
                   </div>
                 </div>
               </>
