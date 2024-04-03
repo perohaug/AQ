@@ -4,6 +4,9 @@ import bonfire from '~/icons/bonfire.png';
 import exhaust from '~/icons/exhaust.png';
 import longdistance from '~/icons/longdist.png';
 import ship from '~/icons/ship.png';
+import dust from '~/icons/dust.png';
+import factory from '~/icons/factory.png';
+
 import { particleInfo } from '../TextContent/particleInfo';
 
 type MainPollutantsProps = {
@@ -93,13 +96,13 @@ function MainPollutants({ highestPoll, origin, location }: MainPollutantsProps) 
       return <img className="max-h-20" src={exhaust} alt="" />;
     } else if (maxContributer === 'industri') {
       dominantPollutantFactorString = 'industri';
-      return <img className="max-h-20" src={exhaust} alt="" />;
+      return <img className="max-h-20" src={factory} alt="" />;
     } else if (maxContributer === 'langtransport') {
       dominantPollutantFactorString = 'langtransport';
       return <img className="max-h-20" src={longdistance} alt="" />;
     } else if (maxContributer === 'veistov') {
       dominantPollutantFactorString = 'veistøv';
-      return <img className="max-h-20" src={exhaust} alt="" />;
+      return <img className="max-h-20" src={dust} alt="" />;
     } else if (maxContributer === 'skip') {
       dominantPollutantFactorString = 'skip';
       return <img className="max-h-20" src={ship} alt="" />;
