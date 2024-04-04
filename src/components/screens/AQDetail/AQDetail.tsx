@@ -46,11 +46,9 @@ function LearnMore() {
   };
 
   const { fetchData: fetchData, status: status, data: data, error: error }: ApiResponse = useDataFetcher();
-  const { fetchData: fetchData2, status: status2, data: data2, error: error2 }: ApiResponse = useDataFetcher();
   const [stations, setStations] = useState<Station[]>([]);
   const [selectedStation, setSelectedStation] = useState<string | null>('NO0102A');
   const [isViewMore, setIsViewMore] = useState(false);
-  // const [mainData, setMainData] = useState<APIStandard | null>(null);
   const [compareData, setCompareData] = useState<APIStandard | null>(null);
 
   const aqValue = data?.data.time[0].variables.AQI.text;
@@ -134,8 +132,7 @@ function LearnMore() {
   ];
 
   const handleCompareClick = async () => {
-    await fetchData2(`https://api.met.no/weatherapi/airqualityforecast/0.1/?station=NO0062A`);
-    setCompareData(data2);
+    setCompareData(data);
     setIsViewMore(!isViewMore);
   };
 
@@ -146,9 +143,9 @@ function LearnMore() {
   };
   const gasConc: number =
     +(data?.data.time[0].variables.AQI.no2 as number) + +(data?.data.time[0].variables.AQI.o3 as number);
-  const gasConc2: number =
-    +(data2?.data.time[0].variables.AQI.no2 as number) + +(data2?.data.time[0].variables.AQI.o3 as number);
   console.log('kai:', compareData);
+  const gasConc2: number =
+    +(compareData?.data.time[0].variables.AQI.no2 as number) + +(compareData?.data.time[0].variables.AQI.o3 as number);
 
   return (
     <>
@@ -209,18 +206,26 @@ function LearnMore() {
               compare={false}
             />
           )}
-          {isViewMore && (
-            <BouncingSVGElements
-              pm10={data?.data.time[0].variables.AQI.pm10}
-              Bpm10={data2?.data.time[0].variables.AQI.pm10}
-              pm25={data?.data.time[0].variables.AQI.pm25}
-              Bpm25={data2?.data.time[0].variables.AQI.pm25}
-              gas={gasConc}
-              Bgas={gasConc2}
-              showLungs={true}
-              height={900}
-              compare={true}
-            />
+          {isViewMore && compareData && (
+            <div>
+              <BouncingSVGElements
+                pm10={data?.data.time[0].variables.AQI.pm10}
+                Bpm10={compareData.data.time[0].variables.AQI.pm10}
+                pm25={data?.data.time[0].variables.AQI.pm25}
+                Bpm25={compareData.data.time[0].variables.AQI.pm25}
+                gas={gasConc}
+                Bgas={gasConc2}
+                showLungs={true}
+                height={900}
+                compare={true}
+              />
+              <div
+                className="absolute top-1/2 left-1/3 mb-8 badge badge-lg text-xl text-white font-light px-[0.65em] pb-[0.8em] pt-[0.7em]"
+                style={{ backgroundColor: '#FC8861', borderColor: '#FC8861' }}
+              >
+                {compareData.location.name}
+              </div>
+            </div>
           )}
         </div>
 
