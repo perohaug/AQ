@@ -1,4 +1,5 @@
 import React, { SVGProps } from 'react';
+import { particleInfo } from '~/components/screens/TextContent/particleInfo';
 
 interface Props extends SVGProps<SVGCircleElement> {
   lane: string;
@@ -29,7 +30,7 @@ const getRandomLane = (lane: string) => {
 };
 
 export const PM25: React.FC<Props> = ({ lane }) => (
-  <circle cx="0" cy="0" r="3" fill="#FF155C" stroke="#FF155C" strokeWidth={5}>
+  <circle cx="0" cy="0" r="3" fill={particleInfo.liten.color} stroke={particleInfo.liten.color} strokeWidth={5}>
     <animateMotion
       dur={`${generateRandomDuration()}s`}
       begin={`${generateRandomDuration() % 1}s`}
@@ -42,7 +43,7 @@ export const PM25: React.FC<Props> = ({ lane }) => (
 );
 
 export const PM10: React.FC<Props> = ({ lane }) => (
-  <circle cx="0" cy="0" r="12" fill="#FF6C6C" stroke="#FF6C6C" strokeWidth={3}>
+  <circle cx="0" cy="0" r="12" fill={particleInfo.stor.color} stroke={particleInfo.stor.color} strokeWidth={3}>
     <animateMotion
       dur={`${generateRandomDuration()}s`}
       begin={`${generateRandomDuration() % 1}s`}
@@ -55,7 +56,7 @@ export const PM10: React.FC<Props> = ({ lane }) => (
 );
 
 export const GasParticle: React.FC<Props> = ({ lane }) => (
-  <circle cx="0" cy="0" r="9" fill="#5A4858">
+  <circle cx="0" cy="0" r="9" fill={particleInfo.gass1.color} id="gas">
     <animateMotion
       dur={`${generateRandomDuration() / 3}s`}
       begin={`${generateRandomDuration() % 1}s`}

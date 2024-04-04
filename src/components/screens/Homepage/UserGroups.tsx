@@ -22,14 +22,14 @@ function UserGroups({ aqValue = 'low' }: { aqValue?: string }) {
     <>
       {userGroupInfoLow[activeSVG].id > 1 ? (
         <div
-          className="mt-5 badge badge-lg text-2xl  text-white font-light pb-[0.8em] pt-[0.7em]"
+          className="mt-2 badge badge-lg text-2xl  text-white font-light pb-[0.8em] pt-[0.7em]"
           style={{ backgroundColor: '#192E54', borderColor: '#192E54' }}
         >
           {aqMessageValue.userGroupInfo[activeSVG].name}
         </div>
       ) : (
         <div
-          className="mt-5 badge badge-lg text-2xl  text-white font-light  px-[0.65em] pb-[0.8em] pt-[0.7em]"
+          className="mt-2 badge badge-lg text-2xl  text-white font-light  px-[0.65em] pb-[0.8em] pt-[0.7em]"
           style={{ backgroundColor: '#192E54', borderColor: '#192E54' }}
         >
           Generell befolkning
@@ -59,11 +59,11 @@ function UserGroups({ aqValue = 'low' }: { aqValue?: string }) {
           </svg>
         )}
         <AirFlowSVG aqColor={aqMessageValue.color} />
-        <div className="absolute left-60">
+        <div className="absolute left-40">
           <Link to="/learn">
             <button
-              className="rounded-full bg-blue-800 text-white text-2xl px-4 py-2 hover:scale-105 transition-transform duration-300 font-extralight"
-              style={{ width: '200px', height: '200px', backgroundColor: '#FC8861' }}
+              className="rounded-full bg-blue-800 text-white text-3xl px-4 py-2 hover:scale-105 transition-transform duration-300 font-extralight"
+              style={{ width: '200px', height: '200px', backgroundColor: '#fb5607' }}
             >
               Se mer om luften!
             </button>
@@ -74,7 +74,7 @@ function UserGroups({ aqValue = 'low' }: { aqValue?: string }) {
         </div>
         <UserGroupsSVG handleSVGClick={handleSVGClick} activeSVG={activeSVG} />
         <div className="absolute right-20" style={{ top: '180px' }}>
-          <ChatBubble aqMessageValue={aqMessageValue} svg={activeSVG} />
+          <ChatBubble aqMessageValue={aqMessageValue} aqMessageStatment={aqMessageValue.message} svg={activeSVG} />
         </div>
       </div>
     </>

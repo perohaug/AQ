@@ -16,7 +16,7 @@ function HealthRiskModal({ closeModal }: HealthRiskModalProps) {
           <svg width={40} height={40} className=" mr-5">
             <circle cx={20} cy={20} r={20} fill={aqMessage['low'].color} />
           </svg>
-          <p>Liten eller ingen</p>
+          <p>Ingen eller liten</p>
         </div>
         <div className="flex  items-center mb-3">
           <svg width={40} height={40} className="mr-5">

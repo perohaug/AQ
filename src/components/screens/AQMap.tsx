@@ -138,7 +138,7 @@ function AQMap() {
               ref={inputRef}
             />
             <button
-              className="p-3 rounded-full text-white mr-auto py-2 px-4 hover:bg-opacity-90 focus:outline-none bg-[#FC8861]"
+              className="p-3 rounded-full text-white mr-auto py-2 px-4 hover:bg-opacity-90 focus:outline-none bg-[#fb5607]"
               onClick={handleSubmit}
             >
               Søk
