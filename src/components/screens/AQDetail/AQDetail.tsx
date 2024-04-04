@@ -133,24 +133,15 @@ function LearnMore() {
   ];
 
   const handleCompareClick = async () => {
-<<<<<<< HEAD
     setCompareData(data);
-=======
->>>>>>> a7ba982f8d5e6c3cd8597d4d0f481328be57b46d
     setIsViewMore(!isViewMore);
-    if (isViewMore) {
-      await fetchData(`https://api.met.no/weatherapi/airqualityforecast/0.1/?station=NO0102A`);
-    }
   };
 
-<<<<<<< HEAD
   const handleCompareClickExit = async () => {
     setIsViewMore(false); // Close the compare section
     setCompareData(null);
     await fetchData(`https://api.met.no/weatherapi/airqualityforecast/0.1/?station=NO0102A`); // Fetch Trondheim data
   };
-=======
->>>>>>> a7ba982f8d5e6c3cd8597d4d0f481328be57b46d
   const gasConc: number =
     +(data?.data.time[0].variables.AQI.no2 as number) + +(data?.data.time[0].variables.AQI.o3 as number);
   console.log('kai:', compareData);
@@ -245,7 +236,6 @@ function LearnMore() {
 
         <div className="flex justify-center">
           <div className="flex items-center justify-center relative">
-<<<<<<< HEAD
             {!isViewMore && (
               <div className="absolute top-1/2 mt-80 ml-80">
                 <button
@@ -257,7 +247,6 @@ function LearnMore() {
                 </button>
               </div>
             )}
-=======
             <div className="absolute top-1/2 mt-60 ml-80">
               <button
                 className="ml-20 rounded-full bg-blue-800 text-white text-2xl px-4 hover:scale-110 transition-transform duration-300 py-2 mt-20 font-extralight"
@@ -267,9 +256,8 @@ function LearnMore() {
                 Utforsk luften i andre byer!
               </button>
             </div>
-        
+
             {/* Search city */}
->>>>>>> a7ba982f8d5e6c3cd8597d4d0f481328be57b46d
             {isViewMore && (
               <>
                 <div className="absolute top-1/2 mt-80 flex flex-row justify-between space-x-32">
