@@ -8,6 +8,7 @@ import { Head } from '../shared/Head';
 import { useEffect, useRef, useState } from 'react';
 import { stdconcentrations } from '../lib/API/APIResponse';
 import MainPollutants from './AQDetail/MainPollutants';
+import HealthRiskModal from './HealthRiskModal';
 
 interface otherOpt {
   value: string;
@@ -58,6 +59,17 @@ function AQMap() {
   const [positionValue, setPositionValue] = useState<PositionData[]>([]);
   const [selectedStation, setSelectedStation] = useState<string | null>('NO0102A');
   // const [isViewMore, setIsViewMore] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const aqValue = data?.data.time[0].variables.AQI.text;
+  const aqColor = aqValue ? aqMessage[aqValue].color : 'low';
+
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
 
   useEffect(() => {
     const fetchStations = async () => {
@@ -223,28 +235,92 @@ function AQMap() {
     <>
       <Head title="TOP PAGE" />
       <div>
-        <div>
-          <div className="text-center ">
-            <h1 className="p-8 text-4xl">Her kan du se hvordan luftkvaliteten er i ditt område.</h1>
+        <div className="flex flex-row justify-center mb-10">
+          <h1 className="text-5xl rock-3d-logo">
+            <b>JegPuster</b>
+          </h1>
+          <p className="mt-3 ml-2 mr-2 text-4xl font-extralight">
+            i {data && data.location.name !== 'E6-Tiller' ? data.location.name : 'Trondheim'}
+          </p>
+          <div className="mr-10 cursor-pointer">
+            <div className="mr-3">
+              <svg width={80} height={80} onClick={openModal}>
+                <circle
+                  cx={40}
+                  cy={40}
+                  r={20}
+                  fill={aqColor} // Adjust opacity as needed (0.3 for example)
+                  opacity={0.5}
+                  style={{ animation: 'expandShrink 1s infinite alternate' }}
+                />
+                {/* Tinier circle */}
+                <circle cx={40} cy={40} r={25} fill={aqColor} /> {/* Adjust the radius as needed */}
+              </svg>
+              <style>
+                {`
+                @keyframes expandShrink {
+                  0% {
+                    r: 30; // Initial radius
+                  }
+                  50% {
+                    r: 35; // Maximum radius
+                  }
+                  100% {
+                    r: 40; // Back to the initial radius
+                  }
+                }
+                `}
+              </style>
+            </div>
+            {isModalOpen && <HealthRiskModal closeModal={closeModal} />}
           </div>
+        </div>
+        <div>
           <div className="text-center text-xl">
             <i>
               <b>Disclaimer:</b> Kartet viser ikke en helt presis representasjon av luften, men gir en indikasjon.
             </i>
           </div>
         </div>
-        <div className="">
-          <div className="flex text-center items-center justify-content ">
+        <div className="flex flex-col items-center ">
+          <div className="flex flex-row justify-center">
             <Select
-              className="rounded-full py-2 px-4 text-black ml-auto w-1/2 hover:bg-opacity-90 focus:outline-none z-10"
+              className="rounded-full w-80"
               options={allOptions}
               placeholder="Skriv inn by.."
               isSearchable={true}
               onChange={(selectedOption) => setSelectedStation(selectedOption?.value || null)}
               ref={inputRef}
+              styles={{
+                control: (provided) => ({
+                  ...provided,
+                  borderRadius: '6rem',
+                }),
+                input: (provided) => ({
+                  ...provided,
+                  color: 'grey',
+                }),
+                placeholder: (provided) => ({
+                  ...provided,
+                  color: 'grey',
+                }),
+                singleValue: (provided) => ({
+                  ...provided,
+                  color: 'grey',
+                }),
+                dropdownIndicator: (provided) => ({
+                  ...provided,
+                  color: 'grey',
+                }),
+                indicatorSeparator: (provided) => ({
+                  ...provided,
+                  backgroundColor: 'none',
+                }),
+              }}
             />
+
             <button
-              className="p-3 rounded-full text-white mr-auto py-2 px-4 hover:bg-opacity-90 focus:outline-none bg-[#fb5607]"
+              className="ml-3 p-3 rounded-full text-white mr-auto py-2 px-4 hover:bg-opacity-90 focus:outline-none bg-[#fb5607]"
               onClick={handleSubmit}
             >
               Søk
@@ -261,7 +337,7 @@ function AQMap() {
               stationValues={stationValue}
             /> */}
             <MapContainer
-              className="basis-1/3 m-auto z-0 h-[500px] bg-white border-2 border-gray-300 rounded-lg shadow-lg"
+              className="basis-1/3 m-auto z-0 h-[500px] bg-white  rounded-2xl"
               center={[data?.location.longitude || 12.1, data?.location.latitude || 69]}
               zoom={14}
               scrollWheelZoom={false}
@@ -322,8 +398,7 @@ function AQMap() {
               </LayerGroup>
             </MapContainer>
             {data && (
-              <div className="absolute">
-                <h1>{data.location.name}</h1>
+              <div className="absolute right-1/2">
                 <MainPollutants
                   highestPoll={data?.dominantPollutant}
                   origin={data?.data.time[0].variables.concentrations}
