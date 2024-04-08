@@ -13,7 +13,7 @@ const generateRandomDuration = () => {
 
 const getRandomLane = (lane: string) => {
   if (lane === 'pm10') {
-    const lanesPM10 = ['#right-lane-pm10', '#left-lane-pm-10'];
+    const lanesPM10 = ['#right-lane-pm10', '#left-lane-pm10'];
     const randomIndex = Math.floor(Math.random() * lanesPM10.length);
     return lanesPM10[randomIndex];
   } else if (lane === 'pm25') {

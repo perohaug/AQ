@@ -135,13 +135,12 @@ function LearnMore() {
   const handleCompareClick = async () => {
     setCompareData(data);
     setIsViewMore(!isViewMore);
+    if (isViewMore) {
+      setCompareData(null);
+      await fetchData(`https://api.met.no/weatherapi/airqualityforecast/0.1/?station=NO0102A`);
+    }
   };
 
-  const handleCompareClickExit = async () => {
-    setIsViewMore(false); // Close the compare section
-    setCompareData(null);
-    await fetchData(`https://api.met.no/weatherapi/airqualityforecast/0.1/?station=NO0102A`); // Fetch Trondheim data
-  };
   const gasConc: number =
     +(data?.data.time[0].variables.AQI.no2 as number) + +(data?.data.time[0].variables.AQI.o3 as number);
   console.log('kai:', compareData);
@@ -220,12 +219,6 @@ function LearnMore() {
                 height={900}
                 compare={true}
               />
-              <div
-                className="absolute top-1/2 left-1/3 mb-8 badge badge-lg text-xl text-white font-light px-[0.65em] pb-[0.8em] pt-[0.7em]"
-                style={{ backgroundColor: '#FC8861', borderColor: '#FC8861' }}
-              >
-                {compareData.location.name}
-              </div>
             </div>
           )}
         </div>
@@ -236,17 +229,6 @@ function LearnMore() {
 
         <div className="flex justify-center">
           <div className="flex items-center justify-center relative">
-            {!isViewMore && (
-              <div className="absolute top-1/2 mt-80 ml-80">
-                <button
-                  className="rounded-full bg-blue-800 text-white text-lg px-4 hover:scale-110 transition-transform duration-300 py-2 mt-20 font-extralight"
-                  style={{ width: '160px', height: '160px', backgroundColor: '#FC8861' }}
-                  onClick={handleCompareClick}
-                >
-                  Utforsk luften i andre byer!
-                </button>
-              </div>
-            )}
             <div className="absolute top-1/2 mt-60 ml-80">
               <button
                 className="ml-20 rounded-full bg-blue-800 text-white text-2xl px-4 hover:scale-110 transition-transform duration-300 py-2 mt-20 font-extralight"
@@ -263,15 +245,15 @@ function LearnMore() {
                 <div className="absolute top-1/2 mt-80 flex flex-row justify-between space-x-32">
                   <div
                     className="badge badge-lg text-xl text-white font-light px-[0.65em] pb-[0.8em] pt-[0.7em] mr-0 mt-44 mr-14"
-                    style={{ backgroundColor: '#192E54', borderColor: '#192E54' }}
-                  >
-                    Trondheim
-                  </div>
-                  <div
-                    className="badge badge-lg text-xl text-white font-light px-[0.65em] pb-[0.8em] pt-[0.7em] mt-44"
                     style={{ backgroundColor: '#192E54', borderColor: '#192E54', whiteSpace: 'nowrap' }}
                   >
-                    {data?.location.name}
+                    {compareData?.location.name.split(',')[0]}
+                  </div>
+                  <div
+                    className=" badge badge-lg text-xl text-white font-light px-[0.65em] pb-[0.8em] pt-[0.7em] mt-44"
+                    style={{ backgroundColor: '#192E54', borderColor: '#192E54', whiteSpace: 'nowrap' }}
+                  >
+                    {data?.location.name.split(',')[0]}
                   </div>
                 </div>
                 <div className="absolute top-1/4 left-1/4 ml-72 mt-80 transform">
