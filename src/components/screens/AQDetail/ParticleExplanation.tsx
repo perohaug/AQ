@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { particleInfo } from '../TextContent/particleInfo';
 
 type ExpandedState = {
   particle1: boolean;
@@ -31,89 +32,72 @@ function ParticleExplanation() {
   return (
     <div>
       <div
-        className="badge badge-lg text-xl text-white font-light px-[0.65em] pb-[0.8em] pt-[0.7em] mt-10 mb-10 ml-48"
+        className="badge badge-lg text-xl text-white font-light px-[0.65em] pb-[0.8em] pt-[0.7em] mt-10 mb-10 ml-32"
         style={{ backgroundColor: '#192E54', borderColor: '#192E54' }}
       >
         Hva er i luften?
-      </div>{' '}
-      <div className="flex flex-row items-center ml-12">
+      </div>
+      <div className="flex flex-row items-center">
         {/* First SVG */}
         <div
           className="cursor-pointer flex flex-col items-center justify-start hover:scale-110 transition-transform duration-300"
           onClick={() => handleExpand('particle1')}
         >
-          <svg className="mb-3 w-20 h-20" viewBox="0 0 70 70">
-            <circle cx="35" cy="35" r="35" fill="#FF6C6C" />
+          <svg className="mb-3 w-16 h-16" viewBox="0 0 70 70">
+            <circle cx="35" cy="35" r="35" fill={particleInfo.stor.color} />
           </svg>
           {expanded.particle1 ? (
-            <p className="font-medium">Store partikler</p>
+            <p className="font-medium text-lg">{particleInfo.stor.name}</p>
           ) : (
-            <p className="font-light"> Store partikler</p>
+            <p className="font-light text-lg"> {particleInfo.stor.name}</p>
           )}
         </div>
         {/* Second SVG */}
         <div
-          className="cursor-pointer ml-16 flex flex-col items-center justify-start mt-5 hover:scale-110 transition-transform duration-300"
+          className="cursor-pointer ml-4 flex flex-col items-center justify-start mt-5 hover:scale-110 transition-transform duration-300"
           onClick={() => handleExpand('particle2')}
         >
           <svg className="mb-3  w-10 h-10" viewBox="0 0 70 70">
-            <circle cx="35" cy="35" r="35" fill="#FF155C" />
+            <circle cx="35" cy="35" r="35" fill={particleInfo.liten.color} />
           </svg>
           {expanded.particle2 ? (
-            <p className="font-medium">Små partikler</p>
+            <p className="font-medium text-lg">{particleInfo.liten.name}</p>
           ) : (
-            <p className="font-light"> Små partikler</p>
+            <p className="font-light text-lg"> {particleInfo.liten.name}</p>
           )}
         </div>
         {/* Third SVG */}
         <div
-          className="cursor-pointer ml-16 flex flex-col items-center justify-start hover:scale-110 transition-transform duration-300"
+          className="cursor-pointer ml-6 flex flex-col items-center justify-start hover:scale-110 transition-transform duration-300"
           onClick={() => handleExpand('particle3')}
         >
           <svg className="mb-3 w-12 h-12" viewBox="0 0 70 70">
-            <circle cx="35" cy="35" r="35" fill="#5A4858" />
+            <circle cx="35" cy="35" r="35" fill={particleInfo.gass1.color} />
           </svg>
-          {expanded.particle3 ? <p className="font-medium">Gasser</p> : <p className="font-light"> Gasser</p>}
+          {expanded.particle3 ? (
+            <p className="font-medium text-lg">{particleInfo.gass1.name}</p>
+          ) : (
+            <p className="font-light text-lg"> {particleInfo.gass1.name}</p>
+          )}
+        </div>
+        {/* Fourth SVG */}
+        <div
+          className="cursor-pointer ml-8 mt-3 flex flex-col items-center justify-start hover:scale-110 transition-transform duration-300"
+          onClick={() => handleExpand('particle4')}
+        >
+          <svg className="mb-3 w-10 h-10" viewBox="0 0 70 70">
+            <circle cx="35" cy="35" r="35" fill={particleInfo.gass2.color} />
+          </svg>
+          {expanded.particle4 ? (
+            <p className="font-medium text-lg">{particleInfo.gass2.name}</p>
+          ) : (
+            <p className="font-light text-lg"> {particleInfo.gass2.name}</p>
+          )}
         </div>
       </div>
-      {/* Description for the first SVG */}
-      {expanded.particle1 && (
-        <div className="mt-10 ml-12 text-center" style={{ maxWidth: '350px' }}>
-          <p className="text-m mb-3">
-            Hovedkilde er <b>hovedveier</b>, inkludert partikler fra dekk og asfalt
-          </p>
-          <p className="text-m">
-            Disse partiklene blir ofte fanget opp av slimhinnen og transportert ut igjen slik at de ikke når de dypere
-            delene av lungene.
-          </p>
-        </div>
-      )}
-      {/* Description for the second SVG */}
-      {expanded.particle2 && (
-        <div className="mt-10 ml-12 text-center" style={{ maxWidth: '350px' }}>
-          <p className="text-m mb-3">
-            Hovedkilde er <b>røyk fra vedfyring og eksos</b>
-          </p>
-          <p className="text-m">
-            Disse partiklene blir i mindre grad filtrert og har større evne til å trenge dypere inn i lungene
-          </p>
-        </div>
-      )}
-      {/* Description for the third SVG */}
-      {expanded.particle3 && (
-        <div className="mt-10 ml-12 text-center" style={{ maxWidth: '350px' }}>
-          <p className="text-m mb-3">
-            Hovedkilde er <b>veitrafikk</b>
-          </p>
-          <p className="text-m">
-            Kortvarig eksponering for høye nivåer av gasser kan føre til irritasjon i de øvre luftveiene (feks nese og
-            svelg)
-          </p>
-        </div>
-      )}
       {showButtonDescription && (
         <svg
-          className="mt-3"
+          className="mt-1"
           xmlns="http://www.w3.org/2000/svg"
           width="150"
           height="70"
@@ -131,6 +115,58 @@ function ParticleExplanation() {
             stroke-linecap="round"
           />
         </svg>
+      )}
+      {expanded.particle1 || expanded.particle2 || expanded.particle3 || expanded.particle4 ? (
+        <p></p>
+      ) : (
+        <div className="mt-10 ml-12 text-center text-lg font-light" style={{ maxWidth: '350px' }}>
+          <p className="mb-3">
+            Dette er luftforurensninger som kan forårsake luftveissykdommer, hjerte- og karsykdommer.
+          </p>
+          <p>
+            Virkningen er avhengig av blant annet konsentrasjonen av forurensing i luften, eksponeringsvarighet og
+            individuelle helseforhold.
+          </p>
+        </div>
+      )}
+      {/* Description for the first SVG */}
+      {expanded.particle1 && (
+        <div className="mt-10 ml-12 text-center text-lg font-light" style={{ maxWidth: '350px' }}>
+          <p className="mb-3">
+            Hovedkilde er <b className="font-medium">hovedveier</b>, inkludert partikler fra dekk og asfalt
+          </p>
+          <p>
+            Disse partiklene blir ofte fanget opp av slimhinnen og transportert ut igjen slik at de ikke når de dypere
+            delene av lungene.
+          </p>
+        </div>
+      )}
+      {/* Description for the second SVG */}
+      {expanded.particle2 && (
+        <div className="mt-10 ml-12 text-center text-lg font-light" style={{ maxWidth: '350px' }}>
+          <p className=" mb-3">
+            Hovedkilde er <b className="font-medium">røyk fra vedfyring og eksos</b>
+          </p>
+          <p>Disse partiklene blir i mindre grad filtrert og har større evne til å trenge dypere inn i lungene</p>
+        </div>
+      )}
+      {/* Description for the third SVG */}
+      {expanded.particle3 && (
+        <div className="mt-10 ml-12 text-center text-lg font-light" style={{ maxWidth: '350px' }}>
+          <p className="mb-3">
+            Hovedkilde er <b className="font-medium">veitrafikk</b>
+          </p>
+          <p>Denne gassen kan føre til irritasjon i de øvre luftveiene (feks nese og svelg)</p>
+        </div>
+      )}
+      {/* Description for the fourth SVG */}
+      {expanded.particle4 && (
+        <div className="mt-10 ml-12 text-center text-lg font-light" style={{ maxWidth: '350px' }}>
+          <p className="mb-3">
+            Hovedkilde er <b className="font-medium">veitrafikk</b>
+          </p>
+          <p>Denne gassen kan føre til irritasjon helt ned i lungene</p>
+        </div>
       )}
     </div>
   );

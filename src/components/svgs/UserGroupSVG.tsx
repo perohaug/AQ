@@ -12,7 +12,7 @@ function UserGroupsSVG(props: UserGroupsSVGProps) {
       xmlns="http://www.w3.org/2000/svg"
       xmlnsXlink="http://www.w3.org/1999/xlink"
       width="100%"
-      height="40"
+      height="50"
       viewBox="0 0 334 27"
       fill="none"
       className="absolute"

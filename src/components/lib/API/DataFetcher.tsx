@@ -399,7 +399,7 @@ const useDataFetcher = (): ApiResponse => {
         setApiData({
           data: timeData,
           location: {
-            name: apiDataResponse.meta.location.name,
+            name: apiDataResponse.meta.superlocation.name + ', ' + apiDataResponse.meta.location.name,
             path: apiDataResponse.meta.location.path,
             longitude: parseFloat(apiDataResponse.meta.location.longitude),
             latitude: parseFloat(apiDataResponse.meta.location.latitude),
@@ -419,6 +419,7 @@ const useDataFetcher = (): ApiResponse => {
         const apiResponse = await fetch(userInput);
 
         const apiDataResponse: WAQIResponse = await apiResponse.json();
+        console.log('tiss:', apiDataResponse);
 
         setApiData({
           data: {

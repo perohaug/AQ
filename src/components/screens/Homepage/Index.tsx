@@ -1,13 +1,23 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Head } from '~/components/shared/Head';
 import BouncingSVGElements from '~/components/lib/BouncingSVGElements';
 import useDataFetcher, { ApiResponse } from '~/components/lib/API/DataFetcher';
 import AqMessage from './AqMessage';
 import UserGroups from './UserGroups';
 import PopUp from '../PopUp';
+import { aqMessage } from '../TextContent/aqMessageInfo';
 
 function Index() {
   const { fetchData, status, data, error }: ApiResponse = useDataFetcher();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const aqValue = data?.data.time[0].variables.AQI.text || 'low';
+
+  const aqMessageValue = aqMessage[aqValue];
+
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
 
   const inputRef: any = useRef();
 
@@ -26,10 +36,9 @@ function Index() {
       <PopUp />
       <div className="min-h-screen max-w-screen bg-background">
         <div className="text-center items-center">
-          <div style={{ display: 'flex', justifyContent: 'center' }}>
-            <h1 className="text-9xl rock-3d-logo">JegPuster</h1>
-          </div>
-          <AqMessage aqValue={data?.data.time[0].variables.AQI.text} />
+          <h1 className="text-9xl rock-3d-logo">JegPuster</h1>
+
+          <AqMessage aqValue={data?.data.time[0].variables.AQI.text} location={data?.location.name} />
           <UserGroups aqValue={data?.data.time[0].variables.AQI.text} />
         </div>
       </div>

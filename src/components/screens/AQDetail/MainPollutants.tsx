@@ -4,6 +4,10 @@ import bonfire from '~/icons/bonfire.png';
 import exhaust from '~/icons/exhaust.png';
 import longdistance from '~/icons/longdist.png';
 import ship from '~/icons/ship.png';
+import dust from '~/icons/dust.png';
+import factory from '~/icons/factory.png';
+
+import { particleInfo } from '../TextContent/particleInfo';
 
 type MainPollutantsProps = {
   highestPoll: string;
@@ -20,7 +24,7 @@ function MainPollutants({ highestPoll, origin, location }: MainPollutantsProps) 
 
   const openModal = () => {
     setIsModalOpen(!isModalOpen);
-    setShowButtonDescription(true);
+    setShowButtonDescription(false);
   };
 
   var dominantPollutantFactorString = '';
@@ -29,24 +33,31 @@ function MainPollutants({ highestPoll, origin, location }: MainPollutantsProps) 
 
   function dominantPollutantSVG() {
     if (highestPoll?.toLowerCase() == 'pm25') {
-      dominantPollutantName = 'Små partikler';
+      dominantPollutantName = particleInfo.liten.name;
       return (
         <svg className="w-40 h-40" viewBox="0 0 70 70">
-          <circle cx="35" cy="35" r="35" fill="#FF155C" />
+          <circle cx="35" cy="35" r="35" fill={particleInfo.liten.color} />
         </svg>
       );
     } else if (highestPoll?.toLowerCase() == 'pm10') {
-      dominantPollutantName = 'Store partikler';
+      dominantPollutantName = particleInfo.stor.name;
       return (
         <svg className="w-40 h-40" viewBox="0 0 70 70">
-          <circle cx="35" cy="35" r="35" fill="#FF155C" />
+          <circle cx="35" cy="35" r="35" fill={particleInfo.stor.color} />
         </svg>
       );
-    } else if (highestPoll?.toLowerCase() == 'o3' || 'no2') {
-      dominantPollutantName = 'Gasser';
+    } else if (highestPoll?.toLowerCase() == 'o3') {
+      dominantPollutantName = particleInfo.gass1.name;
       return (
         <svg className="w-40 h-40" viewBox="0 0 70 70">
-          <circle cx="35" cy="35" r="35" fill="#5A4858" />
+          <circle cx="35" cy="35" r="35" fill={particleInfo.gass1.color} />
+        </svg>
+      );
+    } else if (highestPoll?.toLowerCase() == 'no2') {
+      dominantPollutantName = particleInfo.gass2.name;
+      return (
+        <svg className="w-40 h-40" viewBox="0 0 70 70">
+          <circle cx="35" cy="35" r="35" fill={particleInfo.gass2.color} />
         </svg>
       );
     }
@@ -85,13 +96,13 @@ function MainPollutants({ highestPoll, origin, location }: MainPollutantsProps) 
       return <img className="max-h-20" src={exhaust} alt="" />;
     } else if (maxContributer === 'industri') {
       dominantPollutantFactorString = 'industri';
-      return <img className="max-h-20" src={exhaust} alt="" />;
+      return <img className="max-h-20" src={factory} alt="" />;
     } else if (maxContributer === 'langtransport') {
       dominantPollutantFactorString = 'langtransport';
       return <img className="max-h-20" src={longdistance} alt="" />;
     } else if (maxContributer === 'veistov') {
       dominantPollutantFactorString = 'veistøv';
-      return <img className="max-h-20" src={exhaust} alt="" />;
+      return <img className="max-h-20" src={dust} alt="" />;
     } else if (maxContributer === 'skip') {
       dominantPollutantFactorString = 'skip';
       return <img className="max-h-20" src={ship} alt="" />;
@@ -130,13 +141,13 @@ function MainPollutants({ highestPoll, origin, location }: MainPollutantsProps) 
 
         {/**Open modal info */}
         {isModalOpen && (
-          <div className="mx-4 mt-5 flex flex-col items-center">
+          <div className="mx-4 mt-5 flex flex-col items-center text-center text-lg font-light">
             <p className="font-light mb-6">
               {dominantPollutantFactorString === 'utilgjengelig utenfor Norge' ? (
-                ''
+                <p>Data for hva dette stammer av er {dominantPollutantFactorString}</p>
               ) : (
                 <>
-                  Stammer i aller størst grad fra <b className="font-bold">{dominantPollutantFactorString}</b>
+                  Stammer i aller størst grad fra <b className="font-medium">{dominantPollutantFactorString}</b>
                 </>
               )}
             </p>
