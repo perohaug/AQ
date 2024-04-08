@@ -32,8 +32,8 @@ const getRandomLane = (lane: string) => {
 export const PM25: React.FC<Props> = ({ lane }) => (
   <circle cx="0" cy="0" r="3" fill={particleInfo.liten.color} stroke={particleInfo.liten.color} strokeWidth={5}>
     <animateMotion
-      dur={`${generateRandomDuration()}s`}
-      begin={`${generateRandomDuration() % 1}s`}
+      dur={`${generateRandomDuration() * 1.5}s`}
+      begin={`${generateRandomDuration() % 2}s`}
       repeatCount="indefinite"
       fill="freeze" // "freeze" or "remove"
     >
@@ -64,6 +64,19 @@ export const GasParticle: React.FC<Props> = ({ lane }) => (
       fill="freeze" // "freeze" or "remove"
     >
       <mpath href={lane} />
+    </animateMotion>
+  </circle>
+);
+
+export const NoGasParticle: React.FC<Props> = ({ lane }) => (
+  <circle cx="0" cy="0" r="7" fill={particleInfo.gass2.color} id="nogas">
+    <animateMotion
+      dur={`${generateRandomDuration() * 1.5}s`}
+      begin={`${generateRandomDuration() % 1}s`}
+      repeatCount="indefinite"
+      fill="freeze" // "freeze" or "remove"
+    >
+      <mpath href={getRandomLane(lane)} />
     </animateMotion>
   </circle>
 );

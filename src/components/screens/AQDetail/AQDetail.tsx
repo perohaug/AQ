@@ -200,7 +200,8 @@ function LearnMore() {
             <BouncingSVGElements
               pm10={data?.data.time[0].variables.AQI.pm10}
               pm25={data?.data.time[0].variables.AQI.pm25}
-              gas={gasConc}
+              gas={data?.data.time[0].variables.AQI.o3}
+              nogas={data?.data.time[0].variables.AQI.no2}
               showLungs={true}
               height={900}
               compare={false}
@@ -213,8 +214,12 @@ function LearnMore() {
                 Bpm10={compareData.data.time[0].variables.AQI.pm10}
                 pm25={data?.data.time[0].variables.AQI.pm25}
                 Bpm25={compareData.data.time[0].variables.AQI.pm25}
-                gas={gasConc}
-                Bgas={gasConc2}
+                // gas={gasConc}
+                gas={data?.data.time[0].variables.AQI.o3}
+                nogas={data?.data.time[0].variables.AQI.no2}
+                // nogas={gasConc}
+                Bgas={compareData.data.time[0].variables.AQI.o3}
+                Bnogas={compareData.data.time[0].variables.AQI.no2}
                 showLungs={true}
                 height={900}
                 compare={true}
