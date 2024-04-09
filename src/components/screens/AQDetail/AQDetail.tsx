@@ -93,6 +93,9 @@ function LearnMore() {
     }
   };
 
+  const compareVar: number = 10;
+  const singleVar: number = 15;
+
   const listWithOtherOptions: otherOpt[] = [
     {
       value: 'amsterdam',
@@ -198,9 +201,10 @@ function LearnMore() {
         <div className="absolute left-0 w-full flex justify-center items-center">
           {!isViewMore && (
             <BouncingSVGElements
-              pm10={data?.data.time[0].variables.AQI.pm10}
-              pm25={data?.data.time[0].variables.AQI.pm25}
-              gas={gasConc}
+              pm10={data?.data.time[0].variables.AQI.pm10 * singleVar}
+              pm25={data?.data.time[0].variables.AQI.pm25 * singleVar}
+              gas={data?.data.time[0].variables.AQI.o3 * singleVar}
+              nogas={data?.data.time[0].variables.AQI.no2 * singleVar}
               showLungs={true}
               height={900}
               compare={false}
@@ -209,15 +213,17 @@ function LearnMore() {
           {isViewMore && compareData && (
             <div>
               <BouncingSVGElements
-                pm10={data?.data.time[0].variables.AQI.pm10}
-                Bpm10={compareData.data.time[0].variables.AQI.pm10}
-                pm25={data?.data.time[0].variables.AQI.pm25}
-                Bpm25={compareData.data.time[0].variables.AQI.pm25}
-                gas={gasConc}
-                Bgas={gasConc2}
+                pm10={data?.data.time[0].variables.AQI.pm10 * compareVar}
+                pm25={data?.data.time[0].variables.AQI.pm25 * compareVar}
+                gas={data?.data.time[0].variables.AQI.o3 * compareVar}
+                nogas={data?.data.time[0].variables.AQI.no2 * compareVar}
+                compare={true}
                 showLungs={true}
                 height={900}
-                compare={true}
+                Bpm10={compareData.data.time[0].variables.AQI.pm10 * compareVar}
+                Bpm25={compareData.data.time[0].variables.AQI.pm25 * compareVar}
+                Bgas={compareData.data.time[0].variables.AQI.o3 * compareVar}
+                Bnogas={compareData.data.time[0].variables.AQI.no2 * compareVar}
               />
             </div>
           )}
@@ -253,7 +259,7 @@ function LearnMore() {
                     className=" badge badge-lg text-xl text-white font-light px-[0.65em] pb-[0.8em] pt-[0.7em] mt-44"
                     style={{ backgroundColor: '#192E54', borderColor: '#192E54', whiteSpace: 'nowrap' }}
                   >
-                    {data?.location.name.split(',')[0]}
+                    {data?.location.name !== 'Trondheim, E6-Tiller' ? data?.location.name.split(',')[0] : 'Velg By'}
                   </div>
                 </div>
                 <div className="absolute top-1/4 left-1/4 ml-72 mt-80 transform">
@@ -301,6 +307,17 @@ function LearnMore() {
                         Søk
                       </button>
                     </div>
+                    {isViewMore && data && compareData && (
+                      <div className="ml-12 mt-28 absolute bg-gray-200 text-center text-4xl">
+                        {compareData.location.name.split(',')[0]} vs. {data.location.name.split(',')[0]}
+                        <br />
+                        {compareData.dominantPollutant} vs. {data.dominantPollutant}
+                        <br />
+                        {compareData.data.time[0].variables.AQI.text} vs. {data.data.time[0].variables.AQI.text}
+                        <br />
+                        {compareData.data.time[0].from.getDay()} vs. {data.data.time[0].from.getDay()}
+                      </div>
+                    )}
                   </div>
                 </div>
               </>

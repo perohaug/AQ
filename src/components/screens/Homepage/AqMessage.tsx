@@ -22,7 +22,6 @@ function AqMessage({ aqValue = 'low', location }: AqMessageProps) {
     setIsModalOpen(false);
   };
 
-
   return (
     <div className="flex justify-center mt-12 mb-10">
       <div className="flex justify-center">
