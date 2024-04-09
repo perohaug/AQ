@@ -11,6 +11,7 @@ import { APIStandard, stdconcentration, stdconcentrations } from '~/components/l
 import MainPollutants from './MainPollutants';
 import HealthRiskModal from '../HealthRiskModal';
 import { Link } from 'react-router-dom';
+import { particleInfo } from '../TextContent/particleInfo';
 
 interface otherOpt {
   value: string;
@@ -54,6 +55,43 @@ function LearnMore() {
 
   const aqValue = data?.data.time[0].variables.AQI.text;
   const aqColor = aqValue ? aqMessage[aqValue].color : 'low';
+
+  function findParticleName(particleKey: string): string | null {
+    switch (particleKey) {
+      case 'pm10':
+        return particleInfo.stor.name;
+      case 'pm25':
+        return particleInfo.liten.name;
+      case 'o3':
+        return particleInfo.gass1.name;
+      case 'no2':
+        return particleInfo.gass2.name;
+      default:
+        return null;
+    }
+  }
+
+  function findParticleColor(particleKey: string): string {
+    switch (particleKey) {
+      case 'pm10':
+        return particleInfo.stor.color;
+      case 'pm25':
+        return particleInfo.liten.color;
+      case 'o3':
+        return particleInfo.gass1.color;
+      case 'no2':
+        return particleInfo.gass2.color;
+      default:
+        return '#ffffff';
+    }
+  }
+
+  const defaultName =
+    compareData && compareData.dominantPollutant ? findParticleName(compareData.dominantPollutant) : null;
+  const compareName = data && data.dominantPollutant ? findParticleName(data.dominantPollutant) : null;
+  const defaultColor: string =
+    compareData && compareData.dominantPollutant ? findParticleColor(compareData.dominantPollutant) : '#FFFFFF';
+  const compareColor: string = data && data.dominantPollutant ? findParticleColor(data.dominantPollutant) : '#FFFFFF';
 
   useEffect(() => {
     const fetchStations = async () => {
@@ -307,15 +345,24 @@ function LearnMore() {
                         Søk
                       </button>
                     </div>
-                    {isViewMore && data && compareData && (
-                      <div className="ml-12 mt-28 absolute bg-gray-200 text-center text-4xl">
-                        {compareData.location.name.split(',')[0]} vs. {data.location.name.split(',')[0]}
+
+                    {isViewMore && data && compareData && data.location.name != 'Trondheim, E6-Tiller' && (
+                      <div className="ml-16 mt-48 absolute text-xl font-extralight">
+                        <div className="flex flex-row mb-10">
+                          <svg className="w-10 h-10 mr-3" viewBox="0 0 70 70">
+                            <circle cx="35" cy="35" r="35" fill={defaultColor} />
+                          </svg>
+                          {defaultName} er dominerende i {compareData.location.name.split(',')[0]}
+                        </div>
+
+                        <div className="flex flex-row">
+                          <svg className="w-10 h-10 mr-3" viewBox="0 0 70 70">
+                            <circle cx="35" cy="35" r="35" fill={compareColor} />
+                          </svg>{' '}
+                          {compareName} er dominerende i {data.location.name.split(',')[0]}
+                        </div>
+
                         <br />
-                        {compareData.dominantPollutant} vs. {data.dominantPollutant}
-                        <br />
-                        {compareData.data.time[0].variables.AQI.text} vs. {data.data.time[0].variables.AQI.text}
-                        <br />
-                        {compareData.data.time[0].from.getDay()} vs. {data.data.time[0].from.getDay()}
                       </div>
                     )}
                   </div>
