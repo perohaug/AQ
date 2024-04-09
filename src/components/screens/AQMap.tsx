@@ -347,7 +347,7 @@ function AQMap() {
           zoom={14}
           scrollWheelZoom={false}
         >
-          <ChangeView center={[data?.location.longitude || 12.1, data?.location.latitude || 69]} zoom={12} />
+          <ChangeView center={[data?.location.longitude || 12.1, data?.location.latitude || 69]} zoom={11.5} />
           <TileLayer
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
