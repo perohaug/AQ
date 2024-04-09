@@ -343,11 +343,11 @@ function AQMap() {
         </div>
         <MapContainer
           className="basis-2/3 m-auto z-0 h-[500px] bg-white  rounded-2xl"
-          center={[data?.location.longitude || 12.1, data?.location.latitude || 69]}
+          center={[data?.location.longitude || 69, data?.location.latitude || 10]}
           zoom={14}
           scrollWheelZoom={false}
         >
-          <ChangeView center={[data?.location.longitude || 12.1, data?.location.latitude || 69]} zoom={11.5} />
+          <ChangeView center={[data?.location.longitude || 69, data?.location.latitude || 12]} zoom={11.5} />
           <TileLayer
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -355,7 +355,7 @@ function AQMap() {
           <LayerGroup>
             <Circle
               radius={100}
-              center={[data?.location.longitude || 12.1, data?.location.latitude || 69]}
+              center={[data?.location.longitude || 69, data?.location.latitude || 13]}
               pathOptions={{
                 fillColor: aqMessage[data?.data.time[0].variables.AQI.text || 'low'].color,
                 stroke: false,
