@@ -98,7 +98,7 @@ function AQMap() {
     // };
     fetchStations();
     handleSubmit();
-    addData(allOptions);
+    // addData(allOptions);
     // fetchStationValues(stations);
     // stations.map((station) => fetchStationValues(station.eoi));
     // console.log(stationValue);

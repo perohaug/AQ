@@ -1,7 +1,5 @@
-import { Dialog } from '@headlessui/react';
-import { lazy, Suspense, useState, useEffect, useRef } from 'react';
+import { lazy, Suspense, useState, useEffect, useRef, createContext, useContext } from 'react';
 import { Outlet, RouteObject, useRoutes, BrowserRouter, Link } from 'react-router-dom';
-import AQMap from '../screens/AQMap';
 import { aqMessage } from '../screens/TextContent/aqMessageInfo';
 import { Header } from './Header';
 import useDataFetcher, { ApiResponse } from '../lib/API/DataFetcher';
@@ -15,9 +13,12 @@ const LearnMore = lazy(() => import('~/components/screens/AQDetail/AQDetail'));
 const Map = lazy(() => import('~/components/screens/AQMap'));
 
 function Layout() {
+  type StationContextType = 'NO0102A' | 'bangkok';
+  // const StationContext = createContext<StationContextType>('bangkok');
+  // const StationContext = createContext<StationContextType>('bangkok');
   const { fetchData, status, data, error }: ApiResponse = useDataFetcher();
   const handleSubmit = async () => {
-    await fetchData('https://api.met.no/weatherapi/airqualityforecast/0.1/?station=NO0102A');
+    await fetchData(`https://api.met.no/weatherapi/airqualityforecast/0.1/?station=NO0102A`);
     //await fetchData('https://api.waqi.info/feed/bangkok/?token=22f37ad5c0fae31b55ee3304697b74c44a1a4cd0');
   };
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -41,7 +42,10 @@ function Layout() {
     target.style.fontWeight = '250';
   };
 
+  // const station = useContext(StationContext);
+
   return (
+    // <StationContext.Provider value={station}>
     <div>
       {/* Insert style tag on the nav-tag */}
       <nav className="p-4  bg-primary">
@@ -126,13 +130,18 @@ function Layout() {
       </nav>
       <Outlet />
     </div>
+    // </StationContext.Provider>
   );
 }
 
 export const Router = () => {
+  // type StationContextType = 'NO0102A' | 'bangkok';
+  // const StationContext = createContext<StationContextType>('NO0102A'); // default value for station context is NO0102A.
   return (
     <BrowserRouter>
+      {/* <StationContext.Provider value="NO0102A"> */}
       <InnerRouter />
+      {/* </StationContext.Provider> */}
     </BrowserRouter>
   );
 };
@@ -173,6 +182,3 @@ const InnerRouter = () => {
     </div>
   );
 };
-function fetchData(arg0: string) {
-  throw new Error('Function not implemented.');
-}
