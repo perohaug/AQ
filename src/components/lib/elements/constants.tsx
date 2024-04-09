@@ -3,10 +3,12 @@ import { particleInfo } from '~/components/screens/TextContent/particleInfo';
 
 interface Props extends SVGProps<SVGCircleElement> {
   lane: string;
+  dur: number;
+  comp?: number;
 }
 
 const generateRandomDuration = () => {
-  const randomValue = Math.random() * (20 - 5) + 5;
+  const randomValue = Math.random() * 20 + 15;
   const roundedValue = Math.round(randomValue * 10) / 10; // Round to one decimal place
   return roundedValue; // Random number between 5 and 20
 };
@@ -29,10 +31,12 @@ const getRandomLane = (lane: string) => {
   }
 };
 
-export const PM25: React.FC<Props> = ({ lane }) => (
+export const PM25: React.FC<Props> = ({ lane, dur }) => (
   <circle cx="0" cy="0" r="3" fill={particleInfo.liten.color} stroke={particleInfo.liten.color} strokeWidth={5}>
     <animateMotion
-      dur={`${generateRandomDuration() * 1.5}s`}
+      // dur={`${15}s`}
+      // begin={`${dur}s`}
+      dur={`${generateRandomDuration() * 2}s`}
       begin={`${generateRandomDuration() % 2}s`}
       repeatCount="indefinite"
       fill="freeze" // "freeze" or "remove"
@@ -42,11 +46,13 @@ export const PM25: React.FC<Props> = ({ lane }) => (
   </circle>
 );
 
-export const PM10: React.FC<Props> = ({ lane }) => (
-  <circle cx="0" cy="0" r="12" fill={particleInfo.stor.color} stroke={particleInfo.stor.color} strokeWidth={3}>
+export const PM10: React.FC<Props> = ({ lane, dur }) => (
+  <circle cx="0" cy="0" r="8" fill={particleInfo.stor.color} stroke={particleInfo.stor.color} strokeWidth={3}>
     <animateMotion
-      dur={`${generateRandomDuration()}s`}
+      dur={`${generateRandomDuration() * 1.3}s`}
       begin={`${generateRandomDuration() % 1}s`}
+      // dur={`${15}s`}
+      // begin={`${dur}s`}
       repeatCount="indefinite"
       fill="freeze" // "freeze" or "remove"
     >
@@ -55,10 +61,12 @@ export const PM10: React.FC<Props> = ({ lane }) => (
   </circle>
 );
 
-export const GasParticle: React.FC<Props> = ({ lane }) => (
-  <circle cx="0" cy="0" r="9" fill={particleInfo.gass1.color} id="gas">
+export const GasParticle: React.FC<Props> = ({ lane, dur, comp }) => (
+  <circle cx="0" cy="0" r="7" fill={particleInfo.gass1.color} id="gas">
     <animateMotion
-      dur={`${generateRandomDuration() / 3}s`}
+      // dur={`${15}s`}
+      // begin={`${dur}s`}
+      dur={`${(generateRandomDuration() / (comp || 1)) * 1.3}s`}
       begin={`${generateRandomDuration() % 1}s`}
       repeatCount="indefinite"
       fill="freeze" // "freeze" or "remove"
@@ -68,11 +76,13 @@ export const GasParticle: React.FC<Props> = ({ lane }) => (
   </circle>
 );
 
-export const NoGasParticle: React.FC<Props> = ({ lane }) => (
-  <circle cx="0" cy="0" r="7" fill={particleInfo.gass2.color} id="nogas">
+export const NoGasParticle: React.FC<Props> = ({ lane, dur }) => (
+  <circle cx="0" cy="0" r="4" fill={particleInfo.gass2.color} id="nogas">
     <animateMotion
-      dur={`${generateRandomDuration() * 1.5}s`}
-      begin={`${generateRandomDuration() % 1}s`}
+      // dur={`${15}s`}
+      // begin={`${dur}s`}
+      dur={`${generateRandomDuration() * 2}s`}
+      begin={`${generateRandomDuration() % 2}s`}
       repeatCount="indefinite"
       fill="freeze" // "freeze" or "remove"
     >

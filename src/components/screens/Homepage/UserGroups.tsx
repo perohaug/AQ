@@ -60,9 +60,9 @@ function UserGroups({ aqValue = 'low' }: { aqValue?: string }) {
         )}
         <AirFlowSVG aqColor={aqMessageValue.color} />
         <div className="absolute left-40">
-          <Link to="/learn">
+          <Link to="/learn" className="z-50">
             <button
-              className="rounded-full bg-blue-800 text-white text-3xl px-4 py-2 hover:scale-105 transition-transform duration-300 font-extralight"
+              className="rounded-full bg-blue-800 text-white text-3xl px-4 py-2 hover:scale-105 transition-transform duration-300 font-extralight z-30"
               style={{ width: '200px', height: '200px', backgroundColor: '#fb5607' }}
             >
               Se mer om luften!
