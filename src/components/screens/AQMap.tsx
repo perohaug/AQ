@@ -7,7 +7,7 @@ import Select from 'react-select';
 import { Head } from '../shared/Head';
 import { useEffect, useRef, useState } from 'react';
 import { stdconcentrations } from '../lib/API/APIResponse';
-import MainPollutants from './AQDetail/MainPollutants';
+import MainPollutants2 from './MainPollutants2';
 import HealthRiskModal from './HealthRiskModal';
 
 interface otherOpt {
@@ -234,8 +234,8 @@ function AQMap() {
   return (
     <>
       <Head title="TOP PAGE" />
-      <div>
-        <div className="flex flex-row justify-center mb-10">
+      <div className="flex flex-col items-center">
+        <div className="mb-10 flex flex-row ">
           <h1 className="text-5xl rock-3d-logo">
             <b>JegPuster</b>
           </h1>
@@ -249,12 +249,12 @@ function AQMap() {
                   cx={40}
                   cy={40}
                   r={20}
-                  fill={aqColor} // Adjust opacity as needed (0.3 for example)
+                  fill={aqColor}
                   opacity={0.5}
                   style={{ animation: 'expandShrink 1s infinite alternate' }}
                 />
                 {/* Tinier circle */}
-                <circle cx={40} cy={40} r={25} fill={aqColor} /> {/* Adjust the radius as needed */}
+                <circle cx={40} cy={40} r={25} fill={aqColor} />
               </svg>
               <style>
                 {`
@@ -275,139 +275,129 @@ function AQMap() {
             {isModalOpen && <HealthRiskModal closeModal={closeModal} />}
           </div>
         </div>
-        <div>
-          <div className="text-center text-xl">
-            <i>
-              <b>Disclaimer:</b> Kartet viser ikke en helt presis representasjon av luften, men gir en indikasjon.
-            </i>
+
+        <div className="text-center text-xl">
+          <i>
+            <b>Disclaimer:</b> Kartet viser ikke en helt presis representasjon av luften, men gir en indikasjon.
+          </i>
+        </div>
+      </div>
+      <div className="flex flex-col items-center mt-6 mb-4">
+        <div className="flex flex-row mb-4">
+          <Select
+            className="rounded-full w-80 text-xl"
+            options={allOptions}
+            placeholder="Skriv inn by.."
+            isSearchable={true}
+            onChange={(selectedOption) => setSelectedStation(selectedOption?.value || null)}
+            ref={inputRef}
+            styles={{
+              control: (provided) => ({
+                ...provided,
+                borderRadius: '6rem',
+              }),
+              input: (provided) => ({
+                ...provided,
+                color: 'grey',
+              }),
+              placeholder: (provided) => ({
+                ...provided,
+                color: 'grey',
+              }),
+              singleValue: (provided) => ({
+                ...provided,
+                color: 'grey',
+              }),
+              dropdownIndicator: (provided) => ({
+                ...provided,
+                color: 'grey',
+              }),
+              indicatorSeparator: (provided) => ({
+                ...provided,
+                backgroundColor: 'none',
+              }),
+            }}
+          />
+
+          <button
+            className="text-xl ml-3 p-3 rounded-full text-white mr-auto py-2 px-4 hover:bg-opacity-90 focus:outline-none bg-[#fb5607]"
+            onClick={handleSubmit}
+          >
+            Søk
+          </button>
+        </div>
+      </div>
+
+      <div className="flex flex-row justify-center ml-20">
+        <div className="font-extralight text-2xl mr-20">
+          <div
+            className="mt-10 mb-16 badge badge-lg text-white text-2xl font-extralight px-[0.65em] pb-[0.8em] pt-[0.7em] whitespace-nowrap"
+            style={{ backgroundColor: '#192E54', borderColor: '#192E54' }}
+          >
+            Utforsk luftkvalitet i kartet
+          </div>
+          <div className="flex flex-col items-center">
+            <p className="mb-8">1. Skriv inn sted i søkefeltet </p>
+            <p className="mb-8">eller</p>
+            <p>2. Trykk på punktene i kartet </p>
           </div>
         </div>
-        <div className="flex flex-col items-center ">
-          <div className="flex flex-row justify-center">
-            <Select
-              className="rounded-full w-80"
-              options={allOptions}
-              placeholder="Skriv inn by.."
-              isSearchable={true}
-              onChange={(selectedOption) => setSelectedStation(selectedOption?.value || null)}
-              ref={inputRef}
-              styles={{
-                control: (provided) => ({
-                  ...provided,
-                  borderRadius: '6rem',
-                }),
-                input: (provided) => ({
-                  ...provided,
-                  color: 'grey',
-                }),
-                placeholder: (provided) => ({
-                  ...provided,
-                  color: 'grey',
-                }),
-                singleValue: (provided) => ({
-                  ...provided,
-                  color: 'grey',
-                }),
-                dropdownIndicator: (provided) => ({
-                  ...provided,
-                  color: 'grey',
-                }),
-                indicatorSeparator: (provided) => ({
-                  ...provided,
-                  backgroundColor: 'none',
-                }),
+        <MapContainer
+          className="basis-2/3 m-auto z-0 h-[500px] bg-white  rounded-2xl"
+          center={[data?.location.longitude || 12.1, data?.location.latitude || 69]}
+          zoom={14}
+          scrollWheelZoom={false}
+        >
+          <ChangeView center={[data?.location.longitude || 12.1, data?.location.latitude || 69]} zoom={12} />
+          <TileLayer
+            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+          />
+          <LayerGroup>
+            <Circle
+              radius={100}
+              center={[data?.location.longitude || 12.1, data?.location.latitude || 69]}
+              pathOptions={{
+                fillColor: aqMessage[data?.data.time[0].variables.AQI.text || 'low'].color,
+                stroke: false,
+                fillOpacity: 1,
               }}
             />
-
-            <button
-              className="ml-3 p-3 rounded-full text-white mr-auto py-2 px-4 hover:bg-opacity-90 focus:outline-none bg-[#fb5607]"
-              onClick={handleSubmit}
-            >
-              Søk
-            </button>
-          </div>
-          <div className="flex flex-wrap mt-5 display-inline w-full">
-            {/* <MyMap
-              latitude={data?.location.latitude || 12.1}
-              longitude={data?.location.longitude || 69}
-              // station={data?.location.areacode || 'Error'}
-              station={data?.location.name || 'Error'}
-              AQI={data?.data.time[0].variables.AQI.text || 'low'}
-              allStations={stations}
-              stationValues={stationValue}
-            /> */}
-            <MapContainer
-              className="basis-1/3 m-auto z-0 h-[500px] bg-white  rounded-2xl"
+            <Circle
+              radius={1000}
               center={[data?.location.longitude || 12.1, data?.location.latitude || 69]}
-              zoom={14}
-              scrollWheelZoom={false}
-            >
-              <ChangeView center={[data?.location.longitude || 12.1, data?.location.latitude || 69]} zoom={12} />
-              <TileLayer
-                attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-              />
-              <LayerGroup>
-                <Circle
-                  radius={100}
-                  center={[data?.location.longitude || 12.1, data?.location.latitude || 69]}
-                  pathOptions={{
-                    fillColor: aqMessage[data?.data.time[0].variables.AQI.text || 'low'].color,
-                    stroke: false,
-                    fillOpacity: 1,
-                  }}
-                />
-                <Circle
-                  radius={1000}
-                  center={[data?.location.longitude || 12.1, data?.location.latitude || 69]}
-                  pathOptions={{
-                    fillColor: aqMessage[data?.data.time[0].variables.AQI.text || 'low'].color,
-                    stroke: false,
-                    fillOpacity: 0.7,
-                  }}
-                ></Circle>
-              </LayerGroup>
-              <LayerGroup>
-                {stations.map((station, index) => (
-                  <Circle
-                    key={index}
-                    center={[station.latitude, station.longitude]}
-                    radius={200}
-                    pathOptions={{
-                      fillColor: aqMessage[station.eoi || 'high']?.color || 'black',
-                      stroke: false,
-                      fillOpacity: 1,
-                    }}
-                    eventHandlers={{ click: (event: LeafletMouseEvent) => handleClick(station.eoi) }}
-                  ></Circle>
-                ))}
-                {/* {positionValue &&
-                  positionValue.map((objects, index) => (
-                    <Circle
-                      key={index}
-                      center={[objects.latitude, objects.longitude]}
-                      radius={100}
-                      pathOptions={{
-                        fillColor: aqMessage[objects.AQI].color,
-                        stroke: false,
-                        fillOpacity: 1,
-                      }}
-                      eventHandlers={{ click: (event: LeafletMouseEvent) => handleClick(objects.eoi) }}
-                    ></Circle>
-                  ))} */}
-              </LayerGroup>
-            </MapContainer>
-            {data && (
-              <div className="absolute right-1/2">
-                <MainPollutants
-                  highestPoll={data?.dominantPollutant}
-                  origin={data?.data.time[0].variables.concentrations}
-                  location={data.location.name}
-                ></MainPollutants>
-              </div>
-            )}
+              pathOptions={{
+                fillColor: aqMessage[data?.data.time[0].variables.AQI.text || 'low'].color,
+                stroke: false,
+                fillOpacity: 0.7,
+              }}
+            ></Circle>
+          </LayerGroup>
+          <LayerGroup>
+            {stations.map((station, index) => (
+              <Circle
+                key={index}
+                center={[station.latitude, station.longitude]}
+                radius={200}
+                pathOptions={{
+                  fillColor: aqMessage[station.eoi || 'high']?.color || 'black',
+                  stroke: false,
+                  fillOpacity: 1,
+                }}
+                eventHandlers={{ click: (event: LeafletMouseEvent) => handleClick(station.eoi) }}
+              ></Circle>
+            ))}
+          </LayerGroup>
+        </MapContainer>
+        {data && (
+          <div className="mt-10">
+            <MainPollutants2
+              highestPoll={data?.dominantPollutant}
+              origin={data?.data.time[0].variables.concentrations}
+              location={data.location.name}
+            ></MainPollutants2>
           </div>
-        </div>
+        )}
       </div>
     </>
   );

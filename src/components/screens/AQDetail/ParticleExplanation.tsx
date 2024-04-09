@@ -32,7 +32,7 @@ function ParticleExplanation() {
   return (
     <div>
       <div
-        className="badge badge-lg text-xl text-white font-light px-[0.65em] pb-[0.8em] pt-[0.7em] mt-10 mb-10 ml-32"
+        className="badge badge-lg text-2xl text-white font-extralight px-[0.65em] pb-[0.8em] pt-[0.7em] mt-10 mb-10 ml-32"
         style={{ backgroundColor: '#192E54', borderColor: '#192E54' }}
       >
         Hva er i luften?
@@ -47,23 +47,23 @@ function ParticleExplanation() {
             <circle cx="35" cy="35" r="35" fill={particleInfo.stor.color} />
           </svg>
           {expanded.particle1 ? (
-            <p className="font-medium text-lg">{particleInfo.stor.name}</p>
+            <p className="font-medium text-xl">{particleInfo.stor.name}</p>
           ) : (
-            <p className="font-light text-lg"> {particleInfo.stor.name}</p>
+            <p className="font-light text-xl"> {particleInfo.stor.name}</p>
           )}
         </div>
         {/* Second SVG */}
         <div
-          className="cursor-pointer ml-4 flex flex-col items-center justify-start mt-5 hover:scale-110 transition-transform duration-300"
+          className="cursor-pointer ml-4 flex flex-col items-center justify-start mb-3 hover:scale-110 transition-transform duration-300"
           onClick={() => handleExpand('particle2')}
         >
           <svg className="mb-3  w-10 h-10" viewBox="0 0 70 70">
             <circle cx="35" cy="35" r="35" fill={particleInfo.liten.color} />
           </svg>
           {expanded.particle2 ? (
-            <p className="font-medium text-lg">{particleInfo.liten.name}</p>
+            <p className="font-medium text-xl">{particleInfo.liten.name}</p>
           ) : (
-            <p className="font-light text-lg"> {particleInfo.liten.name}</p>
+            <p className="font-light text-xl"> {particleInfo.liten.name}</p>
           )}
         </div>
         {/* Third SVG */}
@@ -75,23 +75,23 @@ function ParticleExplanation() {
             <circle cx="35" cy="35" r="35" fill={particleInfo.gass1.color} />
           </svg>
           {expanded.particle3 ? (
-            <p className="font-medium text-lg">{particleInfo.gass1.name}</p>
+            <p className="font-medium text-xl">{particleInfo.gass1.name}</p>
           ) : (
-            <p className="font-light text-lg"> {particleInfo.gass1.name}</p>
+            <p className="font-light text-xl"> {particleInfo.gass1.name}</p>
           )}
         </div>
         {/* Fourth SVG */}
         <div
-          className="cursor-pointer ml-8 mt-3 flex flex-col items-center justify-start hover:scale-110 transition-transform duration-300"
+          className="cursor-pointer ml-8 mb-3 flex flex-col items-center justify-start hover:scale-110 transition-transform duration-300"
           onClick={() => handleExpand('particle4')}
         >
           <svg className="mb-3 w-10 h-10" viewBox="0 0 70 70">
             <circle cx="35" cy="35" r="35" fill={particleInfo.gass2.color} />
           </svg>
           {expanded.particle4 ? (
-            <p className="font-medium text-lg">{particleInfo.gass2.name}</p>
+            <p className="font-medium text-xl">{particleInfo.gass2.name}</p>
           ) : (
-            <p className="font-light text-lg"> {particleInfo.gass2.name}</p>
+            <p className="font-light text-xl"> {particleInfo.gass2.name}</p>
           )}
         </div>
       </div>
@@ -119,9 +119,9 @@ function ParticleExplanation() {
       {expanded.particle1 || expanded.particle2 || expanded.particle3 || expanded.particle4 ? (
         <p></p>
       ) : (
-        <div className="mt-10 ml-12 text-center text-lg font-light" style={{ maxWidth: '350px' }}>
+        <div className="mt-10 ml-12 text-center text-xl font-extralight" style={{ maxWidth: '350px' }}>
           <p className="mb-3">
-            Dette er luftforurensninger som kan forårsake luftveissykdommer, hjerte- og karsykdommer.
+            Sirklene over representerer luftforurensninger som kan forårsake luftveissykdommer, hjerte- og karsykdommer.
           </p>
           <p>
             Virkningen er avhengig av blant annet konsentrasjonen av forurensing i luften, eksponeringsvarighet og
@@ -131,7 +131,7 @@ function ParticleExplanation() {
       )}
       {/* Description for the first SVG */}
       {expanded.particle1 && (
-        <div className="mt-10 ml-12 text-center text-lg font-light" style={{ maxWidth: '350px' }}>
+        <div className="mt-10 ml-12 text-center text-xl font-extralight" style={{ maxWidth: '350px' }}>
           <p className="mb-3">
             Hovedkilde er <b className="font-medium">hovedveier</b>, inkludert partikler fra dekk og asfalt
           </p>
@@ -143,7 +143,7 @@ function ParticleExplanation() {
       )}
       {/* Description for the second SVG */}
       {expanded.particle2 && (
-        <div className="mt-10 ml-12 text-center text-lg font-light" style={{ maxWidth: '350px' }}>
+        <div className="mt-10 ml-12 text-center text-xl font-extralight" style={{ maxWidth: '350px' }}>
           <p className=" mb-3">
             Hovedkilde er <b className="font-medium">røyk fra vedfyring og eksos</b>
           </p>
@@ -152,7 +152,7 @@ function ParticleExplanation() {
       )}
       {/* Description for the third SVG */}
       {expanded.particle3 && (
-        <div className="mt-10 ml-12 text-center text-lg font-light" style={{ maxWidth: '350px' }}>
+        <div className="mt-10 ml-12 text-center text-xl font-extralight" style={{ maxWidth: '350px' }}>
           <p className="mb-3">
             Hovedkilde er <b className="font-medium">veitrafikk</b>
           </p>
@@ -161,7 +161,7 @@ function ParticleExplanation() {
       )}
       {/* Description for the fourth SVG */}
       {expanded.particle4 && (
-        <div className="mt-10 ml-12 text-center text-lg font-light" style={{ maxWidth: '350px' }}>
+        <div className="mt-10 ml-12 text-center text-xl font-extralight" style={{ maxWidth: '350px' }}>
           <p className="mb-3">
             Hovedkilde er <b className="font-medium">veitrafikk</b>
           </p>
