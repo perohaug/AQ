@@ -256,7 +256,7 @@ function LearnMore() {
                     {data?.location.name.split(',')[0]}
                   </div>
                 </div>
-                <div className="absolute top-1/4 left-1/4 ml-72 mt-80 transform">
+                <div className="absolute top-1/4 left-1/4 ml-72 mt-60 transform">
                   <div className="flex flex-col items-center mt-40 ml-30">
                     <div className="relative flex itmes-center inline-block ml-20 text-xl">
                       <Select

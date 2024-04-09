@@ -276,10 +276,9 @@ function AQMap() {
           </div>
         </div>
 
-        <div className="text-center text-xl">
-          <i>
-            <b>Disclaimer:</b> Kartet viser ikke en helt presis representasjon av luften, men gir en indikasjon.
-          </i>
+        <div className="text-center text-xl font-light">
+          <b className="font-medium">Obs!</b> Kartet gir ikke en nøyaktig representasjon av luftkvalitet, men er en
+          generell indikasjon
         </div>
       </div>
       <div className="flex flex-col items-center mt-6 mb-4">
