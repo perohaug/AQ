@@ -352,14 +352,14 @@ function LearnMore() {
                           <svg className="w-10 h-10 mr-3" viewBox="0 0 70 70">
                             <circle cx="35" cy="35" r="35" fill={defaultColor} />
                           </svg>
-                          {defaultName} er dominerende i {compareData.location.name.split(',')[0]}
+                          {defaultName} er dominerende i {compareData.location.name}
                         </div>
 
                         <div className="flex flex-row">
                           <svg className="w-10 h-10 mr-3" viewBox="0 0 70 70">
                             <circle cx="35" cy="35" r="35" fill={compareColor} />
                           </svg>{' '}
-                          {compareName} er dominerende i {data.location.name.split(',')[0]}
+                          {compareName} er dominerende i {data.location.name}
                         </div>
 
                         <br />
