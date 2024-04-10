@@ -273,7 +273,7 @@ function LearnMore() {
 
         <div className="flex justify-center">
           <div className="flex items-center justify-center relative">
-            <div className="absolute top-1/2 mt-60 ml-80">
+            <div className=" z-30 absolute top-1/2 mt-60 ml-80">
               <button
                 className="ml-20 rounded-full bg-blue-800 text-white text-2xl px-4 hover:scale-110 transition-transform duration-300 py-2 mt-20 font-extralight"
                 style={{ width: '160px', height: '160px', backgroundColor: '#fb5607' }}
