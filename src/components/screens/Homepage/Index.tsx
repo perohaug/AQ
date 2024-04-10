@@ -8,6 +8,7 @@ import PopUp from '../PopUp';
 import { aqMessage } from '../TextContent/aqMessageInfo';
 // import { useStation, useStationUpdate } from '~/components/contexts/StationContext';
 import { useStationContext } from '~/components/contexts/StationContext';
+import BackButton from '~/components/router/BackButton';
 
 function Index() {
   const { fetchData, status, data, error }: ApiResponse = useDataFetcher();
@@ -43,6 +44,7 @@ function Index() {
   return (
     <>
       <Head title="TOP PAGE" />
+      {/* <BackButton /> */}
       <PopUp />
       <div className="min-h-screen max-w-screen bg-background">
         <div className="text-center items-center">
