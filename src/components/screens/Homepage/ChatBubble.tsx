@@ -96,7 +96,7 @@ function ChatBubble(props: ChatBubbleProps) {
           <span className="ellipsis"></span>
         )}
       </div>
-      <div className="chat-footer opacity-50 mr-10">
+      <div className="text-xl chat-footer opacity-50 mr-10">
         Sendt {hours}:{minutes}
       </div>
     </div>
