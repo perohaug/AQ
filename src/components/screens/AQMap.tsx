@@ -383,8 +383,20 @@ function AQMap() {
                   stroke: false,
                   fillOpacity: 0.8,
                 }}
-                eventHandlers={{ click: (event: LeafletMouseEvent) => handleClick(station.eoi) }}
-              ></Circle>
+                // eventHandlers={{ click: (event: LeafletMouseEvent) => handleClick(station.eoi) }}
+              >
+                <Circle
+                  key={index}
+                  center={[station.latitude, station.longitude]}
+                  radius={450}
+                  pathOptions={{
+                    fillColor: aqMessage[station.eoi || 'high']?.color || 'black',
+                    stroke: false,
+                    fillOpacity: 0,
+                  }}
+                  eventHandlers={{ click: (event: LeafletMouseEvent) => handleClick(station.eoi) }}
+                />
+              </Circle>
             ))}
           </LayerGroup>
         </MapContainer>
