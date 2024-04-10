@@ -377,24 +377,24 @@ function AQMap() {
               <Circle
                 key={index}
                 center={[station.latitude, station.longitude]}
-                radius={350}
+                radius={450}
                 pathOptions={{
                   fillColor: aqMessage[station.eoi || 'high']?.color || 'black',
                   stroke: false,
-                  fillOpacity: 0.8,
+                  fillOpacity: 0,
                 }}
+                eventHandlers={{ click: (event: LeafletMouseEvent) => handleClick(station.eoi) }}
                 // eventHandlers={{ click: (event: LeafletMouseEvent) => handleClick(station.eoi) }}
               >
                 <Circle
                   key={index}
                   center={[station.latitude, station.longitude]}
-                  radius={450}
+                  radius={350}
                   pathOptions={{
                     fillColor: aqMessage[station.eoi || 'high']?.color || 'black',
                     stroke: false,
-                    fillOpacity: 0,
+                    fillOpacity: 0.8,
                   }}
-                  eventHandlers={{ click: (event: LeafletMouseEvent) => handleClick(station.eoi) }}
                 />
               </Circle>
             ))}
