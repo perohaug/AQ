@@ -10,32 +10,32 @@ export const userGroupInfoLow: UserGroupInfo = {
     1: {
         id: 1,
         name: "Generell befolkning",
-        healthMessage: "Ingen eller liten mulighet for påvirkning av helse"
+        healthMessage: "Ingen eller liten mulighet for påvirkning av helse."
     },
     2: {
         id: 2, 
         name: "Gravide",
-        healthMessage: "Ingen eller liten mulighet for påvirkning av helse for gravide"
+        healthMessage: "Ingen eller liten mulighet for påvirkning av helse for gravide."
     },
     3: {
         id: 3,
         name: "Eldre",
-        healthMessage: "Ingen eller liten mulighet for påvirkning av helse for eldre"
+        healthMessage: "Ingen eller liten mulighet for påvirkning av helse for eldre."
     },
     4: {
         id: 4,
         name: "Barn",
-        healthMessage: "Ingen eller liten mulighet for påvirkning av helse for barn"
+        healthMessage: "Ingen eller liten mulighet for påvirkning av helse for barn."
     },
     5: {
         id: 5,
         name: "Astmatikere og luftveisplager",
-        healthMessage: "Ingen bekymring for helse for de med astma eller luftveisplager"
+        healthMessage: "Ingen bekymring for helse for de med astma eller luftveisplager."
     },
     6: {
         id: 6,
         name: "Hjerte- og karsykdommer",
-        healthMessage: "Ingen bekymring for helse for de med hjerte- og karsykdommer"
+        healthMessage: "Ingen bekymring for helse for de med hjerte- og karsykdommer."
     },
 };
 
@@ -44,12 +44,12 @@ export const userGroupInfoModerate: UserGroupInfo = {
     1: {
         id: 1,
         name: "Generell befolkning",
-        healthMessage: "Ingen eller liten mulighet for påvirkning av helse"
+        healthMessage: "Ingen eller liten mulighet for påvirkning av helse."
     },
     2: {
         id: 2, 
         name: "Gravide",
-        healthMessage: "Ingen eller liten mulighet for påvirkning av helse for gravide"
+        healthMessage: "Ingen eller liten mulighet for påvirkning av helse for gravide."
     },
     3: {
         id: 3,
@@ -59,7 +59,7 @@ export const userGroupInfoModerate: UserGroupInfo = {
     4: {
         id: 4,
         name: "Barn",
-        healthMessage: "Ingen eller liten mulighet for påvirkning av helse for barn"
+        healthMessage: "Ingen eller liten mulighet for påvirkning av helse for barn."
     },
     5: {
         id: 5,

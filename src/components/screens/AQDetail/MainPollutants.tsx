@@ -114,10 +114,10 @@ function MainPollutants({ highestPoll, origin, location }: MainPollutantsProps) 
 
   return (
     <div className="absolute flex flex-row">
-      <div className="absolute flex flex-col items-center ml-52" style={{ width: '450px' }}>
+      <div className="absolute flex flex-col items-center ml-60" style={{ width: '450px' }}>
         {/**City name */}
         <div
-          className="mb-8 badge badge-lg text-xl text-white font-light px-[0.65em] pb-[0.8em] pt-[0.7em]"
+          className="mb-8 badge badge-lg text-2xl text-white font-extralight px-[0.65em] pb-[0.8em] pt-[0.7em]"
           style={{ backgroundColor: '#192E54', borderColor: '#192E54' }}
         >
           Forurenser luften mest nå
@@ -134,20 +134,22 @@ function MainPollutants({ highestPoll, origin, location }: MainPollutantsProps) 
 
                 {dominantPollutantSVG()}
               </div>
-              <p className="font-light text-xl mt-5">{dominantPollutantName}</p>
+              <p className="font-extralight text-2xl mt-5">{dominantPollutantName}</p>
             </div>
           )}
         </div>
 
         {/**Open modal info */}
         {isModalOpen && (
-          <div className="mx-4 mt-5 flex flex-col items-center text-center text-lg font-light">
-            <p className="font-light mb-6">
+          <div className="mx-4 mt-5 flex flex-col items-center text-center text-xl font-extralight">
+            <p className="font-extralight mb-6">
               {dominantPollutantFactorString === 'utilgjengelig utenfor Norge' ? (
                 <p>Data for hva dette stammer av er {dominantPollutantFactorString}</p>
               ) : (
                 <>
-                  Stammer i aller størst grad fra <b className="font-medium">{dominantPollutantFactorString}</b>
+                  <p className="font-extralight">
+                    Stammer i aller størst grad fra <b className="font-medium">{dominantPollutantFactorString}</b>
+                  </p>
                 </>
               )}
             </p>
