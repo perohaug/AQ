@@ -297,7 +297,7 @@ function LearnMore() {
                     className=" badge badge-lg text-xl text-white font-light px-[0.65em] pb-[0.8em] pt-[0.7em] mt-44"
                     style={{ backgroundColor: '#192E54', borderColor: '#192E54', whiteSpace: 'nowrap' }}
                   >
-                    {data?.location.name !== 'Trondheim, E6-Tiller' ? data?.location.name.split(',')[0] : 'Velg By'}
+                    {data?.location.name !== 'Trondheim, E6-Tiller' ? data?.location.name.split(',')[0] : 'Velg sted'}
                   </div>
                 </div>
                 <div className="absolute top-1/4 left-1/4 ml-72 mt-60 transform">
@@ -306,7 +306,7 @@ function LearnMore() {
                       <Select
                         className="rounded-full w-60"
                         options={allOptions}
-                        placeholder="Skriv inn by.."
+                        placeholder="Skriv inn sted.."
                         isSearchable={true}
                         onChange={(selectedOption) => setSelectedStation(selectedOption?.value || null)}
                         ref={inputRef}
