@@ -168,49 +168,49 @@ function AQMap() {
     ...listWithOtherOptions,
   ];
 
-  async function addData(objects: otherOpt[]): Promise<PositionData[]> {
-    const posStations: PositionData[] = await Promise.all(
-      objects.map(async (station) => {
-        console.log('station:', station);
-        if (station.value?.startsWith('NO') || validStations.includes(station.value || '')) {
-          console.log('selectedStation:', station.value);
-          console.log('InputRef:', inputRef);
-          await fetchData2(`https://api.met.no/weatherapi/airqualityforecast/0.1/?station=${station.value}`);
-        } else {
-          await fetchData2(
-            `https://api.waqi.info/feed/${station.value}/?token=22f37ad5c0fae31b55ee3304697b74c44a1a4cd0`,
-          );
-        }
-        if (data2) {
-          setPositionValue((prevValues) => [
-            {
-              ...prevValues,
-              latitude: data2.location.latitude,
-              longitude: data2.location.longitude,
-              AQI: data2.data.time[0].variables.AQI.text,
-              station: data2.location.name,
-              eoi: data2.location.areacode,
-            },
-          ]);
-        } else {
-          setPositionValue((prevValues) => [
-            {
-              ...prevValues,
-              latitude: 10.37172,
-              longitude: 63.35781,
-              AQI: 'low',
-              station: 'Error',
-              eoi: 'Error',
-            },
-          ]);
-        }
-      }),
-    );
-    // setPositionValue(posStations);
-    console.log('posStations:', posStations);
-    return positionValue && posStations;
-  }
-  console.log('skjer her', positionValue);
+  // async function addData(objects: otherOpt[]): Promise<PositionData[]> {
+  //   const posStations: PositionData[] = await Promise.all(
+  //     objects.map(async (station) => {
+  //       console.log('station:', station);
+  //       if (station.value?.startsWith('NO') || validStations.includes(station.value || '')) {
+  //         console.log('selectedStation:', station.value);
+  //         console.log('InputRef:', inputRef);
+  //         await fetchData2(`https://api.met.no/weatherapi/airqualityforecast/0.1/?station=${station.value}`);
+  //       } else {
+  //         await fetchData2(
+  //           `https://api.waqi.info/feed/${station.value}/?token=22f37ad5c0fae31b55ee3304697b74c44a1a4cd0`,
+  //         );
+  //       }
+  //       if (data2) {
+  //         setPositionValue((prevValues) => [
+  //           {
+  //             ...prevValues,
+  //             latitude: data2.location.latitude,
+  //             longitude: data2.location.longitude,
+  //             AQI: data2.data.time[0].variables.AQI.text,
+  //             station: data2.location.name,
+  //             eoi: data2.location.areacode,
+  //           },
+  //         ]);
+  //       } else {
+  //         setPositionValue((prevValues) => [
+  //           {
+  //             ...prevValues,
+  //             latitude: 10.37172,
+  //             longitude: 63.35781,
+  //             AQI: 'low',
+  //             station: 'Error',
+  //             eoi: 'Error',
+  //           },
+  //         ]);
+  //       }
+  //     }),
+  //   );
+  //   // setPositionValue(posStations);
+  //   console.log('posStations:', posStations);
+  //   return positionValue && posStations;
+  // }
+  // console.log('skjer her', positionValue);
 
   const handleClick = async (station: string) => {
     console.log('click', isViewMore);

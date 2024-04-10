@@ -54,13 +54,15 @@ function Layout() {
           <div className="flex items-center justify-between text-2xl">
             <BackButton mouseLeave={handleMouseLeave} onMouseEnter={handleMouseEnter} />
 
-            <Link to="/map" className="absolute left-1/2 ml-80 mt-24">
+            <Link to="/map" className="absolute left-1/2 ml-80 mt-24 z-10">
               <button
                 className="ml-80 rounded-full bg-blue-800 text-white text-2xl px-4 hover:scale-110 transition-transform duration-300 py-2 font-extralight"
                 style={{ width: '120px', height: '120px', backgroundColor: '#fb5607' }}
               >
                 Se i kart
+                {/* <div className="absolute left-1/2 ml-80 z-20"> */}
               </button>
+              {/* </div> */}
             </Link>
           </div>
         )}
