@@ -419,7 +419,7 @@ const useDataFetcher = (): ApiResponse => {
         const apiResponse = await fetch(userInput);
 
         const apiDataResponse: WAQIResponse = await apiResponse.json();
-        console.log('tiss:', apiDataResponse);
+        console.log('waqi:', apiDataResponse);
 
         setApiData({
           data: {
@@ -474,6 +474,219 @@ const useDataFetcher = (): ApiResponse => {
         });
         setError(null);
         setStatus(apiResponse.status === 200 ? 'success' : 'error');
+      } else if (userInput.includes('highTest')) {
+        const apiResponse = await fetch('https://api.met.no/weatherapi/airqualityforecast/0.1/?station=NO0102A');
+        const apiDataResponse: METResponse = await apiResponse.json();
+        const timeData: stdtimes = {
+          time: apiDataResponse.data.time.map((timeEntry: METTime) => ({
+            from: new Date(timeEntry.from),
+            to: new Date(timeEntry.to),
+            variables: {
+              AQI: {
+                text: 'veryhigh',
+                value: timeEntry.variables.AQI.value.toFixed(2),
+                pm10: timeEntry.variables.AQI_pm10.value.toFixed(2),
+                pm25: timeEntry.variables.AQI_pm25.value.toFixed(2),
+                no2: timeEntry.variables.AQI_no2.value.toFixed(2),
+                o3: timeEntry.variables.AQI_o3.value.toFixed(2),
+              },
+              concentrations: {
+                PM10: {
+                  value: timeEntry.variables.pm10_concentration.value,
+                  units: 'µg/m³',
+                  topContributers: {
+                    veistov:
+                      (apiDataResponse.data.time[0].variables.pm10_local_fraction_traffic_nonexhaust.value / 100) *
+                      apiDataResponse.data.time[0].variables.pm10_concentration.value,
+                    vedfyring:
+                      (apiDataResponse.data.time[0].variables.pm10_local_fraction_heating.value / 100) *
+                      apiDataResponse.data.time[0].variables.pm10_concentration.value,
+                    industri:
+                      (apiDataResponse.data.time[0].variables.pm10_local_fraction_industry.value / 100) *
+                      apiDataResponse.data.time[0].variables.pm10_concentration.value,
+                    skip:
+                      (apiDataResponse.data.time[0].variables.pm10_local_fraction_shipping.value / 100) *
+                      apiDataResponse.data.time[0].variables.pm10_concentration.value,
+                    eksos:
+                      (apiDataResponse.data.time[0].variables.pm10_local_fraction_traffic_exhaust.value / 100) *
+                      apiDataResponse.data.time[0].variables.pm10_concentration.value,
+                    langtransport:
+                      (apiDataResponse.data.time[0].variables.pm10_nonlocal_fraction.value / 100) *
+                      apiDataResponse.data.time[0].variables.pm10_concentration.value,
+                    seasalt:
+                      (apiDataResponse.data.time[0].variables.pm10_nonlocal_fraction_seasalt.value / 100) *
+                      apiDataResponse.data.time[0].variables.pm10_concentration.value,
+                  },
+                  origin: {
+                    langtransport: {
+                      value: timeEntry.variables.pm10_nonlocal_fraction.value,
+                      units: '%',
+                    },
+                    sjosalt: {
+                      value: timeEntry.variables.pm10_nonlocal_fraction_seasalt.value,
+                      units: '%',
+                    },
+                    eksos: {
+                      value: timeEntry.variables.pm10_local_fraction_traffic_exhaust.value,
+                      units: '%',
+                    },
+                    veistov: {
+                      value: timeEntry.variables.pm10_local_fraction_traffic_nonexhaust.value,
+                      units: '%',
+                    },
+                    skip: {
+                      value: timeEntry.variables.pm10_local_fraction_shipping.value,
+                      units: '%',
+                    },
+                    vedfyring: {
+                      value: timeEntry.variables.pm10_local_fraction_heating.value,
+                      units: '%',
+                    },
+                    industri: {
+                      value: timeEntry.variables.pm10_local_fraction_industry.value,
+                      units: '%',
+                    },
+                  },
+                },
+                PM25: {
+                  value: timeEntry.variables.pm25_concentration.value,
+                  units: 'µg/m³',
+                  topContributers: {
+                    veistov:
+                      (apiDataResponse.data.time[0].variables.pm25_local_fraction_traffic_nonexhaust.value / 100) *
+                      apiDataResponse.data.time[0].variables.pm25_concentration.value,
+                    vedfyring:
+                      (apiDataResponse.data.time[0].variables.pm25_local_fraction_heating.value / 100) *
+                      apiDataResponse.data.time[0].variables.pm25_concentration.value,
+                    industri:
+                      (apiDataResponse.data.time[0].variables.pm25_local_fraction_industry.value / 100) *
+                      apiDataResponse.data.time[0].variables.pm25_concentration.value,
+                    skip:
+                      (apiDataResponse.data.time[0].variables.pm25_local_fraction_shipping.value / 100) *
+                      apiDataResponse.data.time[0].variables.pm25_concentration.value,
+                    eksos:
+                      (apiDataResponse.data.time[0].variables.pm25_local_fraction_traffic_exhaust.value / 100) *
+                      apiDataResponse.data.time[0].variables.pm25_concentration.value,
+                    langtransport:
+                      (apiDataResponse.data.time[0].variables.pm25_nonlocal_fraction.value / 100) *
+                      apiDataResponse.data.time[0].variables.pm25_concentration.value,
+                    seasalt:
+                      (apiDataResponse.data.time[0].variables.pm25_nonlocal_fraction_seasalt.value / 100) *
+                      apiDataResponse.data.time[0].variables.pm25_concentration.value,
+                  },
+                  origin: {
+                    langtransport: {
+                      value: timeEntry.variables.pm25_nonlocal_fraction.value,
+                      units: '%',
+                    },
+                    sjosalt: {
+                      value: timeEntry.variables.pm25_nonlocal_fraction_seasalt.value,
+                      units: '%',
+                    },
+                    eksos: {
+                      value: timeEntry.variables.pm25_local_fraction_traffic_exhaust.value,
+                      units: '%',
+                    },
+                    veistov: {
+                      value: timeEntry.variables.pm25_local_fraction_traffic_nonexhaust.value,
+                      units: '%',
+                    },
+                    skip: {
+                      value: timeEntry.variables.pm25_local_fraction_shipping.value,
+                      units: '%',
+                    },
+                    vedfyring: {
+                      value: timeEntry.variables.pm25_local_fraction_heating.value,
+                      units: '%',
+                    },
+                    industri: {
+                      value: timeEntry.variables.pm25_local_fraction_industry.value,
+                      units: '%',
+                    },
+                  },
+                },
+                NO2: {
+                  value: timeEntry.variables.no2_concentration.value,
+                  units: 'µg/m³',
+                  topContributers: {
+                    vedfyring:
+                      (apiDataResponse.data.time[0].variables.no2_local_fraction_heating.value / 100) *
+                      apiDataResponse.data.time[0].variables.no2_concentration.value,
+                    industri:
+                      (apiDataResponse.data.time[0].variables.no2_local_fraction_industry.value / 100) *
+                      apiDataResponse.data.time[0].variables.no2_concentration.value,
+                    skip:
+                      (apiDataResponse.data.time[0].variables.no2_local_fraction_shipping.value / 100) *
+                      apiDataResponse.data.time[0].variables.no2_concentration.value,
+                    eksos:
+                      (apiDataResponse.data.time[0].variables.no2_local_fraction_traffic_exhaust.value / 100) *
+                      apiDataResponse.data.time[0].variables.no2_concentration.value,
+                    langtransport:
+                      (apiDataResponse.data.time[0].variables.no2_nonlocal_fraction.value / 100) *
+                      apiDataResponse.data.time[0].variables.no2_concentration.value,
+                  },
+                  origin: {
+                    langtransport: {
+                      value: timeEntry.variables.no2_nonlocal_fraction.value,
+                      units: '%',
+                    },
+                    eksos: {
+                      value: timeEntry.variables.no2_local_fraction_traffic_exhaust.value,
+                      units: '%',
+                    },
+                    skip: {
+                      value: timeEntry.variables.no2_local_fraction_shipping.value,
+                      units: '%',
+                    },
+                    vedfyring: {
+                      value: timeEntry.variables.no2_local_fraction_heating.value,
+                      units: '%',
+                    },
+                    industri: {
+                      value: timeEntry.variables.no2_local_fraction_industry.value,
+                      units: '%',
+                    },
+                  },
+                },
+                O3: {
+                  value: timeEntry.variables.o3_concentration.value,
+                  units: 'µg/m³',
+                  topContributers: {
+                    langtransport:
+                      (apiDataResponse.data.time[0].variables.o3_nonlocal_fraction.value / 100) *
+                      apiDataResponse.data.time[0].variables.o3_concentration.value,
+                  },
+                  origin: {
+                    langtransport: {
+                      value: timeEntry.variables.o3_nonlocal_fraction.value,
+                      units: '%',
+                    },
+                  },
+                },
+              },
+            },
+          })),
+        };
+
+        setApiData({
+          data: timeData,
+          location: {
+            name: apiDataResponse.meta.superlocation.name + ', ' + apiDataResponse.meta.location.name,
+            path: apiDataResponse.meta.location.path,
+            longitude: parseFloat(apiDataResponse.meta.location.longitude),
+            latitude: parseFloat(apiDataResponse.meta.location.latitude),
+            areacode: apiDataResponse.meta.location.areacode,
+          },
+          stationID: apiDataResponse.meta.superlocation.superareacode,
+          dominantPollutant: domPoll(
+            apiDataResponse.data.time[0].variables.o3_concentration.value,
+            apiDataResponse.data.time[0].variables.no2_concentration.value,
+            apiDataResponse.data.time[0].variables.pm10_concentration.value,
+            apiDataResponse.data.time[0].variables.pm25_concentration.value,
+          ),
+        });
+        setError(null);
+        setStatus('success');
       }
     } catch (error) {
       setStatus('error');
