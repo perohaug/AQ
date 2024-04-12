@@ -9,11 +9,40 @@ import { aqMessage } from '../TextContent/aqMessageInfo';
 // import { useStation, useStationUpdate } from '~/components/contexts/StationContext';
 import { useStationContext } from '~/components/contexts/StationContext';
 import BackButton from '~/components/router/BackButton';
+import { APIStandard } from '~/components/lib/API/APIResponse';
 
 function Index() {
   const { fetchData, status, data, error }: ApiResponse = useDataFetcher();
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [testingData, setTestingData] = useState<APIStandard | null>(null);
+  const [testingData2, setTestingData2] = useState<APIStandard | null>(null);
   const aqValue = data?.data.time[0].variables.AQI.text || 'low';
+
+  function highData(test: APIStandard) {
+    const highTest: APIStandard = {
+      ...test,
+      data: {
+        time: [
+          {
+            from: test.data.time[0].from,
+            to: test.data.time[0].to,
+            variables: {
+              AQI: {
+                text: 'high',
+                value: 100,
+                pm10: undefined,
+                pm25: undefined,
+                no2: undefined,
+                o3: undefined,
+              },
+              concentrations: test.data.time[0].variables.concentrations,
+            },
+          },
+        ],
+      },
+    };
+    setTestingData2(highTest);
+  }
 
   const aqMessageValue = aqMessage[aqValue];
   // const stationCont: string = useStation();
@@ -34,7 +63,7 @@ function Index() {
 
   const handleSubmit = async () => {
     await fetchData(`https://api.met.no/weatherapi/airqualityforecast/0.1/?station=NO0102A`);
-    // await fetchData('https://api.waqi.info/feed/bangkok/?token=22f37ad5c0fae31b55ee3304697b74c44a1a4cd0');
+    // await fetchData(`highTest`);
   };
 
   useEffect(() => {
@@ -46,6 +75,7 @@ function Index() {
       <Head title="TOP PAGE" />
       {/* <BackButton /> */}
       <PopUp />
+
       <div className="min-h-screen max-w-screen bg-background">
         <div className="text-center items-center">
           <h1 className="text-9xl rock-3d-logo">JegPuster</h1>
