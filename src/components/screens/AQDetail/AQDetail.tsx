@@ -279,7 +279,7 @@ function LearnMore() {
                 style={{ width: '160px', height: '160px', backgroundColor: '#fb5607' }}
                 onClick={handleCompareClick}
               >
-                Utforsk luften i andre byer!
+                Sammenlikn luften med andre byer!
               </button>
             </div>
 
