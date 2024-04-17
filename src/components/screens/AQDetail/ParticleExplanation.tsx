@@ -43,7 +43,7 @@ function ParticleExplanation() {
           className="cursor-pointer flex flex-col items-center justify-start hover:scale-110 transition-transform duration-300"
           onClick={() => handleExpand('particle1')}
         >
-          <svg className="mb-3 w-16 h-16" viewBox="0 0 70 70">
+          <svg className="mb-1 w-16 h-16" viewBox="0 0 70 70">
             <circle cx="35" cy="35" r="35" fill={particleInfo.stor.color} />
           </svg>
           {expanded.particle1 ? (
@@ -54,7 +54,7 @@ function ParticleExplanation() {
         </div>
         {/* Second SVG */}
         <div
-          className="cursor-pointer ml-4 flex flex-col items-center justify-start mb-3 hover:scale-110 transition-transform duration-300"
+          className="cursor-pointer ml-4 flex flex-col items-center justify-start mt-1 hover:scale-110 transition-transform duration-300"
           onClick={() => handleExpand('particle2')}
         >
           <svg className="mb-3  w-10 h-10" viewBox="0 0 70 70">
@@ -82,7 +82,7 @@ function ParticleExplanation() {
         </div>
         {/* Fourth SVG */}
         <div
-          className="cursor-pointer ml-8 mb-3 flex flex-col items-center justify-start hover:scale-110 transition-transform duration-300"
+          className="cursor-pointer ml-8 mt-3 flex flex-col items-center justify-start hover:scale-110 transition-transform duration-300"
           onClick={() => handleExpand('particle4')}
         >
           <svg className="mb-3 w-10 h-10" viewBox="0 0 70 70">

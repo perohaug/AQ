@@ -54,7 +54,7 @@ export const userGroupInfoModerate: UserGroupInfo = {
     3: {
         id: 3,
         name: "Eldre",
-        healthMessage: "Men eldre og forverrede symptomer i luftveiene eller i hjert- og karsystemet? Da bør du vurdere å redusere høy fysisk aktvitet i de mest forurensede områdene.",
+        healthMessage: "Men eldre og forverrede symptomer i luftveiene eller i hjert- og karsystemet? Da bør du vurdere å redusere høy fysisk aktivitet i de mest forurensede områdene.",
     },
     4: {
         id: 4,
