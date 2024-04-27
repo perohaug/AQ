@@ -62,7 +62,6 @@ function ChatBubble(props: ChatBubbleProps) {
           width: 1ch;
         }
       `}</style>
-
       <div
         className={`chat-bubble bg-white text-2xl text-start font-extralight text-black px-4 py-3 mt-5 mr-10 max-w-600 transition-all font-extralight`}
         style={{

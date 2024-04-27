@@ -26,6 +26,7 @@ const Popup: React.FC = () => {
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
+    handleResetPopup();
   }, [showPopup]);
 
   const handleClosePopup = () => {
@@ -56,13 +57,16 @@ const Popup: React.FC = () => {
           <p className="text-xl font-light pb-5">
             Denne applikasjonen er utviklet som en del av et masterprosjekt ved NTNU. Prosjektet har blitt kalt
             "JegPuster", hvor formålet med prosjektet er å presentere luftkvalitetsdata på en måte som har fokus på
-            estetikk og forståelse. Vi utforsker bruken av visualiseringer for å oppnå dette målet og samtidig vurdere
-            graden av engasjement som applikasjonen genererer. Prosjektet henter luftkvalitetsdata fra åpne API-er, både
+            estetikk og forståelse. Prosjektet henter luftkvalitetsdata fra åpne API-er, både
             nasjonalt og internasjonalt.
           </p>
           <p className="text-xl font-light pb-5">
             Applikasjonen gir nåværende informasjon om luftkvaliteten, samtidig som den tilbyr dypere innsikt i luftens
             sammensetning og faktorer som påvirker kvaliteten.
+          </p>
+          <p className="text-xl font-light pb-5">
+            {' '}
+            Merk at merk at tipsene på denne siden er generelle råd, og at helsepersonell har mer omfattende kunnskap
           </p>
           <button
             onClick={handleClosePopup}
