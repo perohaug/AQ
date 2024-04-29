@@ -57,8 +57,8 @@ const Popup: React.FC = () => {
           <p className="text-xl font-light pb-5">
             Denne applikasjonen er utviklet som en del av et masterprosjekt ved NTNU. Prosjektet har blitt kalt
             "JegPuster", hvor formålet med prosjektet er å presentere luftkvalitetsdata på en måte som har fokus på
-            estetikk og forståelse. Prosjektet henter luftkvalitetsdata fra åpne API-er, både
-            nasjonalt og internasjonalt.
+            estetikk og forståelse. Prosjektet henter luftkvalitetsdata fra åpne API-er, både nasjonalt og
+            internasjonalt, og har hentet informajon på https://luftkvalitet.miljodirektoratet.no/.
           </p>
           <p className="text-xl font-light pb-5">
             Applikasjonen gir nåværende informasjon om luftkvaliteten, samtidig som den tilbyr dypere innsikt i luftens

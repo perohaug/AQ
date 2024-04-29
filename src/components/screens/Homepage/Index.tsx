@@ -68,6 +68,14 @@ function Index() {
           <AqMessage aqValue={data?.data.time[0].variables.AQI.text} location={data?.location.name} />
           <UserGroups aqValue={data?.data.time[0].variables.AQI.text} />
         </div>
+
+        <p className="text-xl font-extralight mt-48 ml-4">
+          Besøk
+          <a className="font-medium" href="https://luftkvalitet.miljodirektoratet.no/" rel="stylesheet">
+            Miljødirektoret
+          </a>
+          for mer detaljer om luftkvalitet{' '}
+        </p>
       </div>
     </>
   );
