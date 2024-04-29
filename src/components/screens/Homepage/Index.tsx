@@ -70,10 +70,10 @@ function Index() {
         </div>
 
         <p className="text-xl font-extralight mt-48 ml-4">
-          Besøk
+          Besøk{' '}
           <a className="font-medium" href="https://luftkvalitet.miljodirektoratet.no/" rel="stylesheet">
             Miljødirektoret
-          </a>
+          </a>{' '}
           for mer detaljer om luftkvalitet{' '}
         </p>
       </div>
