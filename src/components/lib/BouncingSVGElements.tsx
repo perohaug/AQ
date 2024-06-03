@@ -1,7 +1,4 @@
-import React, { useEffect } from 'react';
 import { PM25, PM10, GasParticle, NoGasParticle } from './elements/constants';
-
-// Make an interface that takes in two numbers, both should represent the amount props in the PM25 and PM10 components.
 
 interface BouncingSVGElementsProps {
   pm25: number;
@@ -32,7 +29,7 @@ const BouncingSVGElements: React.FC<BouncingSVGElementsProps> = ({
 }) => {
   {
     const generateRandomDelay = () => {
-      return Math.floor(Math.random() * (20 - 5 + 1) + 5); // Random number between 5 and 20
+      return Math.floor(Math.random() * (20 - 5 + 1) + 5);
     };
 
     const generatePM25Elements = (val: number, lane: string) => {

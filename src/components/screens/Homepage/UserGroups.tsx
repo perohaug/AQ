@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { aqMessage } from '../TextContent/aqMessageInfo';
 import { userGroupInfoLow } from '../TextContent/userGroupInfo';
 import HumanBody from '../../svgs/HumanBodySVG';

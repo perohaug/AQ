@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { APIStandard, stdconcentration, stdconcentrations } from '~/components/lib/API/APIResponse';
+import { stdconcentrations } from '~/components/lib/API/APIResponse';
 import bonfire from '~/icons/bonfire.png';
 import exhaust from '~/icons/exhaust.png';
 import longdistance from '~/icons/longdist.png';
@@ -15,10 +15,7 @@ type MainPollutantsProps = {
   location: string;
 };
 
-function MainPollutants({ highestPoll, origin, location }: MainPollutantsProps) {
-  // const { data } = props;
-  // console.log('PROPS', props);
-
+function MainPollutants({ highestPoll, origin }: MainPollutantsProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [showButtonDescription, setShowButtonDescription] = useState(true);
 
@@ -115,7 +112,6 @@ function MainPollutants({ highestPoll, origin, location }: MainPollutantsProps) 
   return (
     <div className="absolute flex flex-row">
       <div className="absolute flex flex-col items-center ml-60" style={{ width: '450px' }}>
-        {/**City name */}
         <div
           className="mb-8 badge badge-lg text-2xl text-white font-extralight px-[0.65em] pb-[0.8em] pt-[0.7em]"
           style={{ backgroundColor: '#192E54', borderColor: '#192E54' }}
@@ -123,7 +119,6 @@ function MainPollutants({ highestPoll, origin, location }: MainPollutantsProps) 
           Forurenser luften mest nå
         </div>
         <div className="flex flex-row justify-center">
-          {/**Pollutant info */}
           {highestPoll && (
             <div className="flex flex-col  items-center">
               <div
@@ -139,7 +134,6 @@ function MainPollutants({ highestPoll, origin, location }: MainPollutantsProps) 
           )}
         </div>
 
-        {/**Open modal info */}
         {isModalOpen && (
           <div className="mx-4 mt-5 flex flex-col items-center text-center text-xl font-extralight">
             <p className="font-extralight mb-6">

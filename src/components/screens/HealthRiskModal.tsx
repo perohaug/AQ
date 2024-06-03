@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { aqMessage } from './TextContent/aqMessageInfo';
 
 interface HealthRiskModalProps {

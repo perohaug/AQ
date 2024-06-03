@@ -17,7 +17,6 @@ function ParticleExplanation() {
   });
 
   const handleExpand = (particle: keyof ExpandedState) => {
-    // Toggle the expanded state for the clicked particle
     setShowButtonDescription(false);
     setExpanded((prevState) => ({
       particle1: particle === 'particle1' ? !prevState.particle1 : false,
@@ -38,7 +37,6 @@ function ParticleExplanation() {
         Hva er i luften?
       </div>
       <div className="flex flex-row items-center">
-        {/* First SVG */}
         <div
           className="cursor-pointer flex flex-col items-center justify-start hover:scale-110 transition-transform duration-300"
           onClick={() => handleExpand('particle1')}
@@ -52,7 +50,6 @@ function ParticleExplanation() {
             <p className="font-light text-xl"> {particleInfo.stor.name}</p>
           )}
         </div>
-        {/* Second SVG */}
         <div
           className="cursor-pointer ml-4 flex flex-col items-center justify-start mt-1 hover:scale-110 transition-transform duration-300"
           onClick={() => handleExpand('particle2')}
@@ -66,7 +63,6 @@ function ParticleExplanation() {
             <p className="font-light text-xl"> {particleInfo.liten.name}</p>
           )}
         </div>
-        {/* Third SVG */}
         <div
           className="cursor-pointer ml-6 flex flex-col items-center justify-start hover:scale-110 transition-transform duration-300"
           onClick={() => handleExpand('particle3')}
@@ -80,7 +76,6 @@ function ParticleExplanation() {
             <p className="font-light text-xl"> {particleInfo.gass1.name}</p>
           )}
         </div>
-        {/* Fourth SVG */}
         <div
           className="cursor-pointer ml-8 mt-3 flex flex-col items-center justify-start hover:scale-110 transition-transform duration-300"
           onClick={() => handleExpand('particle4')}
@@ -129,7 +124,6 @@ function ParticleExplanation() {
           </p>
         </div>
       )}
-      {/* Description for the first SVG */}
       {expanded.particle1 && (
         <div className="mt-10 ml-12 text-center text-xl font-extralight" style={{ maxWidth: '350px' }}>
           <p className="mb-3">
@@ -141,7 +135,6 @@ function ParticleExplanation() {
           </p>
         </div>
       )}
-      {/* Description for the second SVG */}
       {expanded.particle2 && (
         <div className="mt-10 ml-12 text-center text-xl font-extralight" style={{ maxWidth: '350px' }}>
           <p className=" mb-3">
@@ -150,7 +143,6 @@ function ParticleExplanation() {
           <p>Disse partiklene blir i mindre grad filtrert og har større evne til å trenge dypere inn i lungene</p>
         </div>
       )}
-      {/* Description for the third SVG */}
       {expanded.particle3 && (
         <div className="mt-10 ml-12 text-center text-xl font-extralight" style={{ maxWidth: '350px' }}>
           <p className="mb-3">
@@ -159,7 +151,6 @@ function ParticleExplanation() {
           <p>Denne gassen kan føre til irritasjon i de øvre luftveiene (feks nese og svelg)</p>
         </div>
       )}
-      {/* Description for the fourth SVG */}
       {expanded.particle4 && (
         <div className="mt-10 ml-12 text-center text-xl font-extralight" style={{ maxWidth: '350px' }}>
           <p className="mb-3">

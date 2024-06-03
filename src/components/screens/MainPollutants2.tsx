@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { APIStandard, stdconcentration, stdconcentrations } from '~/components/lib/API/APIResponse';
+import { stdconcentrations } from '~/components/lib/API/APIResponse';
 import bonfire from '~/icons/bonfire.png';
 import exhaust from '~/icons/exhaust.png';
 import longdistance from '~/icons/longdist.png';

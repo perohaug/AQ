@@ -1,6 +1,4 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { APIStandard } from '~/components/lib/API/APIResponse';
 import HealthRiskModal from '../HealthRiskModal';
 import { aqMessage } from '../TextContent/aqMessageInfo';
 
@@ -32,7 +30,7 @@ function AqMessage({ aqValue = 'low', location }: AqMessageProps) {
             cx={40}
             cy={40}
             r={20}
-            fill={aqMessage[aqValue].color} // Adjust opacity as needed (0.3 for example)
+            fill={aqMessage[aqValue].color}
             opacity={0.5}
             style={{ animation: 'expandShrink 1s infinite alternate' }}
           />

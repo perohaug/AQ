@@ -1,5 +1,4 @@
 import { Link } from 'react-router-dom';
-import { Router } from './Router';
 
 export const Header = () => (
   <div className="bg-blue-800 w-full">
@@ -10,7 +9,6 @@ export const Header = () => (
       <Link className="text-2xl font-semibold whitespace-nowrap dark:text-white" to="/AQ">
         AQ
       </Link>
-      {/* Add more navigation links as needed */}
     </nav>
   </div>
 );

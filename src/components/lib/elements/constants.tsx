@@ -9,8 +9,8 @@ interface Props extends SVGProps<SVGCircleElement> {
 
 const generateRandomDuration = () => {
   const randomValue = Math.random() * 20 + 15;
-  const roundedValue = Math.round(randomValue * 10) / 10; // Round to one decimal place
-  return roundedValue; // Random number between 5 and 20
+  const roundedValue = Math.round(randomValue * 10) / 10;
+  return roundedValue;
 };
 
 const getRandomLane = (lane: string) => {
@@ -34,12 +34,10 @@ const getRandomLane = (lane: string) => {
 export const PM25: React.FC<Props> = ({ lane, dur }) => (
   <circle cx="0" cy="0" r="3" fill={particleInfo.liten.color} stroke={particleInfo.liten.color} strokeWidth={5}>
     <animateMotion
-      // dur={`${15}s`}
-      // begin={`${dur}s`}
       dur={`${generateRandomDuration() * 2}s`}
       begin={`${generateRandomDuration() % 2}s`}
       repeatCount="indefinite"
-      fill="freeze" // "freeze" or "remove"
+      fill="freeze"
     >
       <mpath href={getRandomLane(lane)} />
     </animateMotion>
@@ -51,10 +49,8 @@ export const PM10: React.FC<Props> = ({ lane, dur }) => (
     <animateMotion
       dur={`${generateRandomDuration() * 1.3}s`}
       begin={`${generateRandomDuration() % 1}s`}
-      // dur={`${15}s`}
-      // begin={`${dur}s`}
       repeatCount="indefinite"
-      fill="freeze" // "freeze" or "remove"
+      fill="freeze"
     >
       <mpath href={getRandomLane(lane)} />
     </animateMotion>
@@ -64,12 +60,10 @@ export const PM10: React.FC<Props> = ({ lane, dur }) => (
 export const GasParticle: React.FC<Props> = ({ lane, dur, comp }) => (
   <circle cx="0" cy="0" r="7" fill={particleInfo.gass1.color} id="gas">
     <animateMotion
-      // dur={`${15}s`}
-      // begin={`${dur}s`}
       dur={`${(generateRandomDuration() / (comp || 1)) * 1.3}s`}
       begin={`${generateRandomDuration() % 1}s`}
       repeatCount="indefinite"
-      fill="freeze" // "freeze" or "remove"
+      fill="freeze"
     >
       <mpath href={lane} />
     </animateMotion>
@@ -79,12 +73,10 @@ export const GasParticle: React.FC<Props> = ({ lane, dur, comp }) => (
 export const NoGasParticle: React.FC<Props> = ({ lane, dur }) => (
   <circle cx="0" cy="0" r="4" fill={particleInfo.gass2.color} id="nogas">
     <animateMotion
-      // dur={`${15}s`}
-      // begin={`${dur}s`}
       dur={`${generateRandomDuration() * 2}s`}
       begin={`${generateRandomDuration() % 2}s`}
       repeatCount="indefinite"
-      fill="freeze" // "freeze" or "remove"
+      fill="freeze"
     >
       <mpath href={getRandomLane(lane)} />
     </animateMotion>

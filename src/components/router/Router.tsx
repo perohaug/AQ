@@ -1,34 +1,17 @@
-import { lazy, Suspense, useState, useEffect, useRef, createContext, useContext } from 'react';
+import { lazy, Suspense, useState } from 'react';
 import { Outlet, RouteObject, useRoutes, BrowserRouter, Link } from 'react-router-dom';
-import { aqMessage } from '../screens/TextContent/aqMessageInfo';
-import { Header } from './Header';
-import useDataFetcher, { ApiResponse } from '../lib/API/DataFetcher';
 import BackButton from './BackButton';
 
 const Loading = () => <p className="p-4 w-full h-full text-center">Loading...</p>;
 
 const IndexScreen = lazy(() => import('~/components/screens/Homepage/Index'));
 const Page404Screen = lazy(() => import('~/components/screens/404'));
-const AQPage = lazy(() => import('~/components/screens/AQ'));
 const LearnMore = lazy(() => import('~/components/screens/AQDetail/AQDetail'));
 const Map = lazy(() => import('~/components/screens/AQMap'));
 
 function Layout() {
-  type StationContextType = 'NO0102A' | 'bangkok';
-  // const StationContext = createContext<StationContextType>('bangkok');
-  // const StationContext = createContext<StationContextType>('bangkok');
-  // const { fetchData, status, data, error }: ApiResponse = useDataFetcher();
-  // const handleSubmit = async () => {
-  //   await fetchData(`https://api.met.no/weatherapi/airqualityforecast/0.1/?station=NO0102A`);
-  //   //await fetchData('https://api.waqi.info/feed/bangkok/?token=22f37ad5c0fae31b55ee3304697b74c44a1a4cd0');
-  // };
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  // useEffect(() => {
-  //   handleSubmit();
-  // }, []);
-
-  // const aqMessageValue = aqMessage[data?.data.time[0].variables.AQI.text || 'high'];
   const openModal = () => {
     setIsModalOpen(true);
   };
@@ -43,12 +26,8 @@ function Layout() {
     target.style.fontWeight = '250';
   };
 
-  // const station = useContext(StationContext);
-
   return (
-    // <StationContext.Provider value={station}>
     <div>
-      {/* Insert style tag on the nav-tag */}
       <nav className="p-4  bg-primary">
         {location.pathname == '/learn' && (
           <div className="flex items-center justify-between text-2xl">
@@ -60,15 +39,12 @@ function Layout() {
                 style={{ width: '120px', height: '120px', backgroundColor: '#fb5607' }}
               >
                 Se i kart
-                {/* <div className="absolute left-1/2 ml-80 z-20"> */}
               </button>
-              {/* </div> */}
             </Link>
           </div>
         )}
         {location.pathname == '/' && (
           <div className="flex items-center justify-between text-2xl">
-            {/* <BackButton mouseLeave={handleMouseLeave} onMouseEnter={handleMouseEnter} /> */}
             <Link to="/map">
               <div className="absolute left-1/2 ml-80">
                 <button
@@ -84,51 +60,18 @@ function Layout() {
         {location.pathname == '/map' && (
           <div className="flex items-center justify-between text-2xl">
             <BackButton mouseLeave={handleMouseLeave} onMouseEnter={handleMouseEnter} />
-            {/* <Link className="font-light whitespace-nowrap dark:text-grey" to="/">
-              <div className="flex flex-row">
-                <svg
-                  className="mt-1"
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="39"
-                  height="24"
-                  viewBox="0 0 39 24"
-                  fill="none"
-                >
-                  <path d="M6 12H38" stroke="#3D4043" stroke-linecap="round" stroke-linejoin="round" />
-                  <path
-                    d="M12 3L6 12L12 21"
-                    stroke="#3D4043"
-                    stroke-miterlimit="16"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  />
-                </svg>
-                <p
-                  className="ml-5 font-extralight text-2xl"
-                  onMouseEnter={handleMouseEnter}
-                  onMouseLeave={handleMouseLeave}
-                >
-                  Trondheim
-                </p>
-              </div>
-            </Link> */}
           </div>
         )}
       </nav>
       <Outlet />
     </div>
-    // </StationContext.Provider>
   );
 }
 
 export const Router = () => {
-  // type StationContextType = 'NO0102A' | 'bangkok';
-  // const StationContext = createContext<StationContextType>('NO0102A'); // default value for station context is NO0102A.
   return (
     <BrowserRouter>
-      {/* <StationContext.Provider value="NO0102A"> */}
       <InnerRouter />
-      {/* </StationContext.Provider> */}
     </BrowserRouter>
   );
 };
@@ -146,10 +89,6 @@ const InnerRouter = () => {
         {
           path: '*',
           element: <Page404Screen />,
-        },
-        {
-          path: 'AQ',
-          element: <AQPage />,
         },
         {
           path: 'learn',

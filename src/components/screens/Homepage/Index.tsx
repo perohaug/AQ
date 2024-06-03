@@ -1,20 +1,14 @@
-import { useContext, useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Head } from '~/components/shared/Head';
-import BouncingSVGElements from '~/components/lib/BouncingSVGElements';
 import useDataFetcher, { ApiResponse } from '~/components/lib/API/DataFetcher';
 import AqMessage from './AqMessage';
 import UserGroups from './UserGroups';
 import PopUp from '../PopUp';
 import { aqMessage } from '../TextContent/aqMessageInfo';
-// import { useStation, useStationUpdate } from '~/components/contexts/StationContext';
-import { useStationContext } from '~/components/contexts/StationContext';
-import BackButton from '~/components/router/BackButton';
 import { APIStandard } from '~/components/lib/API/APIResponse';
 
 function Index() {
   const { fetchData, status, data, error }: ApiResponse = useDataFetcher();
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [testingData, setTestingData] = useState<APIStandard | null>(null);
   const [testingData2, setTestingData2] = useState<APIStandard | null>(null);
   const aqValue = data?.data.time[0].variables.AQI.text || 'low';
 
@@ -43,9 +37,6 @@ function Index() {
     };
     setTestingData2(highTest);
   }
-
-  const aqMessageValue = aqMessage[aqValue];
-  const inputRef: any = useRef();
 
   const handleSubmit = async () => {
     await fetchData(`https://api.met.no/weatherapi/airqualityforecast/0.1/?station=NO0102A`);

@@ -1,16 +1,14 @@
 import { useEffect, useRef, useState } from 'react';
 import { Head } from '../../shared/Head';
 import AirFlowSVG from '../../svgs/AirFlowSVG';
-import HumanBody from '../../svgs/HumanBodySVG';
 import ParticleExplanation from './ParticleExplanation';
 import { aqMessage } from '../TextContent/aqMessageInfo';
 import useDataFetcher, { ApiResponse } from '~/components/lib/API/DataFetcher';
 import BouncingSVGElements from '~/components/lib/BouncingSVGElements';
 import Select from 'react-select';
-import { APIStandard, stdconcentration, stdconcentrations } from '~/components/lib/API/APIResponse';
+import { APIStandard } from '~/components/lib/API/APIResponse';
 import MainPollutants from './MainPollutants';
 import HealthRiskModal from '../HealthRiskModal';
-import { Link } from 'react-router-dom';
 import { particleInfo } from '../TextContent/particleInfo';
 
 interface otherOpt {
@@ -35,8 +33,6 @@ interface Station {
   };
 }
 function LearnMore() {
-  const [isClicked, setIsClicked] = useState(false);
-
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const openModal = () => {
@@ -207,12 +203,11 @@ function LearnMore() {
                   cx={40}
                   cy={40}
                   r={20}
-                  fill={aqColor} // Adjust opacity as needed (0.3 for example)
+                  fill={aqColor}
                   opacity={0.5}
                   style={{ animation: 'expandShrink 1s infinite alternate' }}
                 />
-                {/* Tinier circle */}
-                <circle cx={40} cy={40} r={25} fill={aqColor} /> {/* Adjust the radius as needed */}
+                <circle cx={40} cy={40} r={25} fill={aqColor} />
               </svg>
               <style>
                 {`
@@ -283,7 +278,6 @@ function LearnMore() {
               </button>
             </div>
 
-            {/* Search city */}
             {isViewMore && (
               <>
                 <div className="absolute top-1/2 mt-80 flex flex-row justify-between space-x-32">
@@ -317,23 +311,23 @@ function LearnMore() {
                           }),
                           input: (provided) => ({
                             ...provided,
-                            color: 'grey', // Set color for input text
+                            color: 'grey',
                           }),
                           placeholder: (provided) => ({
                             ...provided,
-                            color: 'grey', // Set color for placeholder text
+                            color: 'grey',
                           }),
                           singleValue: (provided) => ({
                             ...provided,
-                            color: 'grey', // Set color for selected option text
+                            color: 'grey',
                           }),
                           dropdownIndicator: (provided) => ({
                             ...provided,
-                            color: 'grey', // Set color for dropdown indicator
+                            color: 'grey',
                           }),
                           indicatorSeparator: (provided) => ({
                             ...provided,
-                            backgroundColor: 'none', // Set color for indicator separator
+                            backgroundColor: 'none',
                           }),
                         }}
                       />

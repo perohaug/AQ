@@ -1,16 +1,5 @@
-import { useState, useEffect, useCallback } from 'react';
-import {
-  APIStandard,
-  Contributor,
-  METResponse,
-  METTime,
-  METVariables,
-  WAQIResponse,
-  stdconcentration,
-  stdconcentrations,
-  stdtime,
-  stdtimes,
-} from './APIResponse';
+import { useState, useCallback } from 'react';
+import { APIStandard, METResponse, METTime, METVariables, WAQIResponse, stdtimes } from './APIResponse';
 
 export interface ApiResponse {
   fetchData: (userInput: string) => Promise<void>;
@@ -22,20 +11,14 @@ export interface ApiResponse {
 function domPoll(O3: number, NO2: number, PM10: number, PM25: number) {
   const max = Math.max(O3, NO2, PM10, PM25);
   if (max === O3) {
-    return 'o3'; // Ozon
+    return 'o3';
   } else if (max === NO2) {
-    return 'no2'; // Nitrogendioksid
+    return 'no2';
   } else if (max === PM10) {
-    return 'pm10'; // Store svevestøv
+    return 'pm10';
   } else {
-    return 'pm25'; // Små svevestøv
+    return 'pm25';
   }
-}
-
-function topContribs(topContributors: METVariables, pos: number) {
-  const values = [Object.values(topContributors)];
-  values.sort();
-  return values[pos];
 }
 
 function PM25AQI(x: number) {
@@ -92,27 +75,6 @@ function NO2AQI(x: number) {
     aqi = (x - 200.0) / (400.0 - 200.0) + 3;
   } else {
     aqi = x / 400.0 + 3;
-  }
-
-  if (aqi > 4.999) {
-    aqi = 4.999;
-  }
-
-  return aqi;
-}
-
-function SO2AQI(x: number) {
-  let aqi = 1;
-  if (x < 0) {
-    aqi = 1;
-  } else if (x < 100.0) {
-    aqi = x / 100.0 + 1;
-  } else if (x < 350.0) {
-    aqi = (x - 100.0) / (350.0 - 100.0) + 2;
-  } else if (x < 500.0) {
-    aqi = (x - 350.0) / (500.0 - 350.0) + 3;
-  } else {
-    aqi = x / 500.0 + 3;
   }
 
   if (aqi > 4.999) {
@@ -419,7 +381,6 @@ const useDataFetcher = (): ApiResponse => {
         const apiResponse = await fetch(userInput);
 
         const apiDataResponse: WAQIResponse = await apiResponse.json();
-        console.log('waqi:', apiDataResponse);
 
         setApiData({
           data: {
@@ -692,11 +653,6 @@ const useDataFetcher = (): ApiResponse => {
       setStatus('error');
     }
   }, []);
-  // apiData.data.time[0].topContribs = findTopContributors(
-  //   apiData?.dominantPollutant,
-  //   apiData.data.time[0].variables.concentrations,
-  // );
-  console.log(apiData);
   return { fetchData, data: apiData, status, error };
 };
 

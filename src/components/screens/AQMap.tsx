@@ -52,13 +52,9 @@ export interface Station {
 
 function AQMap() {
   const { fetchData, status, data, error }: ApiResponse = useDataFetcher();
-  const { fetchData: fetchData2, status: status2, data: data2, error: error2 }: ApiResponse = useDataFetcher();
   const [stations, setStations] = useState<Station[]>([]);
   const [isViewMore, setIsViewMore] = useState(false);
-  const [stationValue, setStationValue] = useState<StationValues[]>([]);
-  const [positionValue, setPositionValue] = useState<PositionData[]>([]);
   const [selectedStation, setSelectedStation] = useState<string | null>('NO0102A');
-  // const [isViewMore, setIsViewMore] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const aqValue = data?.data.time[0].variables.AQI.text;
   const aqColor = aqValue ? aqMessage[aqValue].color : 'low';
@@ -81,29 +77,8 @@ function AQMap() {
         console.error('Error fetching stations:', error);
       }
     };
-    // const fetchStationValues = async (station: string) => {
-    //   if (!station || !stations.length) return;
-    //   const stationObj = stations.find((s) => s.eoi === station);
-    //   if (!stationObj) return;
-    //   const url = `https://api.met.no/weatherapi/airqualityforecast/0.1/?station=${station}`;
-    //   await fetchData2(url);
-    //   setStationValue((prevValues) => ({
-    //     ...prevValues,
-    //     station: data2?.location.areacode || 'Error',
-    //     highestPoll: data2?.dominantPollutant || 'low',
-    //     origin: data2?.data.time[0].variables.concentrations || undefined,
-    //     location: data2?.location.name || 'Error',
-    //     AQI: data2?.data.time[0].variables.AQI.text || 'low',
-    //   }));
-    // };
     fetchStations();
     handleSubmit();
-    // addData(allOptions);
-    // fetchStationValues(stations);
-    // stations.map((station) => fetchStationValues(station.eoi));
-    // console.log(stationValue);
-
-    // fetchStationValues(stations);
   }, []);
 
   const inputRef: any = useRef();
@@ -168,50 +143,6 @@ function AQMap() {
     ...listWithOtherOptions,
   ];
 
-  // async function addData(objects: otherOpt[]): Promise<PositionData[]> {
-  //   const posStations: PositionData[] = await Promise.all(
-  //     objects.map(async (station) => {
-  //       console.log('station:', station);
-  //       if (station.value?.startsWith('NO') || validStations.includes(station.value || '')) {
-  //         console.log('selectedStation:', station.value);
-  //         console.log('InputRef:', inputRef);
-  //         await fetchData2(`https://api.met.no/weatherapi/airqualityforecast/0.1/?station=${station.value}`);
-  //       } else {
-  //         await fetchData2(
-  //           `https://api.waqi.info/feed/${station.value}/?token=22f37ad5c0fae31b55ee3304697b74c44a1a4cd0`,
-  //         );
-  //       }
-  //       if (data2) {
-  //         setPositionValue((prevValues) => [
-  //           {
-  //             ...prevValues,
-  //             latitude: data2.location.latitude,
-  //             longitude: data2.location.longitude,
-  //             AQI: data2.data.time[0].variables.AQI.text,
-  //             station: data2.location.name,
-  //             eoi: data2.location.areacode,
-  //           },
-  //         ]);
-  //       } else {
-  //         setPositionValue((prevValues) => [
-  //           {
-  //             ...prevValues,
-  //             latitude: 10.37172,
-  //             longitude: 63.35781,
-  //             AQI: 'low',
-  //             station: 'Error',
-  //             eoi: 'Error',
-  //           },
-  //         ]);
-  //       }
-  //     }),
-  //   );
-  //   // setPositionValue(posStations);
-  //   console.log('posStations:', posStations);
-  //   return positionValue && posStations;
-  // }
-  // console.log('skjer her', positionValue);
-
   const handleClick = async (station: string) => {
     console.log('click', isViewMore);
     setIsViewMore(!isViewMore);
@@ -253,7 +184,6 @@ function AQMap() {
                   opacity={0.5}
                   style={{ animation: 'expandShrink 1s infinite alternate' }}
                 />
-                {/* Tinier circle */}
                 <circle cx={40} cy={40} r={25} fill={aqColor} />
               </svg>
               <style>
@@ -384,7 +314,6 @@ function AQMap() {
                   fillOpacity: 0,
                 }}
                 eventHandlers={{ click: (event: LeafletMouseEvent) => handleClick(station.eoi) }}
-                // eventHandlers={{ click: (event: LeafletMouseEvent) => handleClick(station.eoi) }}
               >
                 <Circle
                   key={index}

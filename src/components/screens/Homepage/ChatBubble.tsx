@@ -7,7 +7,7 @@ interface ChatBubbleProps {
   svg: number;
   aqMessageValue: {
     userGroupInfo: {
-      [key: string]: any; // Adjust the type accordingly
+      [key: string]: any;
     };
     color: string;
   };
@@ -20,21 +20,16 @@ function ChatBubble(props: ChatBubbleProps) {
   const [showSecondText, setShowSecondText] = useState(false);
 
   useEffect(() => {
-    setShowText(false); // Reset showText to false when svg prop changes
-
+    setShowText(false);
     const timer1 = setTimeout(() => {
-      setShowText(true); // Show the first message after 2 seconds
-
+      setShowText(true);
       const timer2 = setTimeout(() => {
-        setShowSecondText(true); // Show the second message after additional delay
-      }, 2000); // Adjust the delay according to your preference
-
-      return () => clearTimeout(timer2); // Clear the timer for the second message
-    }, 2000); // Adjust the delay according to your preference
-
-    return () => clearTimeout(timer1); // Clear the timer for the first message
-  }, [aqMessageValue, svg]); // Include svg in the dependency array
-
+        setShowSecondText(true);
+      }, 2000);
+      return () => clearTimeout(timer2);
+    }, 2000);
+    return () => clearTimeout(timer1);
+  }, [aqMessageValue, svg]);
   const now = new Date();
   const hours = String(now.getHours()).padStart(2, '0');
   const minutes = String(now.getMinutes()).padStart(2, '0');
@@ -67,7 +62,7 @@ function ChatBubble(props: ChatBubbleProps) {
         style={{
           overflow: 'hidden',
           whiteSpace: 'normal',
-          maxWidth: '500px', // Allow text wrapping
+          maxWidth: '500px',
         }}
       >
         {aqMessageStatment}
@@ -77,7 +72,7 @@ function ChatBubble(props: ChatBubbleProps) {
         style={{
           overflow: 'hidden',
           whiteSpace: 'normal',
-          maxWidth: '800px', // Allow text wrapping
+          maxWidth: '800px',
         }}
       >
         {showText ? (
